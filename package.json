@@ -1,0 +1,26 @@
+{
+  "name": "yao",
+  "version": "1.0.0",
+  "description": "yao network",
+  "author": "Patrick Weingärtner",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.4.1",
+    "@nuxtjs/vuetify": "^0.5.5",
+    "cross-env": "^5.2.0",
+    "node-sass": "^4.11.0",
+    "nuxt": "^2.4.0",
+    "nuxt-material-design-icons": "^1.0.4",
+    "nuxt-vue-material": "^1.1.0",
+    "sass-loader": "^7.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}
