@@ -1,104 +1,52 @@
 <template>
   <div class="doc">
-    <md-card>
-      <md-card-area md-inset>
-        <md-card-media md-ratio="1:1">
-          <img src="~assets/doc.png">
-        </md-card-media>
-
-        <md-card-header>
-          <h2 class="md-title">Dr. Pepper</h2>
-          <div class="md-subhead">
-            <md-icon>location_on</md-icon>
-            <span>2 km</span>
+    <v-flex>
+      <v-card>
+        <v-img src="https://qph.fs.quoracdn.net/main-qimg-c55f4f1eab6aa42861d2e42436825ba9" aspect-ratio="1"></v-img>
+        <v-card-title>
+          <div>
+            <h3 class="headline mb-0">{{ title }} {{ firstname }} {{ lastname }}</h3>
+            <div>{{ speciality }}</div>
           </div>
-
-        </md-card-header>
-
-        <md-card-content>
-          Osteopathy, Acupuncture
-        </md-card-content>
-      </md-card-area>
-
-      <md-card-content class="dates">
-        <h3 class="md-subheading">Next available days</h3>
-        <div class="card-reservation">
-          <md-icon>access_time</md-icon>
-          <div class="md-button-group">
-            <md-button>Fr. 13.3</md-button>
-            <md-button>Sa. 14.3</md-button>
-            <md-button>Mo. 16.3</md-button>
-          </div>
-        </div>
-      </md-card-content>
-
-      <md-card-actions class="moreButton">
-        <md-button class="md-primary">Show more</md-button>
-      </md-card-actions>
-    </md-card>
+        </v-card-title>
+        <v-divider light></v-divider>
+        <v-card-text>
+          <v-layout align-center>
+            <v-icon>access_time</v-icon>
+            <v-btn class="somebtn" flat>Fr. 13.4</v-btn>
+            <v-btn class="somebtn" flat>Mo. 16.4</v-btn>
+            <v-btn class="somebtn" flat>Di. 17.4</v-btn>
+          </v-layout>
+        </v-card-text>
+        <v-card-actions>
+          <v-layout justify-end>
+            <v-btn flat color="rgba(51, 169, 181, 255)">Booking</v-btn>
+          </v-layout>
+        </v-card-actions>
+      </v-card>
+    </v-flex>
   </div>
 </template>
 
+<script>
+  export default {
+    props: ['title', 'firstname', 'lastname', 'speciality']
+  }
+</script>
+
 <style lang="scss" scoped>
-  .md-card {
+
+  .v-card {
     width: 320px;
-    margin: 4px;
-    display: inline-block;
+    margin: 20px;
   }
 
-  .md-card {
-    .md-subhead {
-      .md-icon {
-        $size: 16px;
-
-        width: $size;
-        min-width: $size;
-        height: $size;
-        font-size: $size !important;
-      }
-
-      span {
-        vertical-align: middle;
-      }
-    }
-
-    .card-reservation {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      .md-icon {
-        margin: 8px;
-      }
-    }
-
-    .md-button-group {
-      display: flex;
-
-      .md-button {
-        min-width: 60px;
-        border-radius: 2px;
-      }
-    }
-  }
-  .md-card-header {
-    padding: 10px 0  10px 0;
+  .v-card__title {
+    justify-content: center;
   }
 
-  .md-card-content {
-    padding: 0;
-    padding-bottom: 5px;
-  }
-
-  .dates {
-    padding-top: 5px;
-  }
-
-  .md-subheading {
-    font-weight: bold;
-  }
-
-  .moreButton {
-    padding: 0 8px 8px 8px;
+  .somebtn{
+    margin: 0;
+    padding: 0 10px;
   }
 </style>

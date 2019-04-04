@@ -1,11 +1,12 @@
 {
   "name": "yao",
   "version": "1.0.0",
-  "description": "yao network",
+  "description": "YAO Frontend",
   "author": "Patrick Weingärtner",
   "private": true,
   "scripts": {
     "dev": "nuxt",
+    "dev:debug": "node --inspect-brk node_modules/.bin/nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate"
@@ -14,6 +15,7 @@
     "@nuxtjs/axios": "^5.4.1",
     "@nuxtjs/vuetify": "^0.5.5",
     "cross-env": "^5.2.0",
+    "lodash": "^4.17.11",
     "node-sass": "^4.11.0",
     "nuxt": "^2.4.0",
     "nuxt-material-design-icons": "^1.0.4",

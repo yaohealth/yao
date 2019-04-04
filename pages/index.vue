@@ -3,13 +3,15 @@
     <Navbar/>
     <div class="bg">
       <div class="searchContainer">
-        <div class="search">
-          <label>WAS</label>
-          <input autofocus="true" placeholder="Ostheopath, TCM ..." class="searchInput" v-model="message"/>
-        </div>
-        <nuxt-link :to="{name: 'results', params: { search:message } }">
-          <button type="submit" class="search-button">Search</button>
-        </nuxt-link>
+          <form action="submit">
+            <div class="search">
+              <label>WAS</label>
+              <input autofocus placeholder=" Ostheopath, TCM ..." class="searchInput" v-model="message"/>
+            </div>
+            <nuxt-link :to="{name: 'results', query: { search:message } }">
+              <button type="submit" class="search-button">Search</button>
+            </nuxt-link>
+          </form>
       </div>
     </div>
     <div class="betaInfo">
@@ -19,11 +21,10 @@
         <p>We only support BERLIN for the BETA VERSION</p>
       </div>
     </div>
-    <div class="docPreview md-layout md-alignment-center-space-around">
-      <Doc></Doc>
-      <Doc></Doc>
-      <Doc></Doc>
-    </div>
+    <v-layout align-center justify-space-around row>
+
+        <Doc v-for="doctor in doctors" :title="doctor.title" :firstname="doctor.firstname" :lastname="doctor.lastname" :speciality="doctor.speciality" :key="doctor.id"></Doc>
+    </v-layout>
     <div class="whatIsYao">
       <div>
         <p>WHAT IS YAO?</p>
@@ -51,17 +52,20 @@
         </div>
       </div>
     </div>
+    <Yaofooter></Yaofooter>
   </section>
 </template>
 
 <script>
   import Navbar from '@/components/Navbar'
   import Doc from '@/components/Doc'
+  import Yaofooter from '@/components/Yaofooter'
 
 export default {
   components: {
     Navbar,
-    Doc
+    Doc,
+    Yaofooter
   },
   data() {
     return {
@@ -69,9 +73,16 @@ export default {
     }
   },
   async asyncData({ $axios }) {
-/*    const ip = await $axios.$get('http://icanhazip.com')
-    console.log(ip)
-    return { ip }*/
+    return $axios.$get(`http://localhost:3000/doctors/`).then(data => {
+      const newdata = []
+      let tmp = data.slice()
+      for (let i = 0; i < 3; i++) {
+        newdata.push(tmp.splice(Math.ceil(Math.random() * 10) % tmp.length, 1)[0])
+      }
+      return {doctors : newdata}
+    }, reason => {
+      return {doctors: []}
+    })
   }
 }
 </script>
@@ -82,6 +93,7 @@ $yao: rgba(51, 169, 181, 255);
   min-height: 100vh;
   text-align: center;
   padding: 0;
+  margin: 0;
 }
 
 .searchContainer {
@@ -96,6 +108,9 @@ $yao: rgba(51, 169, 181, 255);
   align-items: center;
   justify-content: space-evenly;
 
+  form {
+    display: flex;
+  }
 
   .search {
     display: flex;
@@ -187,12 +202,11 @@ $yao: rgba(51, 169, 181, 255);
 }
 
 .network {
-  height: 100%;
+  height: 40vw;
 
   #networkImage {
     position: relative;
     margin: 4vh 0 0 4vw;
-    background-color: green;
     width: 40vw;
     img {
       width: 45vw;
@@ -223,14 +237,13 @@ $yao: rgba(51, 169, 181, 255);
 }
 
 .calendar {
-  height: 100%;
-
+  height: 40vw;
+  display: flex;
+  justify-content: flex-end;
   #calendarImage {
     float: right;
     position: relative;
-    top: 8vw;
-    margin: 4vh 4vw 0 0;
-    background-color: green;
+    margin: 4vh 6vw 0 0;
     width: 40vw;
     img {
       width: 45vw;
@@ -240,7 +253,7 @@ $yao: rgba(51, 169, 181, 255);
       top: 50%;
       right: 85%;
       width: 55vw;
-      height: 15vw;
+      height: 16vw;
       min-height: 100px;
       background-color: black;
       #calendarText {
@@ -259,7 +272,4 @@ $yao: rgba(51, 169, 181, 255);
     }
   }
 }
-
-
-
 </style>

@@ -40,14 +40,11 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    ['nuxt-vue-material', {
-    theme: 'default'
-    }],
+    '@nuxtjs/vuetify',
     'nuxt-material-design-icons',
     '@nuxtjs/axios'
 
   ],
-
   /*
   ** Build configuration
   */

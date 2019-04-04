@@ -3,7 +3,7 @@
     <nav>
       <input type="checkbox" id="nav-toggle">
       <label for="nav-toggle" class="burger-menu">
-        <md-icon>menu</md-icon>
+        <v-icon>menu</v-icon>
       </label>
       <div class="left-menu">
         <a class="links" href="https://blog.yao.health">Blog</a>
