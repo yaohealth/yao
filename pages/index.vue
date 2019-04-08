@@ -1,15 +1,14 @@
 <template>
-  <section class="container">
+  <v-app>
+  <section class="mycontainer">
     <Navbar/>
     <div class="bg">
       <div class="searchContainer">
           <form action="submit">
-            <div class="search">
               <label>WAS</label>
-              <input autofocus placeholder=" Ostheopath, TCM ..." class="searchInput" v-model="message"/>
-            </div>
+              <v-select class="therapyselect" @change="dosomething" :items="therapies" label="Wähle eine Therapie" solo></v-select>
             <nuxt-link :to="{name: 'results', query: { search:message } }">
-              <button type="submit" class="search-button">Search</button>
+              <button type="submit" class="search-button">Suche</button>
             </nuxt-link>
           </form>
       </div>
@@ -21,10 +20,11 @@
         <p>We only support BERLIN for the BETA VERSION</p>
       </div>
     </div>
-    <v-layout align-center justify-space-around row>
-
-        <Doc v-for="doctor in doctors" :title="doctor.title" :firstname="doctor.firstname" :lastname="doctor.lastname" :speciality="doctor.speciality" :key="doctor.id"></Doc>
-    </v-layout>
+    <v-container >
+      <v-layout row wrap align-center justify-space-around >
+          <Doc v-for="doctor in doctors" :title="doctor.title" :firstname="doctor.firstname" :lastname="doctor.lastname" :speciality="doctor.speciality" :key="doctor.id" :calendar-id="doctor.calendarid" :dates="doctor.dates"></Doc>
+      </v-layout>
+    </v-container>
     <div class="whatIsYao">
       <div>
         <p>WHAT IS YAO?</p>
@@ -46,14 +46,15 @@
         <img src="~assets/calendar.jpg" alt="">
         <div id="calendarTextContainer">
           <div id="calendarText">
-            <h2>2. Termin</h2>
-            <p>Buchen Sie online einen Termin</p>
+            <h2>2. Termine</h2>
+            <p>Buchen Sie einen Termin online</p>
           </div>
         </div>
       </div>
     </div>
     <Yaofooter></Yaofooter>
   </section>
+  </v-app>
 </template>
 
 <script>
@@ -69,71 +70,92 @@ export default {
   },
   data() {
     return {
-      message: ''
+      message: '',
+      doctors: [],
+      therapies: []
+    }
+  },
+  methods: {
+    dosomething: function(option) {
+      this.message = option
     }
   },
   async asyncData({ $axios }) {
-    return $axios.$get(`http://localhost:3000/doctors/`).then(data => {
-      const newdata = []
-      let tmp = data.slice()
-      for (let i = 0; i < 3; i++) {
-        newdata.push(tmp.splice(Math.ceil(Math.random() * 10) % tmp.length, 1)[0])
+    const [data, appointmentTypes, tmpData] = await Promise.all([
+      $axios.$get(`http://localhost:3000/doctors/`),
+      $axios.$get('http://localhost:3001/api/appointment-types', {auth: {username: '17442156', password: 'a4cacb401c53a2ab5621bd7dc9bfaf00'}}),
+      $axios.$get(`http://localhost:3000/specialities`)
+      ])
+    const doctors = []
+    let therapies = []
+    let tmp = data.slice()
+    for (let i = 0; i < 3; i++) {
+      doctors.push(tmp.splice(Math.ceil(Math.random() * 10) % tmp.length, 1)[0])
+    }
+    console.log("got docs")
+    for(const doctor of doctors) {
+      doctor.appointmentTypes = []
+      for ( const type of appointmentTypes) {
+        if(type.calendarIDs) {
+          if (doctor.calendarid == type.calendarIDs[0]) {
+            doctor.appointmentTypes.push(type)
+          }
+        }
       }
-      return {doctors : newdata}
-    }, reason => {
-      return {doctors: []}
-    })
+    }
+    console.log("got types")
+
+    for(const doctor of doctors) {
+      for(const type of doctor.appointmentTypes){
+        const date = new Date()
+        // vllt kann man hier die asyncron feuern und immer noch dem entsprechenden doctor zuordnen
+        const dates = await $axios.$get(`http://localhost:3001/api/availability/dates?appointmentTypeID=${type.id}&month=${date.getFullYear()}-${date.getMonth()+1}&calendarID=${doctor.calendarid}`, {auth: {username: '17442156', password: 'a4cacb401c53a2ab5621bd7dc9bfaf00'}})
+        // need to sort the dates in case they have multiple appointment types
+        doctor.dates = dates.slice(0, 3)
+      }
+    }
+    console.log("got dates")
+    therapies = tmpData.map( speciality => speciality.speciality)
+    return {doctors, therapies}
   }
 }
 </script>
 
 <style lang="scss" scoped>
 $yao: rgba(51, 169, 181, 255);
-.container {
+.mycontainer {
   min-height: 100vh;
   text-align: center;
   padding: 0;
   margin: 0;
 }
 
+.bg {
+  background: url("../assets/landing.jpg") no-repeat center;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .searchContainer {
   width: 80vw;
   min-width: 400px;
   height: 80px;
-  margin: 0 auto;
-  position: relative;
-  top: 40vh;
   background-color: rgba(255,255,255,0.7);
   display: flex;
-  align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
 
-  form {
-    display: flex;
-  }
-
-  .search {
-    display: flex;
-    align-items: center;
-    width: 50vw;
+  .specialities {
+    width: 20vw;
+    background-color: $yao !important;
+    color: white;
   }
 
   label {
-    color: $yao;
+    color: $yao !important;
     font-size: 20pt;
-  }
-
-  ::placeholder {
-    color: white;
-  }
-
-  .searchInput {
-    background-color: $yao;
-    color: white;
-    border: none;
-    height: 30px;
-    width: 30vw;
-    margin-left: 20px;
   }
 
   .search-button {
@@ -150,6 +172,21 @@ $yao: rgba(51, 169, 181, 255);
     background-color: white;
     color: $yao;
     border: 1px solid $yao;
+  }
+
+  form {
+    display: flex;
+    align-items: center;
+  }
+
+  .therapyselect {
+    padding: 25px 0 0 2vw;
+    width: 50vw;
+    max-width: 400px !important;
+  }
+
+  a {
+    padding-left: 2vw;
   }
 
 }
@@ -174,11 +211,7 @@ $yao: rgba(51, 169, 181, 255);
 
 }
 
-.bg {
-  background: url("../assets/landing.jpg") no-repeat center;
-  background-size: cover;
-  height: 100vh;
-}
+
 
 .docPreview {
   margin: 5vw 0 5vw 0;
@@ -187,6 +220,8 @@ $yao: rgba(51, 169, 181, 255);
 .whatIsYao {
   background: url("../assets/herb.jpg") no-repeat center;
   background-size: cover;
+  /*display: block;
+  position: relative;*/
   height: 100vh;
   div {
     position: relative;
@@ -200,6 +235,18 @@ $yao: rgba(51, 169, 181, 255);
     }
   }
 }
+
+/*.whatIsYao::after {
+  content: "";
+  background: url("../assets/herb.jpg") no-repeat center;
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+}*/
 
 .network {
   height: 40vw;
@@ -219,17 +266,20 @@ $yao: rgba(51, 169, 181, 255);
       height: 20vw;
       min-height: 100px;
       background-color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       #networkText {
         text-transform: uppercase;
         color: white;
         h2 {
           font-size: 4vw;
-          padding-top: 4vw;
+
         }
         p {
           font-size: 1.5vw;
           line-height: 2;
-          padding: 3vw 1vw 0 1vw;
+          padding: 0 1vw;
         }
       }
     }
@@ -241,7 +291,6 @@ $yao: rgba(51, 169, 181, 255);
   display: flex;
   justify-content: flex-end;
   #calendarImage {
-    float: right;
     position: relative;
     margin: 4vh 6vw 0 0;
     width: 40vw;
@@ -256,17 +305,18 @@ $yao: rgba(51, 169, 181, 255);
       height: 16vw;
       min-height: 100px;
       background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       #calendarText {
         text-transform: uppercase;
         color: white;
         h2 {
           font-size: 4vw;
-          padding-top: 4vw;
         }
         p {
           font-size: 1.5vw;
           line-height: 2;
-          padding: 3vw 1vw 0 1vw;
         }
       }
     }

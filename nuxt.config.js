@@ -40,11 +40,26 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    ['nuxt-fontawesome', {
+      component: 'fa',
+      imports: [
+        //import whole set
+        {
+          set: '@fortawesome/free-brands-svg-icons',
+          icons: ['fab']
+        }]
+    }],
     '@nuxtjs/vuetify',
     'nuxt-material-design-icons',
     '@nuxtjs/axios'
 
   ],
+  'axios': {
+    'proxy': true
+  },
+  'proxy': {
+    '/api/': { target: 'https://acuityscheduling.com/api/v1/', pathRewrite: {'^/api/': ''} }
+  },
   /*
   ** Build configuration
   */
@@ -53,6 +68,9 @@ export default {
     ** You can extend webpack config here
     */
     extend(config, ctx) {
+      // should remove this for production
+      // make it conditional
+      config.devtool = ctx.isClient ? 'eval-source-map' : 'inline-source-map'
     }
   }
 }

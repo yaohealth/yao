@@ -1,6 +1,6 @@
 <template>
   <div class="doc">
-    <v-flex>
+    <v-flex xs12 m6>
       <v-card>
         <v-img src="https://qph.fs.quoracdn.net/main-qimg-c55f4f1eab6aa42861d2e42436825ba9" aspect-ratio="1"></v-img>
         <v-card-title>
@@ -13,9 +13,8 @@
         <v-card-text>
           <v-layout align-center>
             <v-icon>access_time</v-icon>
-            <v-btn class="somebtn" flat>Fr. 13.4</v-btn>
-            <v-btn class="somebtn" flat>Mo. 16.4</v-btn>
-            <v-btn class="somebtn" flat>Di. 17.4</v-btn>
+            <v-btn v-for="nextdate in nextDates" :key="nextdate" class="somebtn" flat>{{ nextdate }}</v-btn>
+
           </v-layout>
         </v-card-text>
         <v-card-actions>
@@ -30,7 +29,26 @@
 
 <script>
   export default {
-    props: ['title', 'firstname', 'lastname', 'speciality']
+    props: {
+      'title': String,
+      'firstname': String,
+      'lastname': String,
+      'speciality': String,
+      'calendarId': String,
+      'dates': Array
+    },
+    data() {
+      return {
+        nextDates: []
+      }
+    },
+    created () {
+      for(const dateString of this.dates) {
+        const date = new Date(dateString.date);
+        const options = { weekday: 'short', month: '2-digit', day: 'numeric' };
+        this.nextDates.push(`${date.toLocaleDateString('de-DE', options)}`)
+      }
+    }
   }
 </script>
 

@@ -1,11 +1,11 @@
 <template>
-  <section class="container">
+  <section class="mycontainer">
     <Navbar></Navbar>
     <p class="subtitle" v-if="doctors.length">You searched for: {{ search}}</p>
     <p class="subtitle" v-if="!doctors.length">Sorry no results for: {{ search }}</p>
     <br>
     <v-layout align-center justify-space-around row>
-      <Doc v-for="doctor in doctors" :title="doctor.title" :firstname="doctor.firstname" :lastname="doctor.lastname" :speciality="doctor.speciality" :key="doctor.id"></Doc>
+      <Doc v-for="doctor in doctors" :title="doctor.title" :firstname="doctor.firstname" :lastname="doctor.lastname" :speciality="doctor.speciality" :key="doctor.id" :calendar-id="doctor.calendarid" :dates="doctor.dates"></Doc>
     </v-layout>
   </section>
 </template>
@@ -19,24 +19,51 @@
       Navbar
     }, data: function () {
       return {
-        search: ''
+        search: '',
+        doctors: []
       }
     },
     created() {
       this.search = this.$route.query.search
+      console.log('done')
     },
-    asyncData ({$axios, query}) {
-      return $axios.$get(`http://localhost:3000/doctors/speciality/${query.search}`).then(data => {
-        return {doctors : data}
-      }, reason => {
-        return {doctors: []}
-      })
+    async asyncData ({$axios, query}) {
+      const [doctors, appointmentTypes, tmpData] = await Promise.all([
+        $axios.$get(`http://localhost:3000/doctors/speciality/${query.search}`),
+        $axios.$get('http://localhost:3001/api/appointment-types', {auth: {username: '17442156', password: 'a4cacb401c53a2ab5621bd7dc9bfaf00'}}),
+        $axios.$get(`http://localhost:3000/specialities`)
+      ])
+      let therapies = []
+      console.log("got docs")
+      for(const doctor of doctors) {
+        doctor.appointmentTypes = []
+        for ( const type of appointmentTypes) {
+          if(type.calendarIDs) {
+            if (doctor.calendarid == type.calendarIDs[0]) {
+              doctor.appointmentTypes.push(type)
+            }
+          }
+        }
+      }
+      console.log("got types")
+
+      for(const doctor of doctors) {
+        for(const type of doctor.appointmentTypes){
+          const date = new Date()
+          const dates = await $axios.$get(`http://localhost:3001/api/availability/dates?appointmentTypeID=${type.id}&month=${date.getFullYear()}-${date.getMonth()+1}&calendarID=${doctor.calendarid}`, {auth: {username: '17442156', password: 'a4cacb401c53a2ab5621bd7dc9bfaf00'}})
+          // need to sort the dates in case they have multiple appointment types
+          doctor.dates = dates.slice(0, 3)
+        }
+      }
+      console.log("got dates")
+      therapies = tmpData.map( speciality => speciality.speciality)
+      return {doctors, therapies}
     }
   }
 </script>
 
 <style lang="scss" scoped>
-  .container {
+  .mycontainer {
     min-height: 100vh;
     text-align: center;
     padding: 0;
