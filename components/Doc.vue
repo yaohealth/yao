@@ -13,7 +13,7 @@
         <v-card-text>
           <v-layout align-center>
             <v-icon>access_time</v-icon>
-            <v-btn v-for="nextdate in nextDates" :key="nextdate" class="somebtn" flat>{{ nextdate }}</v-btn>
+            <v-btn v-for="nextdate in displaypeviewdates" :key="nextdate" class="somebtn" flat>{{ nextdate }}</v-btn>
 
           </v-layout>
         </v-card-text>
@@ -35,18 +35,52 @@
       'lastname': String,
       'speciality': String,
       'calendarId': String,
-      'dates': Array
+      'previewdates': {
+        type: Array,
+        default: () => []
+      },
+      'dates': {
+        type: Array,
+        default: () => []
+      },
+      'appointmentTypes': {
+        type: Array,
+        default: () => []
+      }
     },
     data() {
       return {
-        nextDates: []
+        nextDates: [],
+        displaypeviewdates: [],
+        allDates: []
       }
     },
-    created () {
-      for(const dateString of this.dates) {
-        const date = new Date(dateString.date);
-        const options = { weekday: 'short', month: '2-digit', day: 'numeric' };
-        this.nextDates.push(`${date.toLocaleDateString('de-DE', options)}`)
+    async created () {
+      const appointmentTypes = await this.$axios.$get('http://localhost:3001/api/appointment-types', {auth: {username: '17442156', password: 'a4cacb401c53a2ab5621bd7dc9bfaf00'}})
+      for (const type of appointmentTypes) {
+        if(type.calendarIDs[0]) {
+          if (Number(this.calendarId) === type.calendarIDs[0]) {
+            this.appointmentTypes.push(type)
+          }
+        }
+      }
+
+      for(const type of this.appointmentTypes){
+        const date = new Date()
+        const dates = await this.$axios.$get(`http://localhost:3001/api/availability/dates?appointmentTypeID=${type.id}&month=${date.getFullYear()}-${date.getMonth()+1}&calendarID=${this.calendarId}`, {auth: {username: '17442156', password: 'a4cacb401c53a2ab5621bd7dc9bfaf00'}})
+        // need to sort the dates in case they have multiple appointment types
+        this.nextDates = dates.slice(0, 3)
+        this.allDates = dates
+      }
+      this.displaydates()
+    },
+    methods: {
+      displaydates() {
+        for (const dateString of this.nextDates) {
+          const date = new Date(dateString.date);
+          const options = {weekday: 'short', month: '2-digit', day: 'numeric'};
+          this.displaypeviewdates.push(`${date.toLocaleDateString('de-DE', options)}`)
+        }
       }
     }
   }

@@ -6,8 +6,8 @@
       <div class="searchContainer">
           <form action="submit">
               <label>WAS</label>
-              <v-select class="therapyselect" @change="dosomething" :items="therapies" label="Wähle eine Therapie" solo></v-select>
-            <nuxt-link :to="{name: 'results', query: { search:message } }">
+              <v-select class="therapyselect" @change="setChoice" :items="therapies" label="Wähle eine Therapie" solo></v-select>
+            <nuxt-link :to="{name: 'results', query: { search:choice } }">
               <button type="submit" class="search-button">Suche</button>
             </nuxt-link>
           </form>
@@ -70,52 +70,28 @@ export default {
   },
   data() {
     return {
-      message: '',
+      choice: '',
       doctors: [],
       therapies: []
     }
   },
   methods: {
-    dosomething: function(option) {
-      this.message = option
+    setChoice: function(option) {
+      this.choice = option
     }
   },
   async asyncData({ $axios }) {
-    const [data, appointmentTypes, tmpData] = await Promise.all([
+    const [allDocs, specialities] = await Promise.all([
       $axios.$get(`http://localhost:3000/doctors/`),
-      $axios.$get('http://localhost:3001/api/appointment-types', {auth: {username: '17442156', password: 'a4cacb401c53a2ab5621bd7dc9bfaf00'}}),
       $axios.$get(`http://localhost:3000/specialities`)
       ])
     const doctors = []
     let therapies = []
-    let tmp = data.slice()
+    let allDocsCopy = allDocs.slice()
     for (let i = 0; i < 3; i++) {
-      doctors.push(tmp.splice(Math.ceil(Math.random() * 10) % tmp.length, 1)[0])
+      doctors.push(allDocsCopy.splice(Math.ceil(Math.random() * 10) % allDocsCopy.length, 1)[0])
     }
-    console.log("got docs")
-    for(const doctor of doctors) {
-      doctor.appointmentTypes = []
-      for ( const type of appointmentTypes) {
-        if(type.calendarIDs) {
-          if (doctor.calendarid == type.calendarIDs[0]) {
-            doctor.appointmentTypes.push(type)
-          }
-        }
-      }
-    }
-    console.log("got types")
-
-    for(const doctor of doctors) {
-      for(const type of doctor.appointmentTypes){
-        const date = new Date()
-        // vllt kann man hier die asyncron feuern und immer noch dem entsprechenden doctor zuordnen
-        const dates = await $axios.$get(`http://localhost:3001/api/availability/dates?appointmentTypeID=${type.id}&month=${date.getFullYear()}-${date.getMonth()+1}&calendarID=${doctor.calendarid}`, {auth: {username: '17442156', password: 'a4cacb401c53a2ab5621bd7dc9bfaf00'}})
-        // need to sort the dates in case they have multiple appointment types
-        doctor.dates = dates.slice(0, 3)
-      }
-    }
-    console.log("got dates")
-    therapies = tmpData.map( speciality => speciality.speciality)
+    therapies = specialities.map( speciality => speciality.speciality)
     return {doctors, therapies}
   }
 }
