@@ -82,8 +82,8 @@ export default {
   },
   async asyncData({ $axios }) {
     const [allDocs, specialities] = await Promise.all([
-      $axios.$get(`http://localhost:3000/doctors/`),
-      $axios.$get(`http://localhost:3000/specialities`)
+      $axios.$get(`${process.env.YAOAPI}/doctors/`),
+      $axios.$get(`${process.env.YAOAPI}/specialities`)
       ])
     const doctors = []
     let therapies = []

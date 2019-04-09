@@ -51,7 +51,8 @@ export default {
     }],
     '@nuxtjs/vuetify',
     'nuxt-material-design-icons',
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/dotenv'
 
   ],
   'axios': {

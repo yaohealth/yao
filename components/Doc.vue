@@ -56,7 +56,7 @@
       }
     },
     async created () {
-      const appointmentTypes = await this.$axios.$get('http://localhost:3001/api/appointment-types', {auth: {username: '17442156', password: 'a4cacb401c53a2ab5621bd7dc9bfaf00'}})
+      const appointmentTypes = await this.$axios.$get('http://localhost:3001/api/appointment-types', {auth: {username: process.env.ACUITYUSER, password: process.env.ACUITYPW}})
       for (const type of appointmentTypes) {
         if(type.calendarIDs[0]) {
           if (Number(this.calendarId) === type.calendarIDs[0]) {
@@ -67,7 +67,7 @@
 
       for(const type of this.appointmentTypes){
         const date = new Date()
-        const dates = await this.$axios.$get(`http://localhost:3001/api/availability/dates?appointmentTypeID=${type.id}&month=${date.getFullYear()}-${date.getMonth()+1}&calendarID=${this.calendarId}`, {auth: {username: '17442156', password: 'a4cacb401c53a2ab5621bd7dc9bfaf00'}})
+        const dates = await this.$axios.$get(`http://localhost:3001/api/availability/dates?appointmentTypeID=${type.id}&month=${date.getFullYear()}-${date.getMonth()+1}&calendarID=${this.calendarId}`, {auth: {username: process.env.ACUITYUSER, password: process.env.ACUITYPW}})
         // need to sort the dates in case they have multiple appointment types
         this.nextDates = dates.slice(0, 3)
         this.allDates = dates
