@@ -4,8 +4,8 @@
     <p class="subtitle" v-if="doctors.length">You searched for: {{ search}}</p>
     <p class="subtitle" v-if="!doctors.length">Sorry no results for: {{ search }}</p>
     <br>
-    <v-layout align-center justify-space-around row>
-      <Doc v-for="doctor in doctors" :title="doctor.title" :firstname="doctor.firstname" :lastname="doctor.lastname" :speciality="doctor.speciality" :key="doctor.id" :calendar-id="doctor.calendarid" :dates="doctor.dates"></Doc>
+    <v-layout align-baseline justify-space-around row wrap>
+      <Doc v-for="doctor in doctors" :id="doctor.iddoctorprofile" :title="doctor.title" :firstname="doctor.firstname" :lastname="doctor.lastname" :speciality="doctor.speciality" :key="doctor.id" :calendar-id="doctor.calendarid" :dates="doctor.dates"></Doc>
     </v-layout>
   </section>
 </template>
@@ -17,9 +17,11 @@
     components: {
       Doc,
       Navbar
-    }, data: function () {
+    },
+    watchQuery: ['search'],
+    data: function () {
       return {
-        search: '',
+        search: this.$route.query.search || '',
         doctors: []
       }
     },
@@ -27,17 +29,18 @@
       this.search = this.$route.query.search
     },
     async asyncData ({$axios, query}) {
-      return { doctors: await $axios.$get(`${process.env.YAOAPI}/doctors/speciality/${query.search}`)}
+      let result = {}
+      if (query.search === '*') {
+        result.doctors = await $axios.$get(`${process.env.YAOAPI}/doctors/`)
+      } else {
+        result.doctors = await $axios.$get(`${process.env.YAOAPI}/doctors/speciality/${query.search}`)
+      }
+      return result
     }
   }
 </script>
 
 <style lang="scss" scoped>
-  .mycontainer {
-    min-height: 100vh;
-    text-align: center;
-    padding: 0;
-  }
 
   .title {
     font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
