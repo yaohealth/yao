@@ -21,13 +21,13 @@
       </div>
     </div>
     <v-container >
-      <v-layout row wrap align-center justify-space-around >
-          <Doc v-for="doctor in doctors" :title="doctor.title" :firstname="doctor.firstname" :lastname="doctor.lastname" :speciality="doctor.speciality" :key="doctor.id" :calendar-id="doctor.calendarid" :dates="doctor.dates"></Doc>
+      <v-layout row wrap align-baseline justify-space-around >
+          <Doc v-for="doctor in doctors" :id="doctor.iddoctorprofile" :title="doctor.title" :firstname="doctor.firstname" :lastname="doctor.lastname" :speciality="doctor.speciality" :key="doctor.iddoctorprofile" :calendar-id="doctor.calendarid" :dates="doctor.dates"></Doc>
       </v-layout>
     </v-container>
     <div class="whatIsYao">
       <div>
-        <p>WHAT IS YAO?</p>
+        <img src="~assets/logo.png" alt="">
       </div>
     </div>
     <div class="network">
@@ -54,6 +54,12 @@
     </div>
     <Yaofooter></Yaofooter>
   </section>
+    <v-snackbar auto-height color="white" class="black--text" v-model="snackbar" bottom :timeout="0">
+      Subscribe to our Newsletter:
+      <v-text-field class="emailinput" v-model="email" :rules="emailRules" label="E-mail"></v-text-field>
+      <v-btn color="rgba(51, 169, 181, 255)" flat @click="subscribe">Subscribe</v-btn>
+      <v-btn color="rgba(51, 169, 181, 255)" flat @click="snackbar = false">Close</v-btn>
+    </v-snackbar>
   </v-app>
 </template>
 
@@ -61,6 +67,7 @@
   import Navbar from '@/components/Navbar'
   import Doc from '@/components/Doc'
   import Yaofooter from '@/components/Yaofooter'
+  import { mapMutations } from 'vuex'
 
 export default {
   components: {
@@ -72,13 +79,28 @@ export default {
     return {
       choice: '',
       doctors: [],
-      therapies: []
+      therapies: [],
+      snackbar: true,
+      valid: false,
+      email: '',
+      emailRules: [ v => /.+@.+\..+/.test(v) || 'E-mail must be valid']
     }
   },
   methods: {
+    ...mapMutations({
+      SET_DOCTORS: 'localStorage/SET_DOCTORS'
+    }),
     setChoice: function(option) {
       this.choice = option
+    },
+    subscribe() {
+      alert("subscribed by " + this.email)
+      // alert("subscribed by " + this.email)
     }
+  },
+  created() {
+    // add expiry of localstorage
+    this.SET_DOCTORS(this.doctors)
   },
   async asyncData({ $axios }) {
     const [allDocs, specialities] = await Promise.all([
@@ -99,12 +121,6 @@ export default {
 
 <style lang="scss" scoped>
 $yao: rgba(51, 169, 181, 255);
-.mycontainer {
-  min-height: 100vh;
-  text-align: center;
-  padding: 0;
-  margin: 0;
-}
 
 .bg {
   background: url("../assets/landing.jpg") no-repeat center;
@@ -205,9 +221,8 @@ $yao: rgba(51, 169, 181, 255);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    p {
-      color: $yao;
-      font-size: 13vw;
+    img {
+      width: 80vw;
     }
   }
 }
@@ -297,5 +312,9 @@ $yao: rgba(51, 169, 181, 255);
       }
     }
   }
+}
+
+.emailinput {
+  padding-left: 20px;
 }
 </style>
