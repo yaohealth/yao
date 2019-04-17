@@ -33,13 +33,14 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-
+    { src: '~/plugins/vuex-persist', ssr: false }
   ],
 
   /*
   ** Nuxt.js modules
   */
   modules: [
+    '@ax2/dayjs-module',
     ['nuxt-fontawesome', {
       component: 'fa',
       imports: [
@@ -52,8 +53,8 @@ export default {
     '@nuxtjs/vuetify',
     'nuxt-material-design-icons',
     '@nuxtjs/axios',
-    '@nuxtjs/dotenv'
-
+    '@nuxtjs/dotenv',
+    'nuxt-leaflet'
   ],
   'axios': {
     'proxy': true

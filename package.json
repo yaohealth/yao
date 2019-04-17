@@ -12,6 +12,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@ax2/dayjs-module": "^0.1.2",
     "@fortawesome/fontawesome-svg-core": "^1.2.17",
     "@fortawesome/free-brands-svg-icons": "^5.8.1",
     "@fortawesome/free-solid-svg-icons": "^5.8.1",
@@ -25,9 +26,11 @@
     "node-sass": "^4.11.0",
     "nuxt": "^2.4.0",
     "nuxt-fontawesome": "^0.4.0",
+    "nuxt-leaflet": "^0.0.18",
     "nuxt-material-design-icons": "^1.0.4",
     "nuxt-vue-material": "^1.1.0",
-    "sass-loader": "^7.1.0"
+    "sass-loader": "^7.1.0",
+    "vuex-persist": "^2.0.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.10"
