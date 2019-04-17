@@ -2,9 +2,11 @@
   <div class="nav-container">
     <nav>
       <input type="checkbox" id="nav-toggle">
-      <label for="nav-toggle" class="burger-menu">
-        <v-icon>menu</v-icon>
-      </label>
+      <div class="burgercontainer">
+        <label for="nav-toggle" class="burger-menu">
+          <v-icon>menu</v-icon>
+        </label>
+      </div>
       <div class="left-menu">
         <a class="links" href="https://blog.yao.health">Blog</a>
       </div>
@@ -12,7 +14,7 @@
         <img class="icon" src="~assets/logo.png" alt="">
       </nuxt-link>
       <div class="right-menu">
-        <nuxt-link class="links" to="/">Registrieren</nuxt-link>
+        <nuxt-link class="links" :to="{name: 'results', query: { search:'*' } }">Booking</nuxt-link>
       </div>
     </nav>
   </div>
@@ -50,21 +52,27 @@
 
     #nav-toggle:checked ~ .left-menu{
       display: grid;
-      grid-row: 2;
-      text-align: left;
+      grid-row: 3;
+      grid-column: 2;
+      text-align: center;
     }
 
     #nav-toggle:checked ~ .right-menu{
       display: grid;
-      grid-column: 1;
-      grid-row: 3;
-      text-align: left;
+      grid-column: 2;
+      grid-row: 4;
+      text-align: center;
     }
+  }
+
+  .burgercontainer {
+    display: flex;
   }
 
   .burger-menu {
     width: 40px;
-    grid-column: 1;
+    grid-column: 2;
+    grid-row: 2;
     align-self: center;
     margin-left: 20px;
   }
