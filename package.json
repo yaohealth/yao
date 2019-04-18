@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "nuxt --port 3001",
-    "dev:debug": "nodemon --inspect-brk node_modules/.bin/nuxt --port 3001",
+    "dev:debug": "nodemon --inspect node_modules/.bin/nuxt --port 3001",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate"

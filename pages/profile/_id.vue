@@ -64,14 +64,15 @@
       }),
       formatTimes(times) {
         return times.map(day => {
-          const fullDate = this.$dayjs(day[0].time)
+          const fullDate = this.$dayjs(day[0].time, {locale: 'de'})
           return {
             date: fullDate.format('DD'),
             weekday: fullDate.format('dd'),
             month: fullDate.format('MMMM'),
+            year: fullDate.year(),
             times: day.map(time => {
 
-              return this.$dayjs(time.time).format('HH:mm')
+              return this.$dayjs(time.time, {locale: 'de'}).format('HH:mm')
 
             }) // "2019-04-16T09:00:00+0200"
           }

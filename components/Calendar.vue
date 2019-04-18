@@ -21,7 +21,7 @@
               <div class="weekday">{{ props.item.weekday }}</div>
             </div>
             <v-list-tile class="timecontainer" v-for="time in props.item.times" :key="props.item.date + time">
-              <v-list-tile-content class="timecontainer"><v-btn class="timebtn" flat @click="openBookingDialog(`${props.item.date} ${props.item.month} ${time}`)">{{time}}</v-btn></v-list-tile-content>
+              <v-list-tile-content class="timecontainer"><v-btn class="timebtn" flat @click="openBookingDialog(`${props.item.date} ${props.item.month} ${props.item.year} ${time}`)">{{time}}</v-btn></v-list-tile-content>
             </v-list-tile>
           </v-list>
         </v-flex>
@@ -49,14 +49,26 @@
       return {
         doctor: {},
         pagination: {
-        rowsPerPage: 5
+          rowsPerPage: 5
         },
-         items: this.dates,
+        items: this.dates,
         showBooking: false,
         selectedDate: ''
       }
     },
     methods: {
+      // inital getDates is in doc -> saves it in vuex
+      // move allDates to calendar
+      // move getTimes from _id nach calendar
+      // move formatDates to calendar
+      // when rest of the month is loaded count how many dates are available
+      // when available - display <= 5 --> load next month + available times  --> save in vuex
+
+
+
+      // calendar next method takes next (rowPerPage) dates and displays them
+      // check available - display <= 5 --> load next month
+      // when in future display prev btn
       openBookingDialog(date) {
         console.log(date)
         this.selectedDate = date
