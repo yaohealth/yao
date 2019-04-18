@@ -1,13 +1,13 @@
 <template>
-  <v-container v-if="items.length > 0" fluid grid-list-md align-content-space-between>
+  <v-container v-if="formatedDates.length > 0" fluid grid-list-md align-content-space-between>
     <v-layout class="header">
       <v-flex class="prev"><v-btn flat>prev</v-btn></v-flex>
-      <v-flex class="month">{{items[0].month}}</v-flex>
+      <v-flex class="month">{{formatedDates[0].month}}</v-flex>
       <v-flex class="next"><v-btn flat>next</v-btn></v-flex>
     </v-layout>
     <v-divider></v-divider>
     <v-data-iterator
-            :items="items"
+            :items="formatedDates"
             :pagination.sync="pagination"
             content-tag="v-layout"
             row
@@ -27,7 +27,7 @@
         </v-flex>
       </template>
     </v-data-iterator>
-    <BookingForm  v-model="showBooking" :selectedDate="selectedDate" :appointmentTypes="appointmentTypes" ></BookingForm>
+    <BookingForm  v-model="showBooking" :selectedDate="selectedDate" :appointmentTypes="doctor.appointmentTypes" ></BookingForm>
   </v-container>
   <h1 class="loading" v-else>Calendar is loading.....</h1>
 </template>
@@ -36,15 +36,9 @@
   import { mapGetters } from 'vuex'
   import BookingForm from '@/components/BookingForm'
   export default {
-    watch: {
-      'dates' : function (val, oldVal) {
-        this.items = val
-      }
-    },
     components: {
       BookingForm
     },
-    props: ['dates', 'appointmentTypes'],
     data() {
       return {
         doctor: {},
@@ -53,14 +47,14 @@
         },
         items: this.dates,
         showBooking: false,
-        selectedDate: ''
+        selectedDate: '',
+        formatedDates: []
       }
     },
     methods: {
       // inital getDates is in doc -> saves it in vuex
-      // move allDates to calendar
-      // move getTimes from _id nach calendar
-      // move formatDates to calendar
+      // move allDates to calendar ( more actually have a function to call to get dates to add to the exisiting)
+      // or then these are not set
       // when rest of the month is loaded count how many dates are available
       // when available - display <= 5 --> load next month + available times  --> save in vuex
 
@@ -69,14 +63,47 @@
       // calendar next method takes next (rowPerPage) dates and displays them
       // check available - display <= 5 --> load next month
       // when in future display prev btn
+
+      ...mapGetters({
+        getSpecificDoctor: 'localStorage/getSpecificDoctor'
+      }),
       openBookingDialog(date) {
-        console.log(date)
         this.selectedDate = date
         this.showBooking = true
+      },
+      setThisDoctor () {
+        this.doctor = (this.getSpecificDoctor())(this.$route.params.id)
+      },
+      async getTimes () {
+        const dateRequests =[]
+        for(const date of this.doctor.allDates) {
+          dateRequests.push(this.$axios.$get(`${process.env.ACUITYPROXY}/api/availability/times?appointmentTypeID=${this.doctor.appointmentTypes[0].id}&calendarID=${this.doctor.calendarid}&date=${date.date}`, {auth: {username: process.env.ACUITYUSER, password: process.env.ACUITYPW}}))
+        }
+        return await Promise.all(dateRequests)
+      },
+      formatTimes (times) {
+        // formated dates/times to show in the calendar
+        this.formatedDates = times.map(day => {
+          const fullDate = this.$dayjs(day[0].time, {locale: 'de'})
+          return {
+            date: fullDate.format('DD'),
+            weekday: fullDate.format('dd'),
+            month: fullDate.format('MMMM'),
+            year: fullDate.year(),
+            times: day.map(time => {
+
+              return this.$dayjs(time.time, {locale: 'de'}).format('HH:mm')
+
+            })
+          }
+        })
       }
     },
-    mounted() {
-      console.log('mounted calendar')
+    async created() {
+      this.setThisDoctor()
+      const times = await this.getTimes()
+      this.formatTimes(times)
+      console.log('created calendar')
     }
 
   }

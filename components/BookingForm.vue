@@ -61,9 +61,6 @@
       booking: async function() {
         const treatmentID = this.appointmentTypes.find(item => item.name === this.treatmentselect)
         try {
-          console.log('day',this.$dayjs(this.selectedDate, {locale: 'de'}).toISOString())
-          let foo = this.$dayjs(this.selectedDate, {locale: 'de'})
-          console.log('id',treatmentID.id)
           const res = await this.$axios.$post(`${process.env.ACUITYPROXY}/api/appointments`, {
 
               appointmentTypeID: treatmentID.id,
@@ -99,11 +96,9 @@
     computed: {
       show: {
         get () {
-          console.log('get is called')
           return this.value
         },
         set (value) {
-          console.log('set is called', value)
           this.$emit('input', value)
         }
       }

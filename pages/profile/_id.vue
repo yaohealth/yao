@@ -12,7 +12,6 @@
         </v-card>
 
         <!--use the adress to get the coordinates and set the map-->
-
           <no-ssr>
             <l-map class="map" :zoom=15 :center="[52.6446503, 13.5393354]">
               <l-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></l-tile-layer>
@@ -20,13 +19,13 @@
             </l-map>
           </no-ssr>
 
+        <!--show adress below calendar-->
+
       </v-card>
 
       <v-card>
-        <!--pass the final formated items-->
-        <Calendar :dates="formatedDates" :appointmentTypes="doctor.appointmentTypes"></Calendar>
+        <Calendar></Calendar>
       </v-card>
-
 
       <v-card class="descriptioncontainer">
         <v-card-text v-for="(description, index) in descriptions" :key="`T-${index}`">
@@ -53,47 +52,19 @@
     data() {
       return {
         doctor: {},
-        allDates: this.$route.params.allDates || '',
-        descriptions: [],
-        formatedDates: []
+        descriptions: []
       }
     },
     methods: {
       ...mapGetters({
         getSpecificDoctor: 'localStorage/getSpecificDoctor'
-      }),
-      formatTimes(times) {
-        return times.map(day => {
-          const fullDate = this.$dayjs(day[0].time, {locale: 'de'})
-          return {
-            date: fullDate.format('DD'),
-            weekday: fullDate.format('dd'),
-            month: fullDate.format('MMMM'),
-            year: fullDate.year(),
-            times: day.map(time => {
-
-              return this.$dayjs(time.time, {locale: 'de'}).format('HH:mm')
-
-            }) // "2019-04-16T09:00:00+0200"
-          }
-        })
-      }
+      })
     },
     async created() {
       this.doctor = (this.getSpecificDoctor())(this.$route.params.id)
-      let dateRequests =[]
-      // request all times for the next 5 next days
-      for(const date of this.doctor.allDates) {
-        dateRequests.push(this.$axios.$get(`${process.env.ACUITYPROXY}/api/availability/times?appointmentTypeID=${this.doctor.appointmentTypes[0].id}&calendarID=${this.doctor.calendarid}&date=${date.date}`, {auth: {username: process.env.ACUITYUSER, password: process.env.ACUITYPW}}))
-      }
-      let times = await Promise.all(dateRequests)
-
-      this.formatedDates = this.formatTimes(times)
-      console.log('formated dates')
     },
     async asyncData({ $axios, route }) {
       const descriptions = await $axios.$get(`${process.env.YAOAPI}/doctors/description/${route.params.id}`)
-
       return {descriptions}
     }
   }

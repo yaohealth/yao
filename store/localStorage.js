@@ -27,6 +27,8 @@ export const mutations = {
 export const getters = {
   getAllDoctors: state => state.allDoctors,
   getSpecificDoctor: (state) =>  (index) => {
+    console.log("get doc nr ", index)
+    console.log(state.doctors)
     return state.doctors.find(doctor => doctor.iddoctorprofile === index)
   }
 }
