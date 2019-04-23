@@ -87,10 +87,6 @@
         const dates = await this.$axios.$get(`${process.env.ACUITYPROXY}/api/availability/dates?appointmentTypeID=${type.id}&month=${date.getFullYear()}-${date.getMonth()+1}&calendarID=${this.calendarId}`, {auth: {username: process.env.ACUITYUSER, password: process.env.ACUITYPW}})
         // need to sort the dates in case they have multiple appointment types
         this.nextDates = dates.slice(0, 3)
-
-        // dates is just for the current month
-        // maybe we need to add it as an object with the month as key
-        // and add more when they are needed in the profile page
         this.allDates = dates
         this.ADD_DATES({dates, id: this.id})
       }

@@ -5,7 +5,7 @@
       <v-card class="docdetails" >
         <v-card class="avatarcard" width="300px" height="300px">
           <v-avatar size="200px">
-            <img :src="doctor.pictureurl"></img>
+            <img v-if="doctor" :src="doctor.pictureurl"/>
           </v-avatar>
           <h2 v-if="doctor">{{doctor.title}} {{doctor.firstname}} {{doctor.lastname}}</h2>
           <p v-if="doctor">{{doctor.speciality}}</p>
@@ -24,7 +24,7 @@
       </v-card>
 
       <v-card>
-        <Calendar></Calendar>
+        <Calendar :doctor="doctor"></Calendar>
       </v-card>
 
       <v-card class="descriptioncontainer">
@@ -51,7 +51,6 @@
     },
     data() {
       return {
-        doctor: {},
         descriptions: []
       }
     },
@@ -60,8 +59,13 @@
         getSpecificDoctor: 'localStorage/getSpecificDoctor'
       })
     },
+    computed: {
+      doctor () {
+        return (this.getSpecificDoctor())(this.$route.params.id)
+      }
+    },
     async created() {
-      this.doctor = (this.getSpecificDoctor())(this.$route.params.id)
+      //this.doctor = (this.getSpecificDoctor())(this.$route.params.id)
     },
     async asyncData({ $axios, route }) {
       const descriptions = await $axios.$get(`${process.env.YAOAPI}/doctors/description/${route.params.id}`)

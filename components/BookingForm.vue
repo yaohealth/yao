@@ -1,6 +1,5 @@
 <template>
   <v-container>
-
       <v-dialog width="60vw" v-model="show">
         <v-card>
           <v-layout  column justify-center fluid>
@@ -22,7 +21,6 @@
                 <small>*indicates required field</small>
               </v-card-text>
             </v-flex>
-
           <v-card-actions class="buttons">
             <v-btn color="rgba(51, 169, 181, 255)" flat @click.stop="show=false">Abbrechen</v-btn>
             <v-btn color="rgba(51, 169, 181, 255)" flat @click.stop="booking()">Buchen</v-btn>

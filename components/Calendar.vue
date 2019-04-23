@@ -1,9 +1,9 @@
 <template>
   <v-container v-if="formatedDates.length > 0" fluid grid-list-md align-content-space-between>
     <v-layout class="header">
-      <v-flex class="prev"><v-btn flat>prev</v-btn></v-flex>
+      <v-flex class="prev"><v-btn flat :disabled="!!pageOne()" @click="prevDates">prev</v-btn></v-flex>
       <v-flex class="month">{{formatedDates[0].month}}</v-flex>
-      <v-flex class="next"><v-btn flat>next</v-btn></v-flex>
+      <v-flex class="next"><v-btn flat @click="nextDates">next</v-btn></v-flex>
     </v-layout>
     <v-divider></v-divider>
     <v-data-iterator
@@ -36,12 +36,19 @@
   import { mapGetters } from 'vuex'
   import BookingForm from '@/components/BookingForm'
   export default {
+    watch: {
+      doctor: {
+        handler(newValue, oldValue){
+          this.setFormatedTimes()
+        }
+      }
+    },
+    props: ['doctor'],
     components: {
       BookingForm
     },
     data() {
       return {
-        doctor: {},
         pagination: {
           rowsPerPage: 5
         },
@@ -71,9 +78,6 @@
         this.selectedDate = date
         this.showBooking = true
       },
-      setThisDoctor () {
-        this.doctor = (this.getSpecificDoctor())(this.$route.params.id)
-      },
       async getTimes () {
         const dateRequests =[]
         for(const date of this.doctor.allDates) {
@@ -97,15 +101,33 @@
             })
           }
         })
+      },
+      async setFormatedTimes() {
+        const times = await this.getTimes()
+        this.formatTimes(times)
+      },
+      pageOne() {
+        return this.pagination.page < 2
+      },
+      async nextDates() {
+        this.pagination.page += 1
+        // if less then two pages of dates available
+        if ((this.formatedDates.length - this.pagination.page * this.pagination.rowsPerPage) < 10) {
+
+        }
+        // if not load more and store them
+      },
+      prevDates() {
+        if(this.pagination.page >= 2) {
+          this.pagination.page -= 1
+        }
       }
     },
     async created() {
-      this.setThisDoctor()
-      const times = await this.getTimes()
-      this.formatTimes(times)
-      console.log('created calendar')
+      if (this.doctor) {
+        await this.setFormatedTimes()
+      }
     }
-
   }
 </script>
 
