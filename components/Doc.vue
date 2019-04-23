@@ -2,7 +2,7 @@
   <div class="doc">
     <v-flex xs12 m6>
       <v-card>
-        <nuxt-link :to="{name: `profile-id`, params: {id, allDates}}">
+        <nuxt-link :to="{name: `profile-id`, params: {id, availableDates}}">
           <v-img src="https://qph.fs.quoracdn.net/main-qimg-c55f4f1eab6aa42861d2e42436825ba9" aspect-ratio="1"></v-img>
         </nuxt-link>
         <v-card-title>
@@ -15,14 +15,14 @@
         <v-card-text v-if="displaypeviewdates.length">
           <v-layout align-center>
             <v-icon>access_time</v-icon>
-            <nuxt-link :to="{name: `profile-id`, params: {id, allDates}}">
+            <nuxt-link :to="{name: `profile-id`, params: {id, availableDates}}">
             <v-btn v-for="nextdate in displaypeviewdates" :key="nextdate" class="somebtn" flat>{{ nextdate }}</v-btn>
             </nuxt-link>
           </v-layout>
         </v-card-text>
         <v-card-actions>
           <v-layout justify-end>
-            <nuxt-link :to="{name: `profile-id`, params: {id, allDates}}">
+            <nuxt-link :to="{name: `profile-id`, params: {id, availableDates}}">
               <v-btn flat color="rgba(51, 169, 181, 255)">Booking</v-btn>
             </nuxt-link>
           </v-layout>
@@ -60,7 +60,7 @@
       return {
         nextDates: [],
         displaypeviewdates: [],
-        allDates: []
+        availableDates: []
       }
     },
     async created () {
@@ -87,7 +87,7 @@
         const dates = await this.$axios.$get(`${process.env.ACUITYPROXY}/api/availability/dates?appointmentTypeID=${type.id}&month=${date.getFullYear()}-${date.getMonth()+1}&calendarID=${this.calendarId}`, {auth: {username: process.env.ACUITYUSER, password: process.env.ACUITYPW}})
         // need to sort the dates in case they have multiple appointment types
         this.nextDates = dates.slice(0, 3)
-        this.allDates = dates
+        this.availableDates = dates
         this.ADD_DATES({dates, id: this.id})
       }
       this.ADD_APPOINTMENTTYPES({appointmentTypes: this.appointmentTypes, id: this.id})

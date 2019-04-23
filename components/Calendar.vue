@@ -60,7 +60,7 @@
     },
     methods: {
       // inital getDates is in doc -> saves it in vuex
-      // move allDates to calendar ( more actually have a function to call to get dates to add to the exisiting)
+      // move availableDates to calendar ( more actually have a function to call to get dates to add to the exisiting)
       // or then these are not set
       // when rest of the month is loaded count how many dates are available
       // when available - display <= 5 --> load next month + available times  --> save in vuex
@@ -80,7 +80,7 @@
       },
       async getTimes () {
         const dateRequests =[]
-        for(const date of this.doctor.allDates) {
+        for(const date of this.doctor.availableDates) {
           dateRequests.push(this.$axios.$get(`${process.env.ACUITYPROXY}/api/availability/times?appointmentTypeID=${this.doctor.appointmentTypes[0].id}&calendarID=${this.doctor.calendarid}&date=${date.date}`, {auth: {username: process.env.ACUITYUSER, password: process.env.ACUITYPW}}))
         }
         return await Promise.all(dateRequests)

@@ -11,7 +11,7 @@ export const mutations = {
   ADD_DATES: (state, payload) => {
     for (const doctor of state.doctors) {
       if (doctor.iddoctorprofile === payload.id) {
-        doctor.allDates = payload.dates
+        doctor.availableDates = payload.dates
       }
     }
   },
