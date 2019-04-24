@@ -59,7 +59,7 @@
       booking: async function() {
         const treatmentID = this.appointmentTypes.find(item => item.name === this.treatmentselect)
         try {
-          const res = await this.$axios.$post(`${process.env.ACUITYPROXY}/api/appointments`, {
+          const res = await this.$http.$post(`${process.env.ACUITYPROXY}/api/appointments`, {
 
               appointmentTypeID: treatmentID.id,
               datetime: this.$dayjs(this.selectedDate, {locale: 'de'}).toISOString(),

@@ -54,10 +54,12 @@ export default {
     'nuxt-material-design-icons',
     '@nuxtjs/axios',
     '@nuxtjs/dotenv',
-    'nuxt-leaflet'
+    'nuxt-leaflet',
+    '@nuxt/http',
+    '@nuxtjs/proxy'
   ],
-  'axios': {
-    'proxy': true
+  http: {
+    proxy: true // Can be also an object with default options
   },
   'proxy': {
     '/api/': { target: 'https://acuityscheduling.com/api/v1/', pathRewrite: {'^/api/': ''} }

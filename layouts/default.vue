@@ -4,6 +4,17 @@
   </div>
 </template>
 
+<script>
+  export default {
+    created() {
+      // set auth for acutiy api
+      const x = new Buffer.from(`${process.env.ACUITYUSER}:${process.env.ACUITYPW}`)
+      this.$http.setToken(x.toString('base64'), 'Basic')
+    }
+  }
+</script>
+
+
 <style>
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',

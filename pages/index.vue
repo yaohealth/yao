@@ -102,10 +102,10 @@ export default {
     // add expiry of localstorage
     this.SET_DOCTORS(this.doctors)
   },
-  async asyncData({ $axios }) {
+  async asyncData({ $http }) {
     const [allDocs, specialities] = await Promise.all([
-      $axios.$get(`${process.env.YAOAPI}/doctors/`),
-      $axios.$get(`${process.env.YAOAPI}/specialities`)
+      $http.$get(`${process.env.YAOAPI}/doctors/`),
+      $http.$get(`${process.env.YAOAPI}/specialities`)
       ])
     const doctors = []
     let therapies = []

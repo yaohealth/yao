@@ -67,8 +67,8 @@
     async created() {
       //this.doctor = (this.getSpecificDoctor())(this.$route.params.id)
     },
-    async asyncData({ $axios, route }) {
-      const descriptions = await $axios.$get(`${process.env.YAOAPI}/doctors/description/${route.params.id}`)
+    async asyncData({ $http, route }) {
+      const descriptions = await $http.get(`${process.env.YAOAPI}/doctors/description/${route.params.id}`)
       return {descriptions}
     }
   }

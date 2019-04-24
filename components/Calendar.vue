@@ -81,13 +81,14 @@
       async getTimes () {
         const dateRequests =[]
         for(const date of this.doctor.availableDates) {
-          dateRequests.push(this.$axios.$get(`${process.env.ACUITYPROXY}/api/availability/times?appointmentTypeID=${this.doctor.appointmentTypes[0].id}&calendarID=${this.doctor.calendarid}&date=${date.date}`, {auth: {username: process.env.ACUITYUSER, password: process.env.ACUITYPW}}))
+          dateRequests.push(this.$http.$get(`${process.env.ACUITYPROXY}/api/availability/times?appointmentTypeID=${this.doctor.appointmentTypes[0].id}&calendarID=${this.doctor.calendarid}&date=${date.date}`))
         }
         return await Promise.all(dateRequests)
       },
       formatTimes (times) {
         // formated dates/times to show in the calendar
         this.formatedDates = times.map(day => {
+          console.log(day)
           const fullDate = this.$dayjs(day[0].time, {locale: 'de'})
           return {
             date: fullDate.format('DD'),
@@ -113,7 +114,9 @@
         this.pagination.page += 1
         // if less then two pages of dates available
         if ((this.formatedDates.length - this.pagination.page * this.pagination.rowsPerPage) < 10) {
-
+          // add another month to availableDates
+          // make the time request
+          // call formatDate
         }
         // if not load more and store them
       },

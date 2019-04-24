@@ -64,9 +64,9 @@
       }
     },
     async created () {
-      let appointmentTypes = []
+      let appointmentTypes
       try {
-        appointmentTypes = await this.$axios.$get(`${process.env.ACUITYPROXY}/api/appointment-types`, {auth: {username: process.env.ACUITYUSER, password: process.env.ACUITYPW}})
+        appointmentTypes = await this.$http.$get(`${process.env.ACUITYPROXY}/api/appointment-types`) //, {auth: {username: process.env.ACUITYUSER, password: process.env.ACUITYPW}}
         
       } catch (e) {
         console.log(e)
@@ -84,10 +84,10 @@
       // then one type
       for(const type of this.appointmentTypes){
         const date = new Date()
-        const dates = await this.$axios.$get(`${process.env.ACUITYPROXY}/api/availability/dates?appointmentTypeID=${type.id}&month=${date.getFullYear()}-${date.getMonth()+1}&calendarID=${this.calendarId}`, {auth: {username: process.env.ACUITYUSER, password: process.env.ACUITYPW}})
+        const dates = await this.$http.$get(`${process.env.ACUITYPROXY}/api/availability/dates?appointmentTypeID=${type.id}&month=${date.getFullYear()}-${date.getMonth()+1}&calendarID=${this.calendarId}`)
         // need to sort the dates in case they have multiple appointment types
         this.nextDates = dates.slice(0, 3)
-        this.availableDates = dates
+        this.availableDates[type] = dates
         this.ADD_DATES({dates, id: this.id})
       }
       this.ADD_APPOINTMENTTYPES({appointmentTypes: this.appointmentTypes, id: this.id})

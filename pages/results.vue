@@ -28,12 +28,12 @@
     created() {
       this.search = this.$route.query.search
     },
-    async asyncData ({$axios, query}) {
+    async asyncData ({$http, query}) {
       let result = {}
       if (query.search === '*') {
-        result.doctors = await $axios.$get(`${process.env.YAOAPI}/doctors/`)
+        result.doctors = await $http.$get(`${process.env.YAOAPI}/doctors/`)
       } else {
-        result.doctors = await $axios.$get(`${process.env.YAOAPI}/doctors/speciality/${query.search}`)
+        result.doctors = await $http.$get(`${process.env.YAOAPI}/doctors/speciality/${query.search}`)
       }
       return result
     }
