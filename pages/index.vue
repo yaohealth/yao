@@ -111,6 +111,7 @@ export default {
     let therapies = []
     let allDocsCopy = allDocs.slice()
     for (let i = 0; i < 3; i++) {
+      // pick and remove three doctors from the array for preview
       doctors.push(allDocsCopy.splice(Math.ceil(Math.random() * 10) % allDocsCopy.length, 1)[0])
     }
     therapies = specialities.map( speciality => speciality.speciality)

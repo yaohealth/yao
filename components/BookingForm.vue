@@ -19,11 +19,12 @@
                 <v-text-field v-model="email" label="Email*" :rules="[rules.required, rules.email]"></v-text-field>
                 <v-text-field v-model="phonenumber" label="Telefon*" :rules="[rules.required]"></v-text-field>
                 <small>*indicates required field</small>
+                <v-checkbox v-model="agb" :rules="[rules.required]" label="AGB akzeptieren*"></v-checkbox>
               </v-card-text>
             </v-flex>
           <v-card-actions class="buttons">
             <v-btn color="rgba(51, 169, 181, 255)" flat @click.stop="show=false">Abbrechen</v-btn>
-            <v-btn color="rgba(51, 169, 181, 255)" flat @click.stop="booking()">Buchen</v-btn>
+            <v-btn color="rgba(51, 169, 181, 255)" :disabled="!agb" flat @click.stop="booking()">Buchen</v-btn>
           </v-card-actions>
           </v-layout>
         </v-card>
@@ -49,7 +50,8 @@
         firstname: '',
         lastname: '',
         email: '',
-        phonenumber: ''
+        phonenumber: '',
+        agb: false
       }
     },
     methods: {
@@ -57,10 +59,9 @@
         return appointmentTypes.map(item => item.name)
       },
       booking: async function() {
-        const treatmentID = this.appointmentTypes.find(item => item.name === this.treatmentselect)
-        try {
-          const res = await this.$http.$post(`${process.env.ACUITYPROXY}/api/appointments`, {
-
+          const treatmentID = this.appointmentTypes.find(item => item.name === this.treatmentselect)
+          try {
+            await this.$http.$post(`${process.env.ACUITYPROXY}/api/appointments`, {
               appointmentTypeID: treatmentID.id,
               datetime: this.$dayjs(this.selectedDate, {locale: 'de'}).toISOString(),
               firstName: this.firstname,
@@ -69,23 +70,20 @@
               phone: this.phonenumber,
               fields: [
                 {
+                  // id is the id of the agb field
                   id: '6202825',
-                  value: true
+                  value: this.agb
                 }
               ]
-            },{
-            auth: {
-              username: process.env.ACUITYUSER, password: process.env.ACUITYPW
-            }})
-
-          console.log(res)
-        } catch (e) {
-          console.log(e)
-        }
-
-
-        // bestätigung anzeigen
-        // kalendar neu laden
+            })
+            this.show = false
+            // emit event to parent component
+            this.$emit('booked', this.selectedDate)
+          } catch (e) {
+            // emit event to parent component
+            this.$emit('failed')
+            console.log(e)
+          }
       },
       setTreatment: function(option) {
         this.treatmentselect = option

@@ -823,14 +823,14 @@
     html-minifier "^3.5.21"
 
 "@nuxt/http@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@nuxt/http/-/http-0.1.1.tgz#710f1d267e8832b61e560d02812aa76fc948e095"
-  integrity sha512-jo44FXT7RsZLGnk060kVfscy9Wm6jlclJxqvdccx2HXGLIqMVNT+p6uTI9AxCdV4+v90CRA/c4ib6x11wE5YNQ==
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@nuxt/http/-/http-0.1.2.tgz#6e958b27f5226deadffcbced13439e827785dd9e"
+  integrity sha512-Iq86Kk3+QwPjO/n/R4VKXAkh/RSEGFiuqxA46+fovqAsKAgCrCha051oqX8E66NrG4+mqbRRarIoh8HOF//VGg==
   dependencies:
     "@nuxtjs/proxy" "^1.3.3"
     consola "^2.6.0"
-    ky "^0.9.1"
-    ky-universal "^0.1.0"
+    ky "^0.10.0"
+    ky-universal "^0.2.0"
 
 "@nuxt/loading-screen@^0.1.2":
   version "0.1.3"
@@ -962,16 +962,6 @@
     webpack-hot-middleware "^2.24.3"
     webpack-node-externals "^1.7.2"
     webpackbar "^3.1.5"
-
-"@nuxtjs/axios@^5.4.1":
-  version "5.4.1"
-  resolved "https://registry.yarnpkg.com/@nuxtjs/axios/-/axios-5.4.1.tgz#8dbc841e939c082271f7053edc1180bf5a441ee3"
-  integrity sha512-SvN6Ixs9d2AHdaB8PF4ZXr9azg4r3ynaomtr71+wMox3EEFfZHBQmAFz6lOY/CqbLRlJqYVDPKPvfIcSnngktw==
-  dependencies:
-    "@nuxtjs/proxy" "^1.3.3"
-    axios "^0.18.0"
-    axios-retry "^3.1.2"
-    consola "^2.5.6"
 
 "@nuxtjs/dotenv@^1.3.0":
   version "1.3.0"
@@ -1249,10 +1239,10 @@ abbrev@1:
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
   integrity sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==
 
-abort-controller@^2.0.2:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/abort-controller/-/abort-controller-2.0.3.tgz#b174827a732efadff81227ed4b8d1cc569baf20a"
-  integrity sha512-EPSq5wr2aFyAZ1PejJB32IX9Qd4Nwus+adnp7STYFM5/23nLPBazqZ1oor6ZqbH+4otaaGXTlC8RN5hq3C8w9Q==
+abort-controller@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/abort-controller/-/abort-controller-3.0.0.tgz#eaf54d53b62bae4138e809ca225c8439a6efb392"
+  integrity sha512-h8lQ8tacZYnR3vNQTgibj+tODHI5/+l06Au2Pcriv/Gmet0eaj4TwWH41sO9wnHDiQsEj19q0drzdWdeAHtweg==
   dependencies:
     event-target-shim "^5.0.0"
 
@@ -1529,21 +1519,6 @@ aws4@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.8.0.tgz#f0e003d9ca9e7f59c7a508945d7b2ef9a04a542f"
   integrity sha512-ReZxvNHIOv88FlT7rxcXIIC0fPt4KZqZbOlivyWtXLt8ESx84zd3kMC6iK5jVeS2qt+g7ftS7ye4fi06X5rtRQ==
-
-axios-retry@^3.1.2:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/axios-retry/-/axios-retry-3.1.2.tgz#4f4dcbefb0b434e22b72bd5e28a027d77b8a3458"
-  integrity sha512-+X0mtJ3S0mmia1kTVi1eA3DAC+oWnT2A29g3CpkzcBPMT6vJm+hn/WiV9wPt/KXLHVmg5zev9mWqkPx7bHMovg==
-  dependencies:
-    is-retry-allowed "^1.1.0"
-
-axios@^0.18.0:
-  version "0.18.0"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.18.0.tgz#32d53e4851efdc0a11993b6cd000789d70c05102"
-  integrity sha1-MtU+SFHv3AoRmTts0AB4nXDAUQI=
-  dependencies:
-    follow-redirects "^1.3.0"
-    is-buffer "^1.1.5"
 
 babel-loader@^8.0.5:
   version "8.0.5"
@@ -3327,7 +3302,7 @@ flush-write-stream@^1.0.0:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
 
-follow-redirects@^1.0.0, follow-redirects@^1.3.0:
+follow-redirects@^1.0.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.7.0.tgz#489ebc198dc0e7f64167bd23b03c4c19b5784c76"
   integrity sha512-m/pZQy4Gj287eNy94nivy5wchN3Kp+Q5WgUPNy5lJSZ3sgkVKSYV/ZChMAQVIgx1SqfZ2zBZtPA2YlXIWxxJOQ==
@@ -4219,7 +4194,7 @@ is-resolvable@^1.0.0:
   resolved "https://registry.yarnpkg.com/is-resolvable/-/is-resolvable-1.1.0.tgz#fb18f87ce1feb925169c9a407c19318a3206ed88"
   integrity sha512-qgDYXFSR5WvEfuS5dMj6oTMEbrrSaM0CrFk2Yiq/gXnBvD9pMa2jGXxyhGLfvhZpuMZe18CJpFxAt3CRs42NMg==
 
-is-retry-allowed@^1.0.0, is-retry-allowed@^1.1.0:
+is-retry-allowed@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/is-retry-allowed/-/is-retry-allowed-1.1.0.tgz#11a060568b67339444033d0125a61a20d564fb34"
   integrity sha1-EaBgVotnM5REAz0BJaYaINVk+zQ=
@@ -4415,18 +4390,18 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
   integrity sha512-s5kLOcnH0XqDO+FvuaLX8DDjZ18CGFk7VygH40QoKPUQhW4e2rvM0rwUq0t8IQDOwYSeLK01U90OjzBTme2QqA==
 
-ky-universal@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/ky-universal/-/ky-universal-0.1.0.tgz#17dd27020427d7fcb6fa5cfcac792a970fcb1cb0"
-  integrity sha512-QyKx159E/gAQFdSxApD+fdTb0ho5dPUgf+DtW5GMFg8chNZfyzaVnzlCO6cWFE67Lrgzz6/xrWae8cm5lZ5/AQ==
+ky-universal@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/ky-universal/-/ky-universal-0.2.0.tgz#fbe4f029a06029c8e88be9c4aca256d6f5149b7b"
+  integrity sha512-OmA2/whehME/S07k7TWnS3odC6csdo0f5qHzljasjkBHTJMx0BSHKP62wmnIdZzGtDxo6XjB81GAvKhv7HhEig==
   dependencies:
-    abort-controller "^2.0.2"
+    abort-controller "^3.0.0"
     node-fetch "^2.3.0"
 
-ky@^0.9.1:
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/ky/-/ky-0.9.1.tgz#0b41c1d14f328226e4cea426a24db7f0fa181c65"
-  integrity sha512-E3R8ziFIbeh8j7BEicyPiCxO7LsJdeXj1WbX86SpJaEmg8HA1zqdylRrXsHxDSV+e1dk0edSPdEI8Z8fnk6+Fw==
+ky@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/ky/-/ky-0.10.0.tgz#b736665a484962f02d8e2498ab27cfb316cfb7d7"
+  integrity sha512-2OiL0TJiex7tGTUvYOrijLbXKV9rb9IJcLvDh+m5+v87ZhBThIlXwEjaC8/H0e8zMW+hq4HCznVBIdbNMsSQKg==
 
 last-call-webpack-plugin@^3.0.0:
   version "3.0.0"
@@ -4995,9 +4970,9 @@ no-case@^2.2.0:
     lower-case "^1.1.1"
 
 node-fetch@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.3.0.tgz#1a1d940bbfb916a1d3e0219f037e89e71f8c5fa5"
-  integrity sha512-MOd8pV3fxENbryESLgVIeaGKrdl+uaYhCSSVkjeOb/31/njTpcis5aWfdqgNlHIrKOLRbMnfPINPOML2CIFeXA==
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.4.1.tgz#b2e38f1117b8acbedbe0524f041fb3177188255d"
+  integrity sha512-P9UbpFK87NyqBZzUuDBDz4f6Yiys8xm8j7ACDbi6usvFm6KItklQUKjeoqTrYS/S1k6I8oaOC2YLLDr/gg26Mw==
 
 node-gyp@^3.8.0:
   version "3.8.0"

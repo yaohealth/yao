@@ -24,7 +24,7 @@
       </v-card>
 
       <v-card>
-        <Calendar :doctor="doctor"></Calendar>
+        <Calendar :doctor="doctor" @successfulBooking="showSuccessSnack" @failedBooking="showFailedSnack"></Calendar>
       </v-card>
 
       <v-card class="descriptioncontainer">
@@ -34,6 +34,9 @@
         </v-card-text>
       </v-card>
       <Yaofooter></Yaofooter>
+      <v-snackbar auto-height :color="color" v-model="snackbar" bottom :timeout="4000">
+        Buchung war erfolgreich!
+      </v-snackbar>
     </section>
   </v-app>
 </template>
@@ -51,21 +54,28 @@
     },
     data() {
       return {
-        descriptions: []
+        descriptions: [],
+        snackbar: false,
+        color: ''
       }
     },
     methods: {
       ...mapGetters({
         getSpecificDoctor: 'localStorage/getSpecificDoctor'
-      })
+      }),
+      showSuccessSnack () {
+        this.color = 'success'
+        this.snackbar = true
+      },
+      showFailedSnack () {
+        this.color = 'error'
+        this.snackbar = true
+      }
     },
     computed: {
       doctor () {
         return (this.getSpecificDoctor())(this.$route.params.id)
       }
-    },
-    async created() {
-      //this.doctor = (this.getSpecificDoctor())(this.$route.params.id)
     },
     async asyncData({ $http, route }) {
       const descriptions = await $http.get(`${process.env.YAOAPI}/doctors/description/${route.params.id}`)

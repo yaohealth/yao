@@ -52,7 +52,6 @@ export default {
     }],
     '@nuxtjs/vuetify',
     'nuxt-material-design-icons',
-    '@nuxtjs/axios',
     '@nuxtjs/dotenv',
     'nuxt-leaflet',
     '@nuxt/http',

@@ -1,11 +1,5 @@
 <template>
   <v-container v-if="formatedDates.length > 0" fluid grid-list-md align-content-space-between>
-    <v-layout class="header">
-      <v-flex class="prev"><v-btn flat :disabled="!!pageOne()" @click="prevDates">prev</v-btn></v-flex>
-      <v-flex class="month">{{formatedDates[0].month}}</v-flex>
-      <v-flex class="next"><v-btn flat @click="nextDates">next</v-btn></v-flex>
-    </v-layout>
-    <v-divider></v-divider>
     <v-data-iterator
             :items="formatedDates"
             :pagination.sync="pagination"
@@ -13,6 +7,14 @@
             row
             hide-actions
     >
+      <template v-slot:header>
+          <v-layout class="header">
+            <v-flex class="prev"><v-btn flat :disabled="!!isPageOne()" @click="prevPage">prev</v-btn></v-flex>
+            <v-flex class="month">{{shownMonth}}</v-flex>
+            <v-flex class="next"><v-btn flat @click="nextPage">next</v-btn></v-flex>
+          </v-layout>
+          <v-divider></v-divider>
+      </template>
       <template v-slot:item="props">
         <v-flex xs12 sm6 md4 lg3>
           <v-list dense>
@@ -27,14 +29,15 @@
         </v-flex>
       </template>
     </v-data-iterator>
-    <BookingForm  v-model="showBooking" :selectedDate="selectedDate" :appointmentTypes="doctor.appointmentTypes" ></BookingForm>
+    <BookingForm  v-model="showBooking" :selectedDate="selectedDate" :appointmentTypes="doctor.appointmentTypes" @booked="successfulBooking" @failed="failedBooking"></BookingForm>
   </v-container>
   <h1 class="loading" v-else>Calendar is loading.....</h1>
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  import { mapGetters, mapMutations } from 'vuex'
   import BookingForm from '@/components/BookingForm'
+
   export default {
     watch: {
       doctor: {
@@ -58,76 +61,104 @@
         formatedDates: []
       }
     },
+    computed: {
+      shownMonth() {
+        return this.formatedDates[this.pagination.page * this.pagination.rowsPerPage - 1].month
+      }
+    },
     methods: {
-      // inital getDates is in doc -> saves it in vuex
-      // move availableDates to calendar ( more actually have a function to call to get dates to add to the exisiting)
-      // or then these are not set
-      // when rest of the month is loaded count how many dates are available
-      // when available - display <= 5 --> load next month + available times  --> save in vuex
-
-
-
-      // calendar next method takes next (rowPerPage) dates and displays them
-      // check available - display <= 5 --> load next month
-      // when in future display prev btn
-
       ...mapGetters({
         getSpecificDoctor: 'localStorage/getSpecificDoctor'
+      }),
+      ...mapMutations({
+        ADD_DATES: 'localStorage/ADD_DATES',
+        ADD_FORMATED_DATES: 'localStorage/ADD_FORMATED_DATES'
       }),
       openBookingDialog(date) {
         this.selectedDate = date
         this.showBooking = true
       },
-      async getTimes () {
-        const dateRequests =[]
-        for(const date of this.doctor.availableDates) {
-          dateRequests.push(this.$http.$get(`${process.env.ACUITYPROXY}/api/availability/times?appointmentTypeID=${this.doctor.appointmentTypes[0].id}&calendarID=${this.doctor.calendarid}&date=${date.date}`))
+      async setFormatedTimes() {
+        let tmpTimes = []
+        for (const type of this.doctor.appointmentTypes) {
+          const times = await this.getTimes(type)
+          this.formatTimes(times, type)
         }
-        return await Promise.all(dateRequests)
+
+        // update the array which is displayed
+        this.doctor.appointmentTypes.forEach(type => {
+          type.availableDates.forEach(date => {
+            if(date.formatedDates) {
+              tmpTimes.push(date.formatedDates)
+            }
+          })
+        })
+        this.formatedDates = tmpTimes
       },
-      formatTimes (times) {
-        // formated dates/times to show in the calendar
-        this.formatedDates = times.map(day => {
-          console.log(day)
-          const fullDate = this.$dayjs(day[0].time, {locale: 'de'})
-          return {
-            date: fullDate.format('DD'),
-            weekday: fullDate.format('dd'),
-            month: fullDate.format('MMMM'),
-            year: fullDate.year(),
-            times: day.map(time => {
-
-              return this.$dayjs(time.time, {locale: 'de'}).format('HH:mm')
-
-            })
+      async getTimes (type) {
+        const dateRequests = []
+        let nextDates = type.availableDates.filter(date => {
+          if (!date.formatedDates) {
+            return date
           }
         })
+
+        nextDates = nextDates.splice(0,10)
+
+        for(const date of nextDates) {
+          dateRequests.push(this.$http.$get(`${process.env.ACUITYPROXY}/api/availability/times?appointmentTypeID=${type.id}&calendarID=${this.doctor.calendarid}&date=${date.date}`))
+        }
+
+        return await Promise.all(dateRequests).catch(e => console.error("error in getTimes", e))
       },
-      async setFormatedTimes() {
-        const times = await this.getTimes()
-        this.formatTimes(times)
+      formatTimes (times, type) {
+        this.ADD_FORMATED_DATES({id: this.doctor.iddoctorprofile, times, type})
       },
-      pageOne() {
+      isPageOne() {
         return this.pagination.page < 2
       },
-      async nextDates() {
+      async nextPage() {
+        await this.nextDates()
         this.pagination.page += 1
-        // if less then two pages of dates available
-        if ((this.formatedDates.length - this.pagination.page * this.pagination.rowsPerPage) < 10) {
-          // add another month to availableDates
-          // make the time request
-          // call formatDate
-        }
-        // if not load more and store them
       },
-      prevDates() {
+      async nextDates() {
+        if ((this.formatedDates.length - this.pagination.page * this.pagination.rowsPerPage) <= 5) {
+          const lastDate = this.doctor.appointmentTypes[0].availableDates[this.doctor.appointmentTypes[0].availableDates.length - 1].date
+          let newDate = this.$dayjs(lastDate).add(1, 'day')
+          for (let i = 0; i < 10; i++) {
+            // adds available dates
+            this.ADD_DATES({date: newDate.format('YYYY-MM-DD'), id: this.doctor.iddoctorprofile})
+            newDate = this.$dayjs(newDate).add(1, 'day')
+          }
+
+          await this.setFormatedTimes()
+        }
+      },
+      prevPage() {
         if(this.pagination.page >= 2) {
           this.pagination.page -= 1
         }
+      },
+      successfulBooking(date) {
+        // find the booked time and remove it from the calendar
+        const fullDate = this.$dayjs(date, {locale: 'de'})
+        const dateDetails = {
+          date: fullDate.format('DD'),
+          month: fullDate.format('MMMM'),
+          time: fullDate.format('HH:mm')
+        }
+        const resultDate = this.formatedDates.find(value => {
+          return value.date === dateDetails.date && value.month == dateDetails.month
+        })
+        resultDate.times = resultDate.times.filter(time => time !== dateDetails.time)
+        this.$emit('successfulBooking')
+      },
+      failedBooking() {
+        this.$emit('failedBooking')
       }
     },
     async created() {
-      if (this.doctor) {
+      if (this.doctor && this.doctor.appointmentTypes) {
         await this.setFormatedTimes()
       }
     }

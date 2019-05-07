@@ -28,7 +28,7 @@
 <style scoped lang="scss">
   .links {
     background-color: rgba(51, 169, 181, 255);
-    margin-top: 20px;
+    margin-top: 20vh;
   }
 
   .footer{
