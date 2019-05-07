@@ -72,20 +72,23 @@
       }),
       ...mapMutations({
         ADD_DATES: 'localStorage/ADD_DATES',
-        ADD_FORMATED_DATES: 'localStorage/ADD_FORMATED_DATES'
+        ADD_FORMATED_DATES: 'localStorage/ADD_FORMATED_DATES',
+        REMOVE_APPOINTMENT: 'localStorage/REMOVE_APPOINTMENT'
       }),
       openBookingDialog(date) {
         this.selectedDate = date
         this.showBooking = true
       },
       async setFormatedTimes() {
-        let tmpTimes = []
         for (const type of this.doctor.appointmentTypes) {
           const times = await this.getTimes(type)
           this.formatTimes(times, type)
         }
 
-        // update the array which is displayed
+        this.updateFormatedTimes()
+      },
+      updateFormatedTimes() {
+        let tmpTimes = []
         this.doctor.appointmentTypes.forEach(type => {
           type.availableDates.forEach(date => {
             if(date.formatedDates) {
@@ -148,9 +151,9 @@
           time: fullDate.format('HH:mm')
         }
         const resultDate = this.formatedDates.find(value => {
-          return value.date === dateDetails.date && value.month == dateDetails.month
+          return value.date === dateDetails.date && value.month === dateDetails.month
         })
-        resultDate.times = resultDate.times.filter(time => time !== dateDetails.time)
+        this.REMOVE_APPOINTMENT({dateDetails, resultDate})
         this.$emit('successfulBooking')
       },
       failedBooking() {

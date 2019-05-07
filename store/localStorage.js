@@ -63,6 +63,9 @@ export const mutations = {
     if (doc) {
       Vue.set(doc, 'appointmentTypes', payload.appointmentTypes)
     }
+  },
+  REMOVE_APPOINTMENT: function (state, payload) {
+    Vue.set(payload.resultDate, 'times', payload.resultDate.times.filter(time => time !== payload.dateDetails.time))
   }
 }
 
