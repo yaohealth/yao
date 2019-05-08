@@ -63,7 +63,8 @@
     },
     computed: {
       shownMonth() {
-        return this.formatedDates[this.pagination.page * this.pagination.rowsPerPage - 1].month
+        const date = this.formatedDates[this.pagination.page * this.pagination.rowsPerPage - 1]
+        return date ? date.month : ''
       }
     },
     methods: {
