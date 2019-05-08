@@ -1,27 +1,25 @@
 <template>
-  <div class="footer">
-    <v-footer dark>
-      <v-card flat tile class="links   flex">
-        <v-card-text>
+  <v-footer>
+    <v-layout justify-center row wrap>
+      <v-flex class="links">
+        <v-flex text--white>
           <strong>Follow us</strong>
           <a href="https://www.facebook.com/yaohealth"><fa class="customicon" :icon="['fab', 'facebook-f']"/></a>
           <a href="https://www.twitter.com/yaohealth"><fa class="customicon" :icon="['fab', 'twitter']"/></a>
-        </v-card-text>
-
-        <v-card-text class=" pt-0">
+        </v-flex>
+        <v-flex>
           <nuxt-link class="footerlink" to="/impressum">Impressum</nuxt-link>
           <nuxt-link class="footerlink" to="/kontakt">Kontakt</nuxt-link>
           <nuxt-link class="footerlink" to="/datenschutz">Datenschutz</nuxt-link>
-        </v-card-text>
+        </v-flex>
+      </v-flex>
 
-        <v-divider></v-divider>
 
-        <v-card-text class="grey darken-3 justify-center">
-          &copy;2019 — <strong>YAO</strong>
-        </v-card-text>
-      </v-card>
-    </v-footer>
-  </div>
+      <v-flex class="grey darken-3" text-xs-center white--text xs12>
+        &copy;2019 — <strong>YAO</strong>
+      </v-flex>
+    </v-layout>
+  </v-footer>
 </template>
 
 
@@ -29,10 +27,7 @@
   .links {
     background-color: rgba(51, 169, 181, 255);
     margin-top: 20vh;
-  }
-
-  .footer{
-    margin-top: 12vh;
+    padding: 10px;
   }
 
   .customicon {
@@ -54,5 +49,9 @@
 
   a:hover {
     opacity: .7 !important;
+  }
+
+  strong {
+    color: white;
   }
 </style>
