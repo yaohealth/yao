@@ -29,12 +29,22 @@
       this.search = this.$route.query.search
     },
     async asyncData ({$http, query}) {
+      // set auth for yao api
+      const x = new Buffer.from(`${process.env.YAOUSER}:${process.env.YAOPW}`)
+      $http.setToken(x.toString('base64'), 'Basic')
+
       let result = {}
-      if (query.search === '*') {
-        result.doctors = await $http.$get(`${process.env.YAOAPI}/doctors/`)
-      } else {
-        result.doctors = await $http.$get(`${process.env.YAOAPI}/doctors/speciality/${query.search}`)
+      try {
+        if (query.search === '*') {
+          result.doctors = await $http.$get(`${process.env.YAOAPI}/doctors/`)
+        } else {
+          result.doctors = await $http.$get(`${process.env.YAOAPI}/doctors/speciality/${query.search}`)
+        }
+      } catch (e) {
+        console.error('Error with YAO API:', e)
+        // show error page
       }
+
       return result
     }
   }

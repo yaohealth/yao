@@ -11,28 +11,29 @@
           <p v-if="doctor">{{doctor.speciality}}</p>
         </v-card>
 
-        <!--use the adress to get the coordinates and set the map-->
-          <no-ssr>
+          <no-ssr v-if="doctor && doctor.latlong">
             <l-map class="map" :zoom=15 :center="[52.6446503, 13.5393354]">
               <l-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></l-tile-layer>
-              <l-marker :lat-lng="[52.6446503, 13.5393354]"></l-marker>
+              <l-marker :lat-lng="[doctor.latlong.x, doctor.latlong.y]"></l-marker>
             </l-map>
           </no-ssr>
-
-        <!--show adress below calendar-->
+          <strong v-else>Sorry can't load map</strong>
 
       </v-card>
 
       <v-card>
         <Calendar :doctor="doctor" @successfulBooking="showSuccessSnack" @failedBooking="showFailedSnack"></Calendar>
+        <v-divider></v-divider>
+        <div class="descriptioncontainer">
+          <section v-for="(description, index) in descriptions" :key="`T-${index}`">
+            <h1 :key="`H-${description.header}`">{{ description.header }}</h1>
+            <p :key="`B-${description.header}`">{{ description.body}}</p>
+          </section>
+        </div>
+
       </v-card>
 
-      <v-card class="descriptioncontainer">
-        <v-card-text v-for="(description, index) in descriptions" :key="`T-${index}`">
-          <h1 :key="`H-${description.header}`">{{ description.header }}</h1>
-          <p :key="`B-${description.header}`">{{ description.body}}</p>
-        </v-card-text>
-      </v-card>
+
       <Yaofooter></Yaofooter>
       <v-snackbar auto-height :color="color" v-model="snackbar" bottom :timeout="4000">
         Buchung war erfolgreich!
@@ -78,7 +79,16 @@
       }
     },
     async asyncData({ $http, route }) {
-      const descriptions = await $http.get(`${process.env.YAOAPI}/doctors/description/${route.params.id}`)
+      // set auth for yao api
+      let descriptions
+      const x = new Buffer.from(`${process.env.YAOUSER}:${process.env.YAOPW}`)
+      $http.setToken(x.toString('base64'), 'Basic')
+      try {
+        descriptions = await $http.$get(`${process.env.YAOAPI}/doctors/description/${route.params.id}`)
+      } catch (e) {
+        console.error('Error with YAO API:', e)
+        // show error page
+      }
       return {descriptions}
     }
   }
@@ -107,6 +117,11 @@
 
   p {
     margin: 0;
+  }
+
+  h1 {
+    margin-top: 20px;
+    font-size: calc(16px + 1.5vw);
   }
 
   .map {

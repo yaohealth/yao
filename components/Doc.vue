@@ -65,9 +65,14 @@
     async created () {
       let appointmentTypes
       try {
+        // set auth for acutiy api
+        const x = new Buffer.from(`${process.env.ACUITYUSER}:${process.env.ACUITYPW}`)
+        this.$http.setToken(x.toString('base64'), 'Basic')
+
         appointmentTypes = await this.$http.$get(`${process.env.ACUITYPROXY}/api/appointment-types`)
       } catch (e) {
-        console.log(e)
+        console.error('Error with Acuity API:', e)
+        //show Error Page
       }
       for (const type of appointmentTypes) {
         if(type.calendarIDs[0]) {

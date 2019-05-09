@@ -60,6 +60,8 @@
       <v-btn color="rgba(51, 169, 181, 255)" flat @click="subscribe">Subscribe</v-btn>
       <v-btn color="rgba(51, 169, 181, 255)" flat @click="snackbar = false">Close</v-btn>
     </v-snackbar>
+    <v-snackbar v-model="errorsnackbar" :timeout="4000" color="error">Ups something went wrong</v-snackbar>
+    <v-snackbar v-model="sucessnackbar" :timeout="4000" color="success">You successful subscribed to our newsletter</v-snackbar>
   </v-app>
 </template>
 
@@ -81,6 +83,8 @@ export default {
       doctors: [],
       therapies: [],
       snackbar: true,
+      errorsnackbar: false,
+      sucessnackbar: false,
       valid: false,
       email: '',
       emailRules: [ v => /.+@.+\..+/.test(v) || 'E-mail must be valid']
@@ -94,8 +98,26 @@ export default {
       this.choice = option
     },
     subscribe() {
-      alert("subscribed by " + this.email)
-      // alert("subscribed by " + this.email)
+      console.log('sub')
+      if (this.email) {
+        // set auth for yao api
+        const x = new Buffer.from(`${process.env.YAOUSER}:${process.env.YAOPW}`)
+        this.$http.setToken(x.toString('base64'), 'Basic')
+        try {
+          console.log('send')
+
+          this.$http.$post(`${process.env.YAOAPI}/subscription/${this.email}`).then(res => {
+            this.snackbar = false
+            if (res.name === 'error') {
+              this.errorsnackbar = true
+            } else if(res.command === 'INSERT') {
+              this.sucessnackbar = true
+            }
+          })
+        } catch (e) {
+          // show error page
+        }
+      }
     }
   },
   created() {
@@ -103,10 +125,14 @@ export default {
     this.SET_DOCTORS(this.doctors)
   },
   async asyncData({ $http }) {
+    // set auth for yao api
+    const x = new Buffer.from(`${process.env.YAOUSER}:${process.env.YAOPW}`)
+    $http.setToken(x.toString('base64'), 'Basic')
+
     const [allDocs, specialities] = await Promise.all([
       $http.$get(`${process.env.YAOAPI}/doctors/`),
       $http.$get(`${process.env.YAOAPI}/specialities`)
-      ])
+      ]).catch(e => console.error('Error with YAO API:', e)) // show error page
     const doctors = []
     let therapies = []
     let allDocsCopy = allDocs.slice()

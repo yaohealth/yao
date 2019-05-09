@@ -108,6 +108,9 @@
         })
 
         nextDates = nextDates.splice(0,10)
+        // set auth for acutiy api
+        const x = new Buffer.from(`${process.env.ACUITYUSER}:${process.env.ACUITYPW}`)
+        this.$http.setToken(x.toString('base64'), 'Basic')
 
         for(const date of nextDates) {
           dateRequests.push(this.$http.$get(`${process.env.ACUITYPROXY}/api/availability/times?appointmentTypeID=${type.id}&calendarID=${this.doctor.calendarid}&date=${date.date}`))
