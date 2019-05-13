@@ -125,23 +125,29 @@ export default {
     this.SET_DOCTORS(this.doctors)
   },
   async asyncData({ $http }) {
+    const doctors = []
+    let therapies = []
     // set auth for yao api
     const x = new Buffer.from(`${process.env.YAOUSER}:${process.env.YAOPW}`)
     $http.setToken(x.toString('base64'), 'Basic')
-
-    const [allDocs, specialities] = await Promise.all([
-      $http.$get(`${process.env.YAOAPI}/doctors/`),
-      $http.$get(`${process.env.YAOAPI}/specialities`)
+    try {
+      const [allDocs, specialities] = await Promise.all([
+        $http.$get(`${process.env.YAOAPI}/doctors/`),
+        $http.$get(`${process.env.YAOAPI}/specialities`)
       ]).catch(e => console.error('Error with YAO API:', e)) // show error page
-    const doctors = []
-    let therapies = []
-    let allDocsCopy = allDocs.slice()
-    for (let i = 0; i < 3; i++) {
-      // pick and remove three doctors from the array for preview
-      doctors.push(allDocsCopy.splice(Math.ceil(Math.random() * 10) % allDocsCopy.length, 1)[0])
+
+      let allDocsCopy = allDocs.slice()
+      for (let i = 0; i < 3; i++) {
+        // pick and remove three doctors from the array for preview
+        doctors.push(allDocsCopy.splice(Math.ceil(Math.random() * 10) % allDocsCopy.length, 1)[0])
+      }
+      therapies = specialities.map( speciality => speciality.speciality)
+      return {doctors, therapies}
+    } catch (e) {
+      console.error('Error with Acuity API:', e)
+      //show Error Page
     }
-    therapies = specialities.map( speciality => speciality.speciality)
-    return {doctors, therapies}
+
   }
 }
 </script>
