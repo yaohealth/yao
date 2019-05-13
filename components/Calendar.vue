@@ -101,11 +101,14 @@
       },
       async getTimes (type) {
         const dateRequests = []
-        let nextDates = type.availableDates.filter(date => {
-          if (!date.formatedDates) {
-            return date
-          }
-        })
+        let nextDates = []
+        if (type.availableDates) {
+          nextDates = type.availableDates.filter(date => {
+            if (!date.formatedDates) {
+              return date
+            }
+          })
+        }
 
         nextDates = nextDates.splice(0,10)
         // set auth for acutiy api
