@@ -1,57 +1,104 @@
 <template>
   <v-app>
   <section class="mycontainer">
-    <Navbar/>
-    <div class="bg">
-      <div class="searchContainer">
-          <form action="submit">
-              <label>WAS</label>
-              <v-select class="therapyselect" @change="setChoice" :items="therapies" label="Wähle eine Therapie" solo></v-select>
-            <nuxt-link :to="{name: 'results', query: { search:choice } }">
-              <button type="submit" class="search-button">Suche</button>
-            </nuxt-link>
-          </form>
+    <section class="searchInfoContainer">
+      <Navbar/>
+      <div class="bg">
+        <section class="searchContainer">
+          <h1 class="discoverText">
+            your complementary and alternative medicine platform
+          </h1>
+        </section>
+
+        <!--<div class="searchContainer">-->
+        <!--<form action="submit">-->
+        <!--<label>WAS</label>-->
+        <!--<v-select class="therapyselect" @change="setChoice" :items="therapies" label="Wähle eine Therapie" solo></v-select>-->
+        <!--<nuxt-link :to="{name: 'results', query: { search:choice } }">-->
+        <!--<button type="submit" class="search-button">Suche</button>-->
+        <!--</nuxt-link>-->
+        <!--</form>-->
+        <!--</div>-->
+        <section class="information">
+          <v-container>
+            <v-layout row wrap fill-height align-center>
+              <v-flex xs12 md4>
+                <i class="iconFind"></i>
+                <p>Find the therapy adapted to you, identify the right doctor or practitioner.</p>
+                <v-btn round>find</v-btn>
+              </v-flex>
+              <v-flex xs12 md4>
+                <fa class="customicon" :icon="['far', 'calendar-check']"/>
+                <p>Book directly and pay online.</p>
+                <v-btn round>book</v-btn>
+              </v-flex>
+              <v-flex xs12 md4>
+                <span class="iconDiscover"></span>
+                <p>Learn about the different therapies and symptoms complementary and alernative medicine can help out.</p>
+                <v-btn round>discover</v-btn>
+              </v-flex>
+            </v-layout>
+          </v-container>
+          <hr>
+          <v-container>
+            <v-layout row wrap fill-height align-center>
+              <v-flex xs12 md6>
+                <p class="joinText">Are you a doctor or practitioner?</p>
+                <v-btn round>JOIN YAO</v-btn>
+              </v-flex>
+              <v-flex xs12 md6>
+                <ul>
+                  <li>Yao is a network regulated by doctors and practitioners, to improve trust and the link with patients</li>
+                  <li>Reduce rate of absenteeism</li>
+                  <li>Improve your visivility online</li>
+                </ul>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </section>
       </div>
-    </div>
-    <div class="betaInfo">
-      <div>
-        <p>YAO is the first platform dedicated to CAM</p>
-        <p>Search and book for your next appointment</p>
-        <p>We only support BERLIN for the BETA VERSION</p>
-      </div>
-    </div>
-    <v-container >
-      <v-layout row wrap align-baseline justify-space-around >
-          <Doc v-for="doctor in doctors" :id="doctor.iddoctorprofile" :title="doctor.title" :firstname="doctor.firstname" :lastname="doctor.lastname" :speciality="doctor.speciality" :key="doctor.iddoctorprofile" :calendar-id="doctor.calendarid" :dates="doctor.dates"></Doc>
+    </section>
+    <v-container class="discoverContainer">
+      <v-layout  align-center justify-center row>
+          <h1 class="discoverText">
+            Discover more about complementary and alternative medicine
+          </h1>
+      </v-layout>
+      <v-layout  align-center justify-center row wrap>
+        <v-layout align-center column>
+          <v-flex xs12 md4>
+            <v-img class="discoverAvatar" :src="require('../assets/back.jpg')"></v-img>
+          </v-flex>
+          <v-flex xs12 md4>
+            <span>Therapies</span>
+          </v-flex>
+        </v-layout>
+        <v-layout align-center column>
+          <v-flex xs12 md4>
+            <v-img class="discoverAvatar" :src="require('../assets/belly.jpg')"></v-img>
+          </v-flex>
+          <v-flex xs12 md4>
+            <span>Symptoms</span>
+          </v-flex>
+        </v-layout>
+        <v-layout align-center column>
+          <v-flex xs12 md4>
+            <v-img class="discoverAvatar" :src="require('../assets/berries.jpg')"></v-img>
+          </v-flex>
+          <v-flex xs12 md4>
+            <span>Topics</span>
+          </v-flex>
+        </v-layout>
       </v-layout>
     </v-container>
-    <div class="whatIsYao">
-      <div>
-        <img src="~assets/logo.png" alt="">
-      </div>
-    </div>
-    <div class="network">
-      <div id="networkImage">
-        <img src="~assets/network.jpg" alt="">
-        <div id="networkTextContainer">
-          <div id="networkText">
-            <h2>1. Netzwerk</h2>
-            <p>Bei Fragen oder Behandlungswünschen steht ihnen das Netzwerk zur verfügung</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="calendar">
-      <div id="calendarImage">
-        <img src="~assets/calendar.jpg" alt="">
-        <div id="calendarTextContainer">
-          <div id="calendarText">
-            <h2>2. Termine</h2>
-            <p>Buchen Sie einen Termin online</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <section class="docPreview">
+      <h1 class="discoverText">Meet our doctors and practitioners</h1>
+      <v-container>
+        <v-layout row wrap justify-space-around fill-height align-center>
+          <Doc v-for="doctor in doctors" :id="doctor.iddoctorprofile" :title="doctor.title" :firstname="doctor.firstname" :lastname="doctor.lastname" :speciality="doctor.speciality" :key="doctor.iddoctorprofile" :calendar-id="doctor.calendarid" :dates="doctor.dates"></Doc>
+        </v-layout>
+      </v-container>
+    </section>
     <Yaofooter></Yaofooter>
   </section>
     <v-snackbar auto-height color="white" class="black--text" v-model="snackbar" bottom :timeout="0">
@@ -153,197 +200,190 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$yao: rgba(51, 169, 181, 255);
+$yaoOld: rgba(51, 169, 181, 1);
+$yao: rgba(0, 174, 163, 1);
+$yaoLow: rgba(236, 247, 251, 0.5);
+$yaobg: #effafc;
+$yaoGradient: radial-gradient(circle at center, #074f65 0, #00afa4 100%);
 
-.bg {
-  background: url("../assets/landing.jpg") no-repeat center;
-  background-size: cover;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.customicon {
+  font-size: 100px;
+  margin: 0 10px;
+  color: $yao;
 }
 
-.searchContainer {
-  width: 80vw;
-  min-width: 400px;
-  height: 80px;
-  background-color: rgba(255,255,255,0.7);
-  display: flex;
-  justify-content: center;
-
-  .specialities {
-    width: 20vw;
-    background-color: $yao !important;
-    color: white;
-  }
-
-  label {
-    color: $yao !important;
-    font-size: 20pt;
-  }
-
-  .search-button {
-    width: 100px;
-    height: 30px;
-    background-color: $yao;
-    color: white;
-    font-size: 16px;
-    border-radius: 16px;
-    border: none;
-  }
-
-  .search-button:hover {
-    background-color: white;
-    color: $yao;
-    border: 1px solid $yao;
-  }
-
-  form {
-    display: flex;
-    align-items: center;
-  }
-
-  .therapyselect {
-    padding: 25px 0 0 2vw;
-    width: 50vw;
-    max-width: 400px !important;
-  }
-
-  a {
-    padding-left: 2vw;
-  }
-
-}
-
-.betaInfo {
+.searchInfoContainer {
   position: relative;
-  background-color: $yao;
-  height: 30vw;
 
-  div {
-    position: relative;
-    float: left;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    p{
-      color: white;
-      font-size: 4vw;
-      line-height: 110%;
+  .bg {
+    background: url("../assets/bgWomen.jpg") no-repeat center;
+    background-size: cover;
+    height: 200vh;
+
+    .searchContainer {
+      position: absolute;
+      top: 0;
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .information {
+      position: absolute;
+      bottom: 0;
+      background-color: $yaoLow;
+      min-height: 100vh;
+      height: auto;
+      width: 100%;
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+
+      .iconFind {
+        background-image: url("../assets/customIcons/iconFind.png");
+        height: 100px;
+        width: 100px;
+        display: inline-block;
+      }
+
+      .iconDiscover {
+        background-image: url("../assets/customIcons/iconLearn.png");
+        height: 100px;
+        width: 100px;
+        display: inline-block;
+      }
+
+      .iconBook {
+        background-image: url("../assets/customIcons/iconBook.png");
+        height: 100px;
+        width: 100px;
+        display: inline-block;
+      }
+
+      @media only screen and (max-width: 1000px) {
+        .iconFind {
+          height: 50px;
+          width: 50px;
+        }
+
+        .iconDiscover {
+          height: 50px;
+          width: 50px;
+        }
+
+        .iconBook {
+          height: 50px;
+          width: 50px;
+        }
+
+        .customicon {
+          font-size: 50px;
+        }
+      }
+
+      p {
+        height: 6vw;
+      }
+
+      button {
+        background-color: $yao !important;
+        color: white;
+        box-shadow: none;
+      }
+
+      .joinText {
+        height: fit-content;
+        text-transform: capitalize;
+        font-size: 50px;
+        background-image: $yaoGradient;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      @media only screen and (max-width: 1200px) {
+        .joinText {
+          font-size: 40px;
+        }
+      }
+
+      @media only screen and (max-width: 600px) {
+        .joinText {
+          font-size: 30px;
+        }
+      }
+
+      hr {
+        display: inline-block;
+        height: 1px;
+        border: 0;
+        border-top: 4px solid #909090;
+        margin: 1em 0;
+        padding: 0;
+        width: 70vw;
+      }
     }
   }
+}
 
+.discoverContainer {
+  min-height: 100vh;
+  height: auto;
+}
+
+.discoverAvatar {
+  margin: 30px;
+  height: 300px;
+  width: 300px;
+  border: double 4px transparent;
+  border-radius: 150px;
+  background-image: linear-gradient(white, white), radial-gradient(circle at top left, #00afa4,#074f65);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: 0 0 0 14px #e5eeed;
 }
 
 
+
+.discoverText {
+  text-transform: capitalize;
+  font-size: 50px;
+  background-image: $yaoGradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  width: 70vw;
+}
+
+@media only screen and (max-width: 1200px) {
+  .discoverText {
+    font-size: 40px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .discoverAvatar {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .discoverText {
+    font-size: 30px;
+  }
+}
 
 .docPreview {
-  margin: 5vw 0 5vw 0;
-}
-
-.whatIsYao {
-  background: url("../assets/herb.jpg") no-repeat center;
-  background-size: cover;
-  /*display: block;
-  position: relative;*/
-  height: 100vh;
-  div {
-    position: relative;
-    float: left;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    img {
-      width: 80vw;
-    }
-  }
-}
-
-/*.whatIsYao::after {
-  content: "";
-  background: url("../assets/herb.jpg") no-repeat center;
-  opacity: 0.5;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  position: absolute;
-  z-index: -1;
-}*/
-
-.network {
-  height: 40vw;
-
-  #networkImage {
-    position: relative;
-    margin: 4vh 0 0 4vw;
-    width: 40vw;
-    img {
-      width: 45vw;
-    }
-    #networkTextContainer {
-      position: absolute;
-      top: 50%;
-      left: 85%;
-      width: 55vw;
-      height: 20vw;
-      min-height: 100px;
-      background-color: black;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      #networkText {
-        text-transform: uppercase;
-        color: white;
-        h2 {
-          font-size: 4vw;
-
-        }
-        p {
-          font-size: 1.5vw;
-          line-height: 2;
-          padding: 0 1vw;
-        }
-      }
-    }
-  }
-}
-
-.calendar {
-  height: 40vw;
+  background: $yaobg;
+  min-height: 100vh;
+  height: auto;
   display: flex;
-  justify-content: flex-end;
-  #calendarImage {
-    position: relative;
-    margin: 4vh 6vw 0 0;
-    width: 40vw;
-    img {
-      width: 45vw;
-    }
-    #calendarTextContainer {
-      position: absolute;
-      top: 50%;
-      right: 85%;
-      width: 55vw;
-      height: 16vw;
-      min-height: 100px;
-      background-color: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      #calendarText {
-        text-transform: uppercase;
-        color: white;
-        h2 {
-          font-size: 4vw;
-        }
-        p {
-          font-size: 1.5vw;
-          line-height: 2;
-        }
-      }
-    }
+  flex-flow: column;
+  align-items: center;
+
+  .discoverText {
+    padding-top: 10vh;
   }
 }
 

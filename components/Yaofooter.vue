@@ -4,8 +4,8 @@
       <v-flex class="links">
         <v-flex text--white>
           <strong>Follow us</strong>
-          <a href="https://www.facebook.com/yaohealth"><fa class="customicon" :icon="['fab', 'facebook-f']"/></a>
-          <a href="https://www.twitter.com/yaohealth"><fa class="customicon" :icon="['fab', 'twitter']"/></a>
+          <a href="https://www.facebook.com/yaohealth"><fa class="socialicon" :icon="['fab', 'facebook-f']"/></a>
+          <a href="https://www.twitter.com/yaohealth"><fa class="socialicon" :icon="['fab', 'twitter']"/></a>
         </v-flex>
         <v-flex>
           <nuxt-link class="footerlink" to="/impressum">Impressum</nuxt-link>
@@ -23,14 +23,13 @@
 </template>
 
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
   .links {
     background-color: rgba(51, 169, 181, 255);
-    margin-top: 20vh;
     padding: 10px;
   }
 
-  .customicon {
+  .socialicon {
     font-size: 30px;
     margin: 0 10px;
   }

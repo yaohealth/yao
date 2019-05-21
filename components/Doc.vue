@@ -1,35 +1,31 @@
 <template>
-  <div class="doc">
-    <v-flex xs12 m6>
+    <v-flex xs12 md4 align-self-center class="doc">
       <v-card>
-        <nuxt-link :to="{name: `profile-id`, params: {id}}">
-          <v-img src="https://qph.fs.quoracdn.net/main-qimg-c55f4f1eab6aa42861d2e42436825ba9" aspect-ratio="1"></v-img>
+        <nuxt-link class="avatarLink" :to="{name: `profile-id`, params: {id}}">
+          <v-img class="docAvatar" src="https://qph.fs.quoracdn.net/main-qimg-c55f4f1eab6aa42861d2e42436825ba9" aspect-ratio="1"></v-img>
         </nuxt-link>
         <v-card-title>
           <div>
-            <h3 class="headline mb-0">{{ title }} {{ firstname }} {{ lastname }}</h3>
+            <span class="name mb-0">{{ title }} {{ firstname }} {{ lastname }}</span>
             <div>{{ speciality }}</div>
           </div>
         </v-card-title>
         <v-divider light></v-divider>
         <v-card-text v-if="displaypeviewdates.length">
-          <v-layout align-center>
-            <v-icon>access_time</v-icon>
-            <nuxt-link :to="{name: `profile-id`, params: {id}}">
+          <v-icon>access_time</v-icon>
+          <nuxt-link :to="{name: `profile-id`, params: {id}}">
             <v-btn v-for="nextdate in displaypeviewdates" :key="nextdate" class="somebtn" flat>{{ nextdate }}</v-btn>
-            </nuxt-link>
-          </v-layout>
+          </nuxt-link>
         </v-card-text>
         <v-card-actions>
-          <v-layout justify-end>
+          <v-layout justify-center>
             <nuxt-link :to="{name: `profile-id`, params: {id}}">
-              <v-btn flat color="rgba(51, 169, 181, 255)">Booking</v-btn>
+              <v-btn round class="bookingButton">Booking</v-btn>
             </nuxt-link>
           </v-layout>
         </v-card-actions>
       </v-card>
     </v-flex>
-  </div>
 </template>
 
 <script>
@@ -119,14 +115,37 @@
 </script>
 
 <style lang="scss" scoped>
+  $yaoGradient: radial-gradient(circle at center, #074f65 0, #00afa4 100%);
+  $yao: rgba(0, 174, 163, 1);
+  $yaoLow: rgba(236, 247, 251, 0.5);
+
+  .doc {
+    display: flex;
+    justify-content: center;
+  }
 
   .v-card {
-    width: 320px;
+    width: 300px;
     margin: 20px;
+    background: #f2f2f2;
   }
 
   .v-card__title {
     justify-content: center;
+  }
+
+  .v-card__text {
+    padding: 8px 0 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .name {
+    font-size: 18px;
+    background-image: $yaoGradient;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   .somebtn{
@@ -137,5 +156,31 @@
   a {
     text-decoration: none;
     display: flex;
+    justify-content: center;
   }
+
+  .avatarLink {
+    padding: 20px;
+  }
+
+  .docAvatar {
+    height: 200px;
+    width: 200px;
+    flex: none;
+    border: double 4px transparent;
+    border-radius: 100px;
+    background-image: linear-gradient(white, white), radial-gradient(circle at top left, #00afa4,#074f65);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    box-shadow: 0 0 0 14px #e5eeed;
+
+  }
+
+  .bookingButton {
+    background-color: $yao !important;
+    color: white;
+    box-shadow: none !important;
+    padding: 0;
+  }
+
 </style>
