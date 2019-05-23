@@ -216,4 +216,8 @@
       font-size: 15pt;
     }
   }
+
+  .v-list {
+    background: none;
+  }
 </style>

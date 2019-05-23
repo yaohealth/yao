@@ -1,44 +1,72 @@
 <template>
   <v-app>
-    <section class="mycontainer">
-      <Navbar></Navbar>
-      <v-card class="docdetails" >
-        <v-card class="avatarcard" width="300px" height="300px">
-          <v-avatar size="200px">
-            <img v-if="doctor" :src="doctor.pictureurl"/>
-          </v-avatar>
-          <h2 v-if="doctor">{{doctor.title}} {{doctor.firstname}} {{doctor.lastname}}</h2>
-          <p v-if="doctor">{{doctor.speciality}}</p>
-        </v-card>
-
-          <no-ssr v-if="doctor && doctor.latlong">
-            <l-map class="map" :zoom=15 :center="[52.6446503, 13.5393354]">
-              <l-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></l-tile-layer>
-              <l-marker :lat-lng="[doctor.latlong.x, doctor.latlong.y]"></l-marker>
-            </l-map>
-          </no-ssr>
-          <strong v-else>Sorry can't load map</strong>
-
-      </v-card>
-
-      <v-card>
-        <Calendar :doctor="doctor" @successfulBooking="showSuccessSnack" @failedBooking="showFailedSnack"></Calendar>
-        <v-divider></v-divider>
-        <div class="descriptioncontainer">
-          <section v-for="(description, index) in descriptions" :key="`T-${index}`">
-            <h1 :key="`H-${description.header}`">{{ description.header }}</h1>
-            <p :key="`B-${description.header}`">{{ description.body}}</p>
-          </section>
-        </div>
-
-      </v-card>
-
-
+    <div class="mycontainer">
+      <section class="profileOverview">
+        <Navbar></Navbar>
+        <v-container class="profileContainer">
+          <v-layout row wrap>
+            <v-flex xs12 md4>
+              <img class="docAvatar" v-if="doctor" :src="doctor.pictureurl"/>
+            </v-flex>
+            <v-flex xs12 md3>
+              <h2 v-if="doctor">{{doctor.title}} {{doctor.firstname}} {{doctor.lastname}}</h2>
+              <p v-if="doctor">{{doctor.speciality}}</p>
+            </v-flex>
+            <v-flex xs12 md5>
+              <no-ssr v-if="doctor && doctor.latlong">
+                <l-map class="map" :zoom=15 :center="[52.6446503, 13.5393354]">
+                  <l-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></l-tile-layer>
+                  <l-marker :lat-lng="[doctor.latlong.x, doctor.latlong.y]"></l-marker>
+                </l-map>
+              </no-ssr>
+              <strong v-else>Sorry can't load map</strong>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </section>
+      <v-container fluid grid-list-xl>
+        <v-layout row wrap>
+          <v-flex xs12 md8>
+            <v-card color="#effafc">
+              <Calendar :doctor="doctor" @successfulBooking="showSuccessSnack" @failedBooking="showFailedSnack"></Calendar>
+            </v-card>
+          </v-flex>
+          <v-flex xs12 md4>
+            <v-card color="#effafc">
+              <h2>Expertise</h2>
+              <div>
+                <v-chip label>Label</v-chip>
+              </div>
+              <div>
+                <v-chip label>Label</v-chip>
+              </div>
+              <div>
+                <v-chip label>Label</v-chip>
+              </div>
+              <div>
+                <v-chip label>Label</v-chip>
+              </div>
+              <h2>Payment Options</h2>
+              <span>Cash, Credit Card, Bitcoin</span>
+            </v-card>
+          </v-flex>
+          <v-flex xs12>
+            <v-card color="#effafc">
+              <div class="descriptioncontainer">
+                <section v-for="(description, index) in descriptions" :key="`T-${index}`">
+                  <h1 :key="`H-${description.header}`">{{ description.header }}</h1>
+                  <p :key="`B-${description.header}`">{{ description.body}}</p>
+                </section>
+              </div>
+            </v-card>
+          </v-flex>
+        </v-layout>
+      </v-container>
       <Yaofooter></Yaofooter>
       <v-snackbar auto-height :color="color" v-model="snackbar" bottom :timeout="4000">
         Buchung war erfolgreich!
       </v-snackbar>
-    </section>
+    </div>
   </v-app>
 </template>
 
@@ -95,6 +123,28 @@
 </script>
 
 <style lang="scss" scoped>
+  .profileOverview {
+    height: auto;
+  }
+
+  .profileContainer {
+    padding: 0;
+    background-color: #effafc;
+  }
+
+  .docAvatar {
+    margin: 30px;
+    height: 300px;
+    width: 300px;
+    border: double 5px transparent;
+    border-radius: 150px;
+    background-image: linear-gradient(white, white), radial-gradient(circle at top left, #00afa4,#074f65);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+  }
+
+
+
   .avatarcard {
     display: flex;
     flex-direction: column;
@@ -125,18 +175,15 @@
   }
 
   .map {
-    width: 50vw;
-    height: 300px;
-    margin-right: 20px;
     z-index: 1;
+    height: 300px;
+    width: 500px;
   }
 
   .descriptioncontainer {
     padding: 20px;
     margin-bottom: 50px;
   }
-
-
 </style>
 
 

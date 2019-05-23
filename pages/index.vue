@@ -2,8 +2,8 @@
   <v-app>
   <section class="mycontainer">
     <section class="searchInfoContainer">
-      <Navbar/>
       <div class="bg">
+        <Navbar/>
         <section class="searchContainer">
           <h1 class="discoverText">
             your complementary and alternative medicine platform
@@ -37,11 +37,9 @@
                 <p>Learn about the different therapies and symptoms complementary and alernative medicine can help out.</p>
                 <v-btn round>discover</v-btn>
               </v-flex>
-            </v-layout>
-          </v-container>
-          <hr>
-          <v-container>
-            <v-layout row wrap fill-height align-center>
+              <v-flex xs12>
+                <hr>
+              </v-flex>
               <v-flex xs12 md6>
                 <p class="joinText">Are you a doctor or practitioner?</p>
                 <v-btn round>JOIN YAO</v-btn>
@@ -199,7 +197,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 $yaoOld: rgba(51, 169, 181, 1);
 $yao: rgba(0, 174, 163, 1);
 $yaoLow: rgba(236, 247, 251, 0.5);
@@ -218,11 +216,11 @@ $yaoGradient: radial-gradient(circle at center, #074f65 0, #00afa4 100%);
   .bg {
     background: url("../assets/bgWomen.jpg") no-repeat center;
     background-size: cover;
-    height: 200vh;
+    min-height: 200vh;
+    display: flex;
+    flex-flow: column;
 
     .searchContainer {
-      position: absolute;
-      top: 0;
       height: 100vh;
       width: 100%;
       display: flex;
@@ -231,8 +229,6 @@ $yaoGradient: radial-gradient(circle at center, #074f65 0, #00afa4 100%);
     }
 
     .information {
-      position: absolute;
-      bottom: 0;
       background-color: $yaoLow;
       min-height: 100vh;
       height: auto;
@@ -308,6 +304,12 @@ $yaoGradient: radial-gradient(circle at center, #074f65 0, #00afa4 100%);
         }
       }
 
+      @media only screen and (max-width: 1000px) {
+        .joinText {
+          font-size: 30px;
+        }
+      }
+
       @media only screen and (max-width: 600px) {
         .joinText {
           font-size: 30px;
@@ -328,7 +330,6 @@ $yaoGradient: radial-gradient(circle at center, #074f65 0, #00afa4 100%);
 }
 
 .discoverContainer {
-  min-height: 100vh;
   height: auto;
 }
 
@@ -376,7 +377,6 @@ $yaoGradient: radial-gradient(circle at center, #074f65 0, #00afa4 100%);
 
 .docPreview {
   background: $yaobg;
-  min-height: 100vh;
   height: auto;
   display: flex;
   flex-flow: column;

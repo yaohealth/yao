@@ -23,7 +23,6 @@
 <style lang="scss" scoped>
   .nav-container {
     width: 100%;
-    position: absolute;
     z-index: 2;
   }
 
