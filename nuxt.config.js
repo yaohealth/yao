@@ -1,4 +1,5 @@
 import pkg from './package'
+import qs from 'qs'
 
 export default {
   mode: 'universal',
@@ -14,6 +15,7 @@ export default {
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Fjalla+One&display=swap' },
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
@@ -27,12 +29,14 @@ export default {
   ** Global CSS
   */
   css: [
+    'assets/styles/font.styl'
   ],
 
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
+    { src: '~/plugins/vue-tiny-slider.js', mode: 'client' },
     { src: '~/plugins/vuex-persist', mode: 'client' }
   ],
 
@@ -40,6 +44,8 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    'nuxt-webfontloader',
+    'nuxt-svg-loader',
     '@ax2/dayjs-module',
     ['nuxt-fontawesome', {
       component: 'fa',
@@ -67,6 +73,20 @@ export default {
   },
   'proxy': {
     '/api/': { target: 'https://acuityscheduling.com/api/v1/', pathRewrite: {'^/api/': ''} }
+  },
+  router: {
+    parseQuery: function (query) {
+      return require('qs').parse(query)
+    },
+    stringifyQuery: function (query) {
+      var r = require('qs').stringify(query, { encode: false })
+      return r ? '?' + r : ''
+    }
+  },
+  webfontloader: {
+    google: {
+      families: ['Fjalla One:400']
+    }
   },
   /*
   ** Build configuration

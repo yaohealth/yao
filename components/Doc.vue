@@ -7,7 +7,8 @@
         <v-card-title>
           <div>
             <span class="name mb-0">{{ title }} {{ firstname }} {{ lastname }}</span>
-            <div>{{ speciality }}</div>
+            <div v-if="Array.isArray(specialities)">{{ specialities.slice(0,3).join()}}</div>
+	          <div v-else>{{ specialities }}</div>
           </div>
         </v-card-title>
         <v-divider light></v-divider>
@@ -37,7 +38,7 @@
       'title': String,
       'firstname': String,
       'lastname': String,
-      'speciality': String,
+      'specialities': [Array, String],
       'calendarId': String,
       'previewdates': {
         type: Array,
@@ -66,11 +67,7 @@
         this.$http.setToken(x.toString('base64'), 'Basic')
 
         appointmentTypes = await this.$http.$get(`${process.env.ACUITYPROXY}/api/appointment-types`)
-      } catch (e) {
-        console.error('Error with Acuity API:', e)
-        //show Error Page
-      }
-      for (const type of appointmentTypes) {
+for (const type of appointmentTypes) {
         if(type.calendarIDs[0]) {
           if (Number(this.calendarId) === type.calendarIDs[0]) {
             this.appointmentTypes.push(type)
@@ -81,6 +78,8 @@
 
       for(const type of this.appointmentTypes){
         const date = this.$dayjs()
+        const x = new Buffer.from(`${process.env.ACUITYUSER}:${process.env.ACUITYPW}`)
+        this.$http.setToken(x.toString('base64'), 'Basic')
         let dates = await this.$http.$get(`${process.env.ACUITYPROXY}/api/availability/dates?appointmentTypeID=${type.id}&month=${date.year()}-${date.month()+1}&calendarID=${this.calendarId}`)
         // TODO if a doctor is booked out we maybe need to next month until we have 3 dates at least
         if(this.$dayjs().endOf('month').diff(date, 'days') < 10){
@@ -97,6 +96,10 @@
         this.ADD_INITIAL_DATES({dates, id: this.id, appointmentType: type})
       }
       this.displaydates()
+      } catch (e) {
+        console.error('Error with Acuity API:', e)
+        //show Error Page
+      }
     },
     methods: {
       ...mapMutations({
@@ -122,6 +125,7 @@
   .doc {
     display: flex;
     justify-content: center;
+    padding-bottom: 20px;
   }
 
   .v-card {

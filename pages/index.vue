@@ -5,62 +5,72 @@
       <div class="bg">
         <Navbar/>
         <section class="searchContainer">
-          <h1 class="discoverText">
+          <p class="discoverText">
             your complementary and alternative medicine platform
-          </h1>
+          </p>
+            <Yaosearch></Yaosearch>
         </section>
-
-        <!--<div class="searchContainer">-->
-        <!--<form action="submit">-->
-        <!--<label>WAS</label>-->
-        <!--<v-select class="therapyselect" @change="setChoice" :items="therapies" label="Wähle eine Therapie" solo></v-select>-->
-        <!--<nuxt-link :to="{name: 'results', query: { search:choice } }">-->
-        <!--<button type="submit" class="search-button">Suche</button>-->
-        <!--</nuxt-link>-->
-        <!--</form>-->
-        <!--</div>-->
-        <section class="information">
-          <v-container>
+          <v-container class="information">
             <v-layout row wrap fill-height align-center>
-              <v-flex xs12 md4>
-                <i class="iconFind"></i>
-                <p>Find the therapy adapted to you, identify the right doctor or practitioner.</p>
+              <v-flex xs12 md4 class="infocontainer">
+                <SearchLogo class="customicon"></SearchLogo>
+                <p class="infotext">Find the therapy adapted to you, identify the right doctor or practitioner.</p>
                 <v-btn round>find</v-btn>
               </v-flex>
-              <v-flex xs12 md4>
-                <fa class="customicon" :icon="['far', 'calendar-check']"/>
-                <p>Book directly and pay online.</p>
+              <v-flex xs12 md4 class="infocontainer">
+                <EventLogo class="customicon"></EventLogo>
+                <p class="infotext">Book directly and pay online.</p>
                 <v-btn round>book</v-btn>
               </v-flex>
-              <v-flex xs12 md4>
-                <span class="iconDiscover"></span>
-                <p>Learn about the different therapies and symptoms complementary and alernative medicine can help out.</p>
+              <v-flex xs12 md4 class="infocontainer">
+                <AgendaLogo class="customicon"></AgendaLogo>
+                <p class="infotext">Learn about the different therapies and symptoms complementary and alternative medicine can help out.</p>
                 <v-btn round>discover</v-btn>
               </v-flex>
               <v-flex xs12>
                 <hr>
               </v-flex>
-              <v-flex xs12 md6>
+              <v-flex xs12 md4>
                 <p class="joinText">Are you a doctor or practitioner?</p>
                 <v-btn round>JOIN YAO</v-btn>
               </v-flex>
-              <v-flex xs12 md6>
-                <ul>
-                  <li>Yao is a network regulated by doctors and practitioners, to improve trust and the link with patients</li>
-                  <li>Reduce rate of absenteeism</li>
-                  <li>Improve your visivility online</li>
-                </ul>
+              <v-flex xs12 md8>
+                <v-list>
+                  <v-list-tile>
+                    <v-list-tile-avatar>
+                      <ArrowLogo class="customicon"></ArrowLogo>
+                    </v-list-tile-avatar>
+                    <v-list-tile-content>
+                      <v-list-tile-title>Yao is a network regulated by doctors and practitioners, to improve trust and the link with patients</v-list-tile-title>
+                    </v-list-tile-content>
+                  </v-list-tile>
+                  <v-list-tile>
+                    <v-list-tile-avatar>
+                      <ArrowLogo class="customicon"></ArrowLogo>
+                    </v-list-tile-avatar>
+                    <v-list-tile-content>
+                      <v-list-tile-title>Reduce rate of absenteeism</v-list-tile-title>
+                    </v-list-tile-content>
+                  </v-list-tile>
+                  <v-list-tile>
+                    <v-list-tile-avatar>
+                      <ArrowLogo class="customicon"></ArrowLogo>
+                    </v-list-tile-avatar>
+                    <v-list-tile-content>
+                      <v-list-tile-title>Improve your visivility online</v-list-tile-title>
+                    </v-list-tile-content>
+                  </v-list-tile>
+                </v-list>
               </v-flex>
             </v-layout>
           </v-container>
-        </section>
       </div>
     </section>
     <v-container class="discoverContainer">
-      <v-layout  align-center justify-center row>
-          <h1 class="discoverText">
+      <v-layout  align-center justify-center row wrap>
+          <p class="discoverText">
             Discover more about complementary and alternative medicine
-          </h1>
+          </p>
       </v-layout>
       <v-layout  align-center justify-center row wrap>
         <v-layout align-center column>
@@ -90,10 +100,10 @@
       </v-layout>
     </v-container>
     <section class="docPreview">
-      <h1 class="discoverText">Meet our doctors and practitioners</h1>
+      <p class="discoverText">Meet our doctors and practitioners</p>
       <v-container>
         <v-layout row wrap justify-space-around fill-height align-center>
-          <Doc v-for="doctor in doctors" :id="doctor.iddoctorprofile" :title="doctor.title" :firstname="doctor.firstname" :lastname="doctor.lastname" :speciality="doctor.speciality" :key="doctor.iddoctorprofile" :calendar-id="doctor.calendarid" :dates="doctor.dates"></Doc>
+          <Doc v-for="doctor in doctors" :id="doctor.iddoctorprofile" :title="doctor.title" :firstname="doctor.firstname" :lastname="doctor.lastname" :specialities="doctor.speciality" :key="doctor.iddoctorprofile" :calendar-id="doctor.calendarid" :dates="doctor.dates"></Doc>
         </v-layout>
       </v-container>
     </section>
@@ -114,17 +124,27 @@
   import Navbar from '@/components/Navbar'
   import Doc from '@/components/Doc'
   import Yaofooter from '@/components/Yaofooter'
+  import Yaosearch from '@/components/Yaosearch.vue'
   import { mapMutations } from 'vuex'
+  import SearchLogo from '@/assets/customIcons/search.svg'
+  import EventLogo from '@/assets/customIcons/event.svg'
+  import AgendaLogo from '@/assets/customIcons/agenda.svg'
+  import ArrowLogo from '@/assets/customIcons/arrow.svg'
+
 
 export default {
   components: {
     Navbar,
+    Yaosearch,
     Doc,
-    Yaofooter
+    Yaofooter,
+    SearchLogo,
+    AgendaLogo,
+    EventLogo,
+    ArrowLogo
   },
   data() {
     return {
-      choice: '',
       doctors: [],
       therapies: [],
       snackbar: true,
@@ -139,9 +159,6 @@ export default {
     ...mapMutations({
       SET_DOCTORS: 'localStorage/SET_DOCTORS'
     }),
-    setChoice: function(option) {
-      this.choice = option
-    },
     subscribe() {
       console.log('sub')
       if (this.email) {
@@ -205,7 +222,7 @@ $yaobg: #effafc;
 $yaoGradient: radial-gradient(circle at center, #074f65 0, #00afa4 100%);
 
 .customicon {
-  font-size: 100px;
+  height: 70px;
   margin: 0 10px;
   color: $yao;
 }
@@ -224,8 +241,11 @@ $yaoGradient: radial-gradient(circle at center, #074f65 0, #00afa4 100%);
       height: 100vh;
       width: 100%;
       display: flex;
+      flex-flow: column;
       align-items: center;
       justify-content: center;
+      position: relative;
+      top: -10vh
     }
 
     .information {
@@ -236,51 +256,22 @@ $yaoGradient: radial-gradient(circle at center, #074f65 0, #00afa4 100%);
       display: flex;
       flex-flow: column;
       align-items: center;
+      padding: 5vw;
 
-      .iconFind {
-        background-image: url("../assets/customIcons/iconFind.png");
-        height: 100px;
-        width: 100px;
-        display: inline-block;
-      }
-
-      .iconDiscover {
-        background-image: url("../assets/customIcons/iconLearn.png");
-        height: 100px;
-        width: 100px;
-        display: inline-block;
-      }
-
-      .iconBook {
-        background-image: url("../assets/customIcons/iconBook.png");
-        height: 100px;
-        width: 100px;
-        display: inline-block;
-      }
 
       @media only screen and (max-width: 1000px) {
-        .iconFind {
-          height: 50px;
-          width: 50px;
-        }
-
-        .iconDiscover {
-          height: 50px;
-          width: 50px;
-        }
-
-        .iconBook {
-          height: 50px;
-          width: 50px;
-        }
-
         .customicon {
-          font-size: 50px;
+          height: 50px;
         }
-      }
 
-      p {
-        height: 6vw;
+        .infotext {
+          height: fit-content;
+        }
+
+        .infocontainer {
+          padding-bottom: 20px;
+        }
+
       }
 
       button {
@@ -289,13 +280,27 @@ $yaoGradient: radial-gradient(circle at center, #074f65 0, #00afa4 100%);
         box-shadow: none;
       }
 
+      .infotext {
+        height: fit-content;
+
+      }
+
       .joinText {
         height: fit-content;
-        text-transform: capitalize;
+        text-transform: uppercase;
         font-size: 50px;
         background-image: $yaoGradient;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+      }
+
+      .v-list {
+        background: none;
+      }
+
+      .v-list__tile__title {
+        height: fit-content;
+        white-space: pre-wrap;
       }
 
       @media only screen and (max-width: 1200px) {
@@ -331,6 +336,12 @@ $yaoGradient: radial-gradient(circle at center, #074f65 0, #00afa4 100%);
 
 .discoverContainer {
   height: auto;
+  background: #fafafa;
+
+  span {
+    text-transform: uppercase;
+    font-size: 24px;
+  }
 }
 
 .discoverAvatar {
@@ -348,7 +359,7 @@ $yaoGradient: radial-gradient(circle at center, #074f65 0, #00afa4 100%);
 
 
 .discoverText {
-  text-transform: capitalize;
+  text-transform: uppercase;
   font-size: 50px;
   background-image: $yaoGradient;
   -webkit-background-clip: text;

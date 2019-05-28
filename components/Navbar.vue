@@ -84,7 +84,6 @@
       color: rgba(51, 169, 181, 255) !important;
       text-decoration: none !important;
       text-transform: uppercase;
-      font-family: sans-serif;
       transition: .3s all ease-in-out !important;
     }
 

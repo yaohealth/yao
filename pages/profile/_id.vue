@@ -5,14 +5,16 @@
         <Navbar></Navbar>
         <v-container class="profileContainer">
           <v-layout row wrap>
-            <v-flex xs12 md4>
+            <v-flex xs12 md4 class="avatarContainer">
               <img class="docAvatar" v-if="doctor" :src="doctor.pictureurl"/>
             </v-flex>
             <v-flex xs12 md3>
               <h2 v-if="doctor">{{doctor.title}} {{doctor.firstname}} {{doctor.lastname}}</h2>
-              <p v-if="doctor">{{doctor.speciality}}</p>
+              <p v-if="doctor && Array.isArray(doctor.speciality)">{{doctor.speciality.slice(0,3).join()}}</p>
+
+              <p v-if="doctor && !Array.isArray(doctor.speciality)">{{doctor.speciality}}</p>
             </v-flex>
-            <v-flex xs12 md5>
+            <v-flex xs12 md5 class="mapContainer">
               <no-ssr v-if="doctor && doctor.latlong">
                 <l-map class="map" :zoom=15 :center="[52.6446503, 13.5393354]">
                   <l-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></l-tile-layer>
@@ -127,23 +129,31 @@
     height: auto;
   }
 
+  avatarContainer {
+    transform: scale(1.4);
+  }
+
   .profileContainer {
     padding: 0;
     background-color: #effafc;
+    height: fit-content;
   }
 
   .docAvatar {
-    margin: 30px;
-    height: 300px;
+    /*margin: 30px;*/
+    /*height: 300px;*/
     width: 300px;
     border: double 5px transparent;
     border-radius: 150px;
     background-image: linear-gradient(white, white), radial-gradient(circle at top left, #00afa4,#074f65);
     background-origin: border-box;
     background-clip: padding-box, border-box;
+    transform: scale(1.1); /*need to do a media query for this to remove it on break*/
   }
 
-
+  .mapContainer{
+    height: 20vw;
+  }
 
   .avatarcard {
     display: flex;
@@ -176,7 +186,6 @@
 
   .map {
     z-index: 1;
-    height: 300px;
     width: 500px;
   }
 
