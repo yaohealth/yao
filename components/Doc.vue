@@ -1,5 +1,5 @@
 <template>
-    <v-flex xs12 md4 align-self-center class="doc">
+    <v-flex xs12 md4 align-self-start class="doc">
       <v-card>
         <nuxt-link class="avatarLink" :to="{name: `profile-id`, params: {id}}">
           <v-img class="docAvatar" src="https://qph.fs.quoracdn.net/main-qimg-c55f4f1eab6aa42861d2e42436825ba9" aspect-ratio="1"></v-img>
@@ -7,7 +7,7 @@
         <v-card-title>
           <div>
             <span class="name mb-0">{{ title }} {{ firstname }} {{ lastname }}</span>
-            <div v-if="Array.isArray(specialities)">{{ specialities.slice(0,3).join()}}</div>
+            <div v-if="Array.isArray(specialities)">{{ specialities.slice(0,3).join(', ')}}</div>
 	          <div v-else>{{ specialities }}</div>
           </div>
         </v-card-title>
