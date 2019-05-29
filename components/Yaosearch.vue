@@ -128,7 +128,7 @@ export default {
 
   /deep/ .v-text-field {
     position: relative; // Allow label positioning (children cannot have "position")
-    margin-top: 28px; // Add space for fixed label
+    /*margin-top: 28px; // Add space for fixed label   // Removed by Patrick because it fucks up when you try to center it*/
 
     // Having relative position messes up labels.
     //   Labels must be positioned relative to ".v-text-field" (icon issues)
