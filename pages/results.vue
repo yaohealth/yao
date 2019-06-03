@@ -39,7 +39,7 @@
   import Yaosearch from '@/components/Yaosearch'
   import Yaofooter from '@/components/Yaofooter'
   import Acupuncture from '@/assets/customIcons/acupuncture.svg'
-  import Chiropractic from '@/assets/customIcons/chiropracty.svg'
+  import Chiropractic from '@/assets/customIcons/chiropractic.svg'
   import Herbal from '@/assets/customIcons/herbal.svg'
   import Homeopathy from '@/assets/customIcons/homeopathy.svg'
   import Hypno from '@/assets/customIcons/hypno.svg'
