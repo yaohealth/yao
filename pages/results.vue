@@ -18,17 +18,18 @@
           <p>{{ treat.name}}</p>
         </v-flex>
       </v-layout>
+
+      <!--<p class="subtitle" v-if="treatment.length > 0">search for: {{ treatment.map(elem => elem.symptom)}}</p>-->
+      <!--<hr>-->
+
+      <p class="subtitle" v-if="doctors">Discover {{doctors.length}} Doctors or Practitioners adapted to your needs</p>
+      <v-layout align-baseline justify-space-around row wrap>
+        <Doc v-for="doctor in doctors" :id="doctor.iddoctorprofile" :title="doctor.title" :firstname="doctor.firstname"
+             :lastname="doctor.lastname" :specialities="doctor.speciality" :key="doctor.id"
+             :calendar-id="doctor.calendarid" :dates="doctor.dates"></Doc>
+      </v-layout>
     </v-container>
 
-    <!--<p class="subtitle" v-if="treatment.length > 0">search for: {{ treatment.map(elem => elem.symptom)}}</p>-->
-    <!--<hr>-->
-
-    <p class="subtitle" v-if="doctors">Discover {{doctors.length}} Doctors or Practitioners adapted to your needs</p>
-    <v-layout align-baseline justify-space-around row wrap>
-      <Doc v-for="doctor in doctors" :id="doctor.iddoctorprofile" :title="doctor.title" :firstname="doctor.firstname"
-           :lastname="doctor.lastname" :specialities="doctor.speciality" :key="doctor.id"
-           :calendar-id="doctor.calendarid" :dates="doctor.dates"></Doc>
-    </v-layout>
     <Yaofooter></Yaofooter>
   </v-app>
 </template>
