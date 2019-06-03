@@ -23,7 +23,9 @@
               <div class="weekday">{{ props.item.weekday }}</div>
             </div>
             <v-list-tile class="timecontainer" v-for="time in props.item.times" :key="props.item.date + time">
-              <v-list-tile-content class="timecontainer"><v-btn class="timebtn" flat @click="openBookingDialog(`${props.item.date} ${props.item.month} ${props.item.year} ${time}`)">{{time}}</v-btn></v-list-tile-content>
+              <v-list-tile-content class="timecontainer">
+                <v-btn class="timebtn" flat @click="openBookingDialog(`${props.item.date} ${props.item.month} ${props.item.year} ${time}`)">{{time}}</v-btn>
+              </v-list-tile-content>
             </v-list-tile>
           </v-list>
         </v-flex>

@@ -38,7 +38,7 @@
                 <v-list>
                   <v-list-tile>
                     <v-list-tile-avatar>
-                      <ArrowLogo class="customicon"></ArrowLogo>
+                      <Arrow class="customicon"></Arrow>
                     </v-list-tile-avatar>
                     <v-list-tile-content>
                       <v-list-tile-title>Yao is a network regulated by doctors and practitioners, to improve trust and the link with patients</v-list-tile-title>
@@ -46,7 +46,7 @@
                   </v-list-tile>
                   <v-list-tile>
                     <v-list-tile-avatar>
-                      <ArrowLogo class="customicon"></ArrowLogo>
+                      <Arrow class="customicon"></Arrow>
                     </v-list-tile-avatar>
                     <v-list-tile-content>
                       <v-list-tile-title>Reduce rate of absenteeism</v-list-tile-title>
@@ -54,7 +54,7 @@
                   </v-list-tile>
                   <v-list-tile>
                     <v-list-tile-avatar>
-                      <ArrowLogo class="customicon"></ArrowLogo>
+                      <Arrow class="customicon" />
                     </v-list-tile-avatar>
                     <v-list-tile-content>
                       <v-list-tile-title>Improve your visivility online</v-list-tile-title>
@@ -129,7 +129,7 @@
   import SearchLogo from '@/assets/customIcons/search.svg'
   import EventLogo from '@/assets/customIcons/event.svg'
   import AgendaLogo from '@/assets/customIcons/agenda.svg'
-  import ArrowLogo from '@/assets/customIcons/arrow.svg'
+  import Arrow from '@/assets/customIcons/arrow.svg'
 
 
 export default {
@@ -141,7 +141,7 @@ export default {
     SearchLogo,
     AgendaLogo,
     EventLogo,
-    ArrowLogo
+    Arrow
   },
   data() {
     return {
