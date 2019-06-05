@@ -11,7 +11,7 @@
         <a class="links" href="https://blog.yao.health">Blog</a>
       </div>
       <nuxt-link to="/" class="logo">
-        <img class="icon" src="~assets/logo.png" alt="">
+        <img class="icon" src="~assets/logo1.png" alt="">
       </nuxt-link>
       <div class="right-menu">
         <nuxt-link class="links" :to="{name: 'results', query: { search:'*' } }">Booking</nuxt-link>
