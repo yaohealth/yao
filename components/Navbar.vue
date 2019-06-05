@@ -81,7 +81,7 @@
     grid-template-columns: 1fr auto 1fr;
 
     a {
-      color: rgba(51, 169, 181, 255) !important;
+      color: #00afa4 !important;
       text-decoration: none !important;
       text-transform: uppercase;
       transition: .3s all ease-in-out !important;

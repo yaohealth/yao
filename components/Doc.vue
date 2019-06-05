@@ -8,8 +8,8 @@
       <v-card-title>
         <div>
           <span class="name mb-0">{{ title }} {{ firstname }} {{ lastname }}</span>
-          <div v-if="Array.isArray(specialities)">{{ specialities.slice(0,3).join(', ')}}</div>
-          <div v-else>{{ specialities }}</div>
+          <div class="specialities" v-if="Array.isArray(specialities)">{{ specialities.slice(0,3).join(', ')}}</div>
+          <div class="specialities" v-else>{{ specialities }}</div>
         </div>
       </v-card-title>
       <v-divider light></v-divider>
@@ -121,8 +121,7 @@
 
 <style lang="scss" scoped>
   $yaoGradient: radial-gradient(circle at center, #074f65 0, #00afa4 100%);
-  $yao: rgba(0, 174, 163, 1);
-  $yaoLow: rgba(236, 247, 251, 0.5);
+  $yaoGreyFont: #393f4d;
 
   .doc {
     display: flex;
@@ -154,9 +153,14 @@
     -webkit-text-fill-color: transparent;
   }
 
+  .specialities {
+    color: $yaoGreyFont;
+  }
+
   .somebtn {
     margin: 0;
     padding: 0 10px;
+    color: $yaoGreyFont;
   }
 
   a {
@@ -173,17 +177,17 @@
     height: 200px;
     width: 200px;
     flex: none;
-    border: double 4px transparent;
+    border: double 7px transparent;
     border-radius: 100px;
     background-image: linear-gradient(white, white), radial-gradient(circle at top left, #00afa4, #074f65);
     background-origin: border-box;
     background-clip: padding-box, border-box;
-    box-shadow: 0 0 0 14px #e5eeed;
+    box-shadow: 0 0 0 10px #e5eeed;
 
   }
 
   .bookingButton {
-    background-color: $yao !important;
+    background-image: $yaoGradient !important;
     color: white;
     box-shadow: none !important;
     padding: 0;

@@ -5,7 +5,7 @@
           <v-layout  column justify-center fluid>
             <v-flex>
               <v-card-title>
-                <h1>Termin buchen</h1>
+                <h1>Book appointment</h1>
               </v-card-title>
               <v-card-title>
                 <span>{{selectedDate}}</span>
@@ -13,18 +13,18 @@
             </v-flex>
             <v-flex>
               <v-card-text>
-                <v-select @change="setTreatment" :items="getAppointmentNames(appointmentTypes)" label="Behandlung*"></v-select>
-                <v-text-field v-model="firstname" label="Vorname*" :rules="[rules.required]"></v-text-field>
-                <v-text-field v-model="lastname" label="Nachname*" :rules="[rules.required]"></v-text-field>
+                <v-select @change="setTreatment" :items="getAppointmentNames(appointmentTypes)" label="Treatment*"></v-select>
+                <v-text-field v-model="firstname" label="Firstname*" :rules="[rules.required]"></v-text-field>
+                <v-text-field v-model="lastname" label="Lastname*" :rules="[rules.required]"></v-text-field>
                 <v-text-field v-model="email" label="Email*" :rules="[rules.required, rules.email]"></v-text-field>
-                <v-text-field v-model="phonenumber" label="Telefon*" :rules="[rules.required]"></v-text-field>
+                <v-text-field v-model="phonenumber" label="Phone*" :rules="[rules.required]"></v-text-field>
                 <small>*indicates required field</small>
-                <v-checkbox v-model="agb" :rules="[rules.required]" label="AGB akzeptieren*"></v-checkbox>
+                <v-checkbox v-model="agb" :rules="[rules.required]" label="Accept AGB*"></v-checkbox>
               </v-card-text>
             </v-flex>
           <v-card-actions class="buttons">
-            <v-btn color="rgba(51, 169, 181, 255)" flat @click.stop="show=false">Abbrechen</v-btn>
-            <v-btn color="rgba(51, 169, 181, 255)" :disabled="!agb" flat @click.stop="booking()">Buchen</v-btn>
+            <v-btn color="rgba(51, 169, 181, 255)" flat @click.stop="show=false">Cancel</v-btn>
+            <v-btn color="rgba(51, 169, 181, 255)" :disabled="!agb" flat @click.stop="booking()">Book</v-btn>
           </v-card-actions>
           </v-layout>
         </v-card>

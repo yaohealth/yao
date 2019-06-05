@@ -35,6 +35,7 @@
               </v-flex>
               <v-flex xs12 md5 class="mapContainer">
                 <no-ssr v-if="doctor && doctor.latlong">
+                  <!--TODO check rezise options of this map  (maybe on an empty page) or take other one...-->
                   <l-map class="map" :zoom=15 :center="[52.6446503, 13.5393354]">
                     <l-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></l-tile-layer>
                     <l-marker :lat-lng="[doctor.latlong.x, doctor.latlong.y]"></l-marker>
@@ -48,18 +49,18 @@
         <v-container grid-list-xl>
           <v-layout row wrap justify-center>
             <v-flex xs12 md8 class="calenderContainer">
-              <v-card color="#effafc">
+              <v-card>
                 <Calendar :doctor="doctor" @successfulBooking="showSuccessSnack"
                           @failedBooking="showFailedSnack"></Calendar>
               </v-card>
             </v-flex>
 
             <v-flex xs12 md4 class="infobox">
-              <v-card color="#effafc">
+              <v-card>
                 <p class="gradientText">Expertise</p>
                 <template v-if="doctor && Array.isArray(doctor.speciality)">
                   <div v-for="speciality in doctor.speciality">
-                    <v-chip label color="#64c9c5" text-color="white">{{speciality}}</v-chip>
+                    <v-chip label text-color="white">{{speciality}}</v-chip>
                   </div>
                 </template>
                 <div v-if="doctor && !Array.isArray(doctor.speciality)">
@@ -147,10 +148,12 @@
 
 <style lang="scss" scoped>
   $yaoGradient: radial-gradient(circle at center, #074f65 0, #00afa4 100%);
+  $yaoLowGradient: radial-gradient(circle at center, rgba(0, 175, 164, 0.2) 0, rgba(0, 175, 164, 0.2) 100%);
+  $yaoGreyFont: #393f4d;
 
   .profileContainer {
     padding: 0;
-    background-color: #effafc;
+    background-image: $yaoLowGradient;
     height: 300px;
 
     p {
@@ -168,7 +171,7 @@
     /*margin: 30px;*/
     /*height: 300px;*/
     width: 300px;
-    border: double 5px transparent;
+    border: double 7px transparent;
     border-radius: 150px;
     background-image: linear-gradient(white, white), radial-gradient(circle at top left, #00afa4, #074f65);
     background-origin: border-box;
@@ -178,6 +181,11 @@
 
   .mapContainer {
     height: 300px;
+  }
+
+  .map {
+    z-index: 1;
+    width: 500px;
   }
 
   .avatarcard {
@@ -193,6 +201,8 @@
     display: flex;
     flex-flow: column;
     justify-content: center;
+    height: 300px;
+    color: $yaoGreyFont;
   }
 
   .gradientText {
@@ -207,10 +217,25 @@
     .v-chip {
       text-transform: uppercase;
       font-size: 16px;
+      background-image: $yaoGradient;
+    }
+
+    .v-card {
+      background-image: $yaoLowGradient;
     }
 
     .paymentOptions {
       padding-bottom: 20px;
+
+      span {
+        color: $yaoGreyFont;
+      }
+    }
+  }
+
+  .calenderContainer {
+    .v-card {
+      background-image: $yaoLowGradient;
     }
   }
 
@@ -228,14 +253,11 @@
     font-size: calc(16px + 1.5vw);
   }
 
-  .map {
-    z-index: 1;
-    width: 500px;
-  }
-
   .descriptioncontainer {
     padding: 20px;
     margin-bottom: 50px;
+    color: $yaoGreyFont;
+    background-image: $yaoLowGradient;
   }
 </style>
 

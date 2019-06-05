@@ -112,6 +112,8 @@ export default {
 
 
 <style lang="scss" scoped>
+  $yaoBase: #00afa4;
+
   .searchbar {
     width: 70vw;
     min-width: 400px;
@@ -214,14 +216,14 @@ export default {
     // Highlight currently focused field
     &.v-input--is-focused {
       .v-input__slot {
-        border-color: #04b7bd; // Replacement for 'underline' behaviour
+        border-color: $yaoBase; // Replacement for 'underline' behaviour
       }
 
       // When errors fields are focused only the border should change,
       //   and all other error colours should remain (label, icons, etc).
       &:not(.v-input--has-state):not(.error--text) {
         .v-label {
-          color: #04b7bd !important; // Vuetify override (".primary--text")
+          color: $yaoBase !important; // Vuetify override (".primary--text")
         }
 
         // Focused icon colours
@@ -229,7 +231,7 @@ export default {
         .v-input__append-outer i,
         .v-input__prepend-inner i,
         .v-input__prepend-outer i {
-          color: #04b7bd !important; // Vuetify override (".primary--text")
+          color: $yaoBase !important; // Vuetify override (".primary--text")
           transition: color 0.15s ease-in-out; // Shorter transition to avoid "jump"
         }
       }

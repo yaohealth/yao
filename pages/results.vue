@@ -149,11 +149,12 @@
 </script>
 
 <style lang="scss">
-  $yaoGradient: radial-gradient(circle at center, #074f65 0, #00afa4 100%);
+  $yaoGradient: radial-gradient(circle at center, rgba(0, 175, 164, 1) 0, rgba(0, 175, 164, 0.38) 100%);
+  $yaoGreyFont: #393f4d;
 
   .subtitle {
     font-size: 24px;
-    color: #526488;
+    color: $yaoGreyFont;
     word-spacing: 5px;
     padding: 15px 0;
   }
@@ -167,7 +168,7 @@
   }
 
   .symptomContainer {
-    background: #effafc;
+    background: radial-gradient(circle at center, rgba(0, 175, 164, 0.33) 0, rgba(0, 175, 164, 0.33) 100%);
   }
 
 </style>

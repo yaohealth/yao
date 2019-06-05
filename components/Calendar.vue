@@ -178,6 +178,12 @@
 </script>
 
 <style scoped lang="scss">
+  $yaoGreyFont: #393f4d;
+
+  * {
+    color: $yaoGreyFont;
+  }
+
   .loading {
     text-align: center;
     display: block;

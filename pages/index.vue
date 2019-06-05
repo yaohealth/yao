@@ -215,16 +215,16 @@ export default {
 </script>
 
 <style lang="scss">
-$yaoOld: rgba(51, 169, 181, 1);
 $yao: rgba(0, 174, 163, 1);
-$yaoLow: rgba(236, 247, 251, 0.5);
+$yaoLow: rgba(236, 247, 251, 0.64);
 $yaobg: #effafc;
 $yaoGradient: radial-gradient(circle at center, #074f65 0, #00afa4 100%);
+$yaoGreyFont: #393f4d;
+
 
 .customicon {
   height: 70px;
   margin: 0 10px;
-  color: $yao;
 }
 
 .searchInfoContainer {
@@ -275,13 +275,14 @@ $yaoGradient: radial-gradient(circle at center, #074f65 0, #00afa4 100%);
       }
 
       button {
-        background-color: $yao !important;
+        background-image: $yaoGradient !important;
         color: white;
         box-shadow: none;
       }
 
       .infotext {
         height: fit-content;
+        color: $yaoGreyFont;
 
       }
 
@@ -301,6 +302,7 @@ $yaoGradient: radial-gradient(circle at center, #074f65 0, #00afa4 100%);
       .v-list__tile__title {
         height: fit-content;
         white-space: pre-wrap;
+        color: $yaoGreyFont;
       }
 
       @media only screen and (max-width: 1200px) {
@@ -341,6 +343,7 @@ $yaoGradient: radial-gradient(circle at center, #074f65 0, #00afa4 100%);
   span {
     text-transform: uppercase;
     font-size: 24px;
+    color: $yaoGreyFont;
   }
 }
 
@@ -348,7 +351,7 @@ $yaoGradient: radial-gradient(circle at center, #074f65 0, #00afa4 100%);
   margin: 30px;
   height: 300px;
   width: 300px;
-  border: double 4px transparent;
+  border: double 6px transparent;
   border-radius: 150px;
   background-image: linear-gradient(white, white), radial-gradient(circle at top left, #00afa4,#074f65);
   background-origin: border-box;
