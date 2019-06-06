@@ -88,7 +88,7 @@
       <Yaofooter></Yaofooter>
     </v-container>
     <v-snackbar auto-height :color="color" v-model="snackbar" bottom :timeout="4000">
-      Buchung war erfolgreich!
+      {{snacktext}}
     </v-snackbar>
   </v-app>
 </template>
@@ -109,6 +109,7 @@
       return {
         descriptions: [],
         snackbar: false,
+        snacktext: '',
         color: ''
       }
     },
@@ -118,10 +119,12 @@
       }),
       showSuccessSnack() {
         this.color = 'success'
+        this.snacktext = 'Booking successful'
         this.snackbar = true
       },
       showFailedSnack() {
         this.color = 'error'
+        this.snacktext = 'Booking failed'
         this.snackbar = true
       }
     },

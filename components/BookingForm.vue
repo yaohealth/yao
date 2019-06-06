@@ -80,6 +80,7 @@
               ]
             })
             this.show = false
+            this.emptyForm()
             // emit event to parent component
             this.$emit('booked', this.selectedDate)
           } catch (e) {
@@ -87,6 +88,14 @@
             this.$emit('failed')
             console.log(e)
           }
+      },
+      emptyForm: function() {
+        this.treatmentselect = ''
+        this.firstname = ''
+        this.lastname = ''
+        this.email = ''
+        this.phonenumber = ''
+        this.agb = false
       },
       setTreatment: function(option) {
         this.treatmentselect = option
