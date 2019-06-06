@@ -68,12 +68,6 @@ export default {
     '@nuxt/http',
     '@nuxtjs/proxy'
   ],
-  http: {
-    proxy: true // Can be also an object with default options
-  },
-  'proxy': {
-    '/api/': { target: 'https://acuityscheduling.com/api/v1/', pathRewrite: {'^/api/': ''} }
-  },
   router: {
     parseQuery: function (query) {
       return require('qs').parse(query)

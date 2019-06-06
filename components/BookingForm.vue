@@ -61,11 +61,10 @@
       booking: async function() {
           const treatmentID = this.appointmentTypes.find(item => item.name === this.treatmentselect)
           try {
-            // set auth for acutiy api
-            const x = new Buffer.from(`${process.env.ACUITYUSER}:${process.env.ACUITYPW}`)
+            // set auth for yao api
+            const x = new Buffer.from(`${process.env.YAOUSER}:${process.env.YAOPW}`)
             this.$http.setToken(x.toString('base64'), 'Basic')
-
-            await this.$http.$post(`${process.env.ACUITYPROXY}/api/appointments`, {
+            const foo = await this.$http.$post(`${process.env.ACUITYPROXY}/appointments`, {
               appointmentTypeID: treatmentID.id,
               datetime: this.$dayjs(this.selectedDate, {locale: 'de'}).toISOString(),
               firstName: this.firstname,

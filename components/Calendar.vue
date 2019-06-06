@@ -113,12 +113,12 @@
         }
 
         nextDates = nextDates.splice(0,10)
-        // set auth for acutiy api
-        const x = new Buffer.from(`${process.env.ACUITYUSER}:${process.env.ACUITYPW}`)
+        // set auth for yao api
+        const x = new Buffer.from(`${process.env.YAOUSER}:${process.env.YAOPW}`)
         this.$http.setToken(x.toString('base64'), 'Basic')
 
         for(const date of nextDates) {
-          dateRequests.push(this.$http.$get(`${process.env.ACUITYPROXY}/api/availability/times?appointmentTypeID=${type.id}&calendarID=${this.doctor.calendarid}&date=${date.date}`))
+          dateRequests.push(this.$http.$get(`${process.env.ACUITYPROXY}/availability/times?appointmentTypeID=${type.id}&calendarID=${this.doctor.calendarid}&date=${date.date}`))
         }
 
         return await Promise.all(dateRequests).catch(e => console.error("error in getTimes", e))
