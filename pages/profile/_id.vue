@@ -181,11 +181,11 @@
 
   .mapContainer {
     height: 300px;
+    width: 500px;
   }
 
   .map {
     z-index: 1;
-    width: 500px;
   }
 
   .avatarcard {
