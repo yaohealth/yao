@@ -7,7 +7,8 @@
           <v-container class="profileContainer">
             <v-layout row wrap>
               <v-flex xs12 md4>
-                <img class="docAvatar" v-if="doctor" :src="doctor.pictureurl"/>
+                <img class="docAvatar" v-if="doctor && doctor.pictureurl" :src="doctor.pictureurl"/>
+                <img class="docAvatar" v-else src="https://via.placeholder.com/150">
               </v-flex>
               <v-flex xs12 md3 class="docdetails">
                 <p class="gradientText" v-if="doctor">{{doctor.title}} {{doctor.firstname}} {{doctor.lastname}}</p>
@@ -151,16 +152,18 @@
 
 <style lang="scss" scoped>
   $yaoGradient: radial-gradient(circle at center, #074f65 0, #00afa4 100%);
-  $yaoLowGradient: radial-gradient(circle at center, rgba(0, 175, 164, 0.2) 0, rgba(0, 175, 164, 0.2) 100%);
+  //$yaoLowGradient: radial-gradient(circle at center, rgba(0, 175, 164, 0.2) 0, rgba(0, 175, 164, 0.2) 100%);
+  $yaoLowGradient: #cce9e9;
   $yaoGreyFont: #393f4d;
 
   .profileContainer {
     padding: 0;
-    background-image: $yaoLowGradient;
+    //background-image: $yaoLowGradient;
+    background: $yaoLowGradient;
     height: 300px;
 
     p {
-      font-size: 24px;
+      font-size: 18px;
     }
 
     .socialicon {
@@ -206,9 +209,12 @@
     justify-content: center;
     height: 300px;
     color: $yaoGreyFont;
+    font-family: Roboto;
+    font-weight: 400;
   }
 
   .gradientText {
+    font-family: Fjalla One;
     text-transform: uppercase;
     font-size: 40px !important;
     background-image: $yaoGradient;
@@ -217,6 +223,8 @@
   }
 
   .infobox {
+    font-family: Roboto;
+    font-weight: 400;
     .v-chip {
       text-transform: uppercase;
       font-size: 16px;
@@ -224,7 +232,8 @@
     }
 
     .v-card {
-      background-image: $yaoLowGradient;
+      //background-image: $yaoLowGradient;
+      background: $yaoLowGradient;
     }
 
     .paymentOptions {
@@ -238,7 +247,8 @@
 
   .calenderContainer {
     .v-card {
-      background-image: $yaoLowGradient;
+      background: $yaoLowGradient;
+      //background-image: $yaoLowGradient;
     }
   }
 
@@ -257,10 +267,12 @@
   }
 
   .descriptioncontainer {
+    font-family: Roboto;
     padding: 20px;
     margin-bottom: 50px;
     color: $yaoGreyFont;
-    background-image: $yaoLowGradient;
+    //background-image: $yaoLowGradient;
+    background: $yaoLowGradient;
   }
 </style>
 

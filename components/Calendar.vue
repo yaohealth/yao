@@ -182,6 +182,8 @@
 
   * {
     color: $yaoGreyFont;
+    font-family: Roboto;
+    font-weight: 400;
   }
 
   .loading {

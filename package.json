@@ -27,7 +27,7 @@
     "css-loader": "^2.1.1",
     "lodash": "^4.17.11",
     "node-sass": "^4.11.0",
-    "nuxt": "^2.4.0",
+    "nuxt": "^2.8.1",
     "nuxt-fontawesome": "^0.4.0",
     "nuxt-leaflet": "^0.0.18",
     "nuxt-material-design-icons": "^1.0.4",

@@ -22,11 +22,12 @@
       <!--<p class="subtitle" v-if="treatment.length > 0">search for: {{ treatment.map(elem => elem.symptom)}}</p>-->
       <!--<hr>-->
 
-      <p class="subtitle" v-if="doctors">Discover {{doctors.length}} Doctors or Practitioners adapted to your needs</p>
       <v-layout align-baseline justify-space-around row wrap>
+        <v-flex xs12 class="subtitle" v-if="doctors">Discover {{doctors.length}} Doctors or Practitioners adapted to your needs</v-flex>
         <Doc v-for="doctor in doctors" :id="doctor.iddoctorprofile" :title="doctor.title" :firstname="doctor.firstname"
              :lastname="doctor.lastname" :specialities="doctor.speciality" :key="doctor.id"
-             :calendar-id="doctor.calendarid" :dates="doctor.dates"></Doc>
+             :calendar-id="doctor.calendarid" :dates="doctor.dates" :pictureurl="doctor.pictureurl"
+        ></Doc>
       </v-layout>
     </v-container>
 
@@ -157,6 +158,7 @@
     color: $yaoGreyFont;
     word-spacing: 5px;
     padding: 15px 0;
+    max-width: 70vw !important;
   }
 
   .resultSearchcontainer {
@@ -168,6 +170,8 @@
   }
 
   .symptomContainer {
+    font-family: Roboto;
+    font-weight: 600;
     background: radial-gradient(circle at center, rgba(0, 175, 164, 0.33) 0, rgba(0, 175, 164, 0.33) 100%);
   }
 

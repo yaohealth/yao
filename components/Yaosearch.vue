@@ -129,6 +129,8 @@ export default {
   $input-border-radius: 15px;
 
   /deep/ .v-text-field {
+    font-family: Roboto;
+    font-weight: 400;
     position: relative; // Allow label positioning (children cannot have "position")
     /*margin-top: 28px; // Add space for fixed label   // Removed by Patrick because it fucks up when you try to center it*/
 
@@ -262,6 +264,7 @@ export default {
     /*background-color: rgba(252, 252, 252, 0.5);*/
     background-color: white;
     border-radius: 8px !important;
+    font-family: Roboto;
   }
 
 

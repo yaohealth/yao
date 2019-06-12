@@ -30,7 +30,7 @@
               <v-flex xs12>
                 <hr>
               </v-flex>
-              <v-flex xs12 md4>
+              <v-flex xs12 md4 infocontainer>
                 <p class="joinText">Are you a doctor or practitioner?</p>
                 <v-btn round>JOIN YAO</v-btn>
               </v-flex>
@@ -41,7 +41,7 @@
                       <Arrow class="customicon"></Arrow>
                     </v-list-tile-avatar>
                     <v-list-tile-content>
-                      <v-list-tile-title>Yao is a network regulated by doctors and practitioners, to improve trust and the link with patients</v-list-tile-title>
+                      <v-list-tile-title class="infotext">Yao is a network regulated by doctors and practitioners, to improve trust and the link with patients</v-list-tile-title>
                     </v-list-tile-content>
                   </v-list-tile>
                   <v-list-tile>
@@ -49,7 +49,7 @@
                       <Arrow class="customicon"></Arrow>
                     </v-list-tile-avatar>
                     <v-list-tile-content>
-                      <v-list-tile-title>Reduce rate of absenteeism</v-list-tile-title>
+                      <v-list-tile-title class="infotext">Reduce rate of absenteeism</v-list-tile-title>
                     </v-list-tile-content>
                   </v-list-tile>
                   <v-list-tile>
@@ -57,7 +57,7 @@
                       <Arrow class="customicon" />
                     </v-list-tile-avatar>
                     <v-list-tile-content>
-                      <v-list-tile-title>Improve your visivility online</v-list-tile-title>
+                      <v-list-tile-title class="infotext">Improve your visivility online</v-list-tile-title>
                     </v-list-tile-content>
                   </v-list-tile>
                 </v-list>
@@ -103,7 +103,17 @@
       <p class="discoverText">Meet our doctors and practitioners</p>
       <v-container>
         <v-layout row wrap justify-space-around fill-height align-center>
-          <Doc v-for="doctor in doctors" :id="doctor.iddoctorprofile" :title="doctor.title" :firstname="doctor.firstname" :lastname="doctor.lastname" :specialities="doctor.speciality" :key="doctor.iddoctorprofile" :calendar-id="doctor.calendarid" :dates="doctor.dates"></Doc>
+          <Doc v-for="doctor in doctors"
+               :id="doctor.iddoctorprofile"
+               :title="doctor.title"
+               :firstname="doctor.firstname"
+               :lastname="doctor.lastname"
+               :specialities="doctor.speciality"
+               :key="doctor.iddoctorprofile"
+               :calendar-id="doctor.calendarid"
+               :dates="doctor.dates"
+               :pictureurl="doctor.pictureurl"
+          ></Doc>
         </v-layout>
       </v-container>
     </section>
@@ -274,6 +284,11 @@ $yaoGreyFont: #393f4d;
 
       }
 
+      .infocontainer {
+        font-family: Roboto;
+        font-weight: 400;
+      }
+
       button {
         background-image: $yaoGradient !important;
         color: white;
@@ -283,7 +298,6 @@ $yaoGreyFont: #393f4d;
       .infotext {
         height: fit-content;
         color: $yaoGreyFont;
-
       }
 
       .joinText {
@@ -293,6 +307,7 @@ $yaoGreyFont: #393f4d;
         background-image: $yaoGradient;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        font-family: Fjalla One;
       }
 
       .v-list {
@@ -344,6 +359,8 @@ $yaoGreyFont: #393f4d;
     text-transform: uppercase;
     font-size: 24px;
     color: $yaoGreyFont;
+    font-family: Roboto;
+    font-weight: 400;
   }
 }
 

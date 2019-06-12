@@ -2,7 +2,8 @@
   <v-flex xs12 md4 align-self-start class="doc">
     <v-card>
       <nuxt-link class="avatarLink" :to="{name: `profile-id`, params: {id}}">
-        <v-img class="docAvatar" src="https://qph.fs.quoracdn.net/main-qimg-c55f4f1eab6aa42861d2e42436825ba9"
+        <v-img v-if="pictureurl.length > 0" class="docAvatar" :src="pictureurl"></v-img>
+        <v-img v-else class="docAvatar" src="https://via.placeholder.com/150"
                aspect-ratio="1"></v-img>
       </nuxt-link>
       <v-card-title>
@@ -42,6 +43,7 @@
       'lastname': String,
       'specialities': [Array, String],
       'calendarId': String,
+      'pictureurl': String,
       'previewdates': {
         type: Array,
         default: () => []
@@ -127,6 +129,8 @@
     display: flex;
     justify-content: center;
     padding-bottom: 20px;
+    font-family: Roboto;
+    font-weight: 400;
   }
 
   .v-card {

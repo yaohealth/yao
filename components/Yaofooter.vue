@@ -35,6 +35,11 @@
 <style lang="scss" scoped>
   $yaoGradient: radial-gradient(circle at center, #074f65 0, #00afa4 100%);
 
+  * {
+    font-family: Roboto;
+    font-weight: 400;
+  }
+
   .links {
     background-image: $yaoGradient;
     padding: 10px;
@@ -55,7 +60,6 @@
     color: white !important;
     text-decoration: none !important;
     text-transform: uppercase;
-    font-family: sans-serif;
     transition: .3s all ease-in-out !important;
   }
 
