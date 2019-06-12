@@ -197,7 +197,7 @@ export default {
     this.SET_DOCTORS(this.doctors)
   },
   async asyncData({ $http }) {
-    const doctors = []
+    let doctors = []
     let therapies = []
     // set auth for yao api
     const x = new Buffer.from(`${process.env.YAOUSER}:${process.env.YAOPW}`)
@@ -209,9 +209,13 @@ export default {
       ]).catch(e => console.error('Error with YAO API:', e)) // show error page
 
       let allDocsCopy = allDocs.slice()
-      for (let i = 0; i < 3; i++) {
-        // pick and remove three doctors from the array for preview
-        doctors.push(allDocsCopy.splice(Math.ceil(Math.random() * 10) % allDocsCopy.length, 1)[0])
+      if(allDocsCopy.length >= 3) {
+        for (let i = 0; i < 3; i++) {
+          // pick and remove three doctors from the array for preview
+          doctors.push(allDocsCopy.splice(Math.ceil(Math.random() * 10) % allDocsCopy.length, 1)[0])
+        }
+      } else if(allDocsCopy.length < 3 && allDocsCopy.length > 0) {
+        doctors = allDocsCopy
       }
       therapies = specialities.map( speciality => speciality.speciality)
       return {doctors, therapies}

@@ -7,8 +7,8 @@
           <v-container class="profileContainer">
             <v-layout row wrap>
               <v-flex xs12 md4>
-                <img class="docAvatar" v-if="doctor && doctor.pictureurl" :src="doctor.pictureurl"/>
-                <img class="docAvatar" v-else src="https://via.placeholder.com/150">
+                <v-img class="docAvatar" v-if="doctor && doctor.pictureurl" :src="doctor.pictureurl" aspect-ratio="1"/>
+                <v-img class="docAvatar" v-else src="https://via.placeholder.com/150" aspect-ratio="1"/>
               </v-flex>
               <v-flex xs12 md3 class="docdetails">
                 <p class="gradientText" v-if="doctor">{{doctor.title}} {{doctor.firstname}} {{doctor.lastname}}</p>
@@ -36,8 +36,7 @@
               </v-flex>
               <v-flex xs12 md5 class="mapContainer">
                 <no-ssr v-if="doctor && doctor.latlong">
-                  <!--TODO check rezise options of this map  (maybe on an empty page) or take other one...-->
-                  <l-map class="map" :zoom=15 :center="[52.6446503, 13.5393354]">
+                  <l-map class="map" :zoom=15 :center="[doctor.latlong.x, doctor.latlong.y]">
                     <l-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></l-tile-layer>
                     <l-marker :lat-lng="[doctor.latlong.x, doctor.latlong.y]"></l-marker>
                   </l-map>
@@ -174,7 +173,8 @@
   }
 
   .docAvatar {
-    /*margin: 30px;*/
+    /*TODO margin is just a hack. fix this!*/
+    margin-left: 50px;
     /*height: 300px;*/
     width: 300px;
     border: double 7px transparent;

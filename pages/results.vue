@@ -79,6 +79,7 @@
         treatmentIcons: [
           {name: 'Acupuncture', icon: Acupuncture},
           {name: 'Chiropractic', icon: Chiropractic},
+          {name: 'Massage Therapy', icon: Chiropractic},
           {name: 'Herbal Medicine', icon: Herbal},
           {name: 'Homeopathy', icon: Homeopathy},
           {name: 'Hypno', icon: Hypno},
