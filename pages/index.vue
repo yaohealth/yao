@@ -156,6 +156,7 @@ export default {
   data() {
     return {
       doctors: [],
+      allDocs:[],
       therapies: [],
       snackbar: true,
       errorsnackbar: false,
@@ -194,7 +195,7 @@ export default {
   },
   created() {
     // add expiry of localstorage
-    this.SET_DOCTORS(this.doctors)
+    this.SET_DOCTORS(this.allDocs)
   },
   async asyncData({ $http }) {
     let doctors = []
@@ -218,7 +219,7 @@ export default {
         doctors = allDocsCopy
       }
       therapies = specialities.map( speciality => speciality.speciality)
-      return {doctors, therapies}
+      return {doctors, allDocs, therapies}
     } catch (e) {
       console.error('Error with Acuity API:', e)
       //show Error Page
