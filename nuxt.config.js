@@ -37,7 +37,8 @@ export default {
   */
   plugins: [
     { src: '~/plugins/vue-tiny-slider.js', mode: 'client' },
-    { src: '~/plugins/vuex-persist', mode: 'client' }
+    { src: '~/plugins/vuex-persist', mode: 'client' },
+    { src: '~/plugins/vuetify'}
   ],
 
   /*
@@ -50,7 +51,6 @@ export default {
     ['nuxt-fontawesome', {
       component: 'fa',
       imports: [
-        //import whole set
         {
           set: '@fortawesome/free-brands-svg-icons',
           icons: ['fab']
@@ -59,9 +59,8 @@ export default {
           set: '@fortawesome/free-regular-svg-icons',
           icons: ['far']
         }
-        ]
+      ]
     }],
-    '@nuxtjs/vuetify',
     'nuxt-material-design-icons',
     '@nuxtjs/dotenv',
     'nuxt-leaflet',
@@ -86,6 +85,8 @@ export default {
   ** Build configuration
   */
   build: {
+    // analyze: true,
+    transpile: [/^vuetify/],
     /*
     ** You can extend webpack config here
     */

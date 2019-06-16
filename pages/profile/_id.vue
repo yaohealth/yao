@@ -1,6 +1,6 @@
 <template>
-  <v-app>
-    <v-container class="mycontainer">
+  <v-app class="mycontainer">
+    <v-container pa-0>
       <Navbar></Navbar>
       <v-layout row wrap>
         <v-flex xs12>
