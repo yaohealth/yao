@@ -6,7 +6,7 @@
         <Navbar/>
         <section class="searchContainer">
           <p class="discoverText">
-            your complementary and alternative medicine platform
+            your preventive medicine platform
           </p>
             <Yaosearch></Yaosearch>
         </section>
