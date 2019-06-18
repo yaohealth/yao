@@ -7,9 +7,9 @@
           <v-icon>menu</v-icon>
         </label>
       </div>
-      <div class="left-menu">
-        <a class="links" href="https://blog.yao.health">Blog</a>
-      </div>
+<!--      <div class="left-menu">-->
+<!--        <a class="links" href="https://blog.yao.health">Blog</a>-->
+<!--      </div>-->
       <nuxt-link to="/" class="logo">
         <img class="icon" src="~assets/logo1.png" alt="">
       </nuxt-link>
