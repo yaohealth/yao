@@ -3,7 +3,7 @@
   <section class="mycontainer">
     <section class="searchInfoContainer">
       <div class="bg">
-        <Navbar/>
+        <Navbar id="navbar"/>
         <section class="searchContainer">
           <p class="discoverText">
             your preventive medicine platform
@@ -15,17 +15,17 @@
               <v-flex xs12 md4 class="infocontainer">
                 <SearchLogo class="customicon"></SearchLogo>
                 <p class="infotext">Find the therapy adapted to you, identify the right doctor or practitioner.</p>
-                <v-btn round>find</v-btn>
+                <v-btn round @click="$vuetify.goTo('#navbar', {duration: 300, easing: 'easeInOutCubic'})">find</v-btn>
               </v-flex>
               <v-flex xs12 md4 class="infocontainer">
                 <EventLogo class="customicon"></EventLogo>
-                <p class="infotext">Book directly and pay online.</p>
+                <p class="infotext">Book directly online.</p>
                 <v-btn round>book</v-btn>
               </v-flex>
               <v-flex xs12 md4 class="infocontainer">
                 <AgendaLogo class="customicon"></AgendaLogo>
                 <p class="infotext">Learn about the different therapies and symptoms complementary and alternative medicine can help out.</p>
-                <v-btn round>discover</v-btn>
+                <v-btn round @click="$vuetify.goTo('#content', {duration: 300, easing: 'easeInOutCubic'})">discover</v-btn>
               </v-flex>
               <v-flex xs12>
                 <hr>
@@ -66,7 +66,7 @@
           </v-container>
       </div>
     </section>
-    <v-container class="discoverContainer">
+    <v-container class="discoverContainer" id="content">
       <v-layout  align-center justify-center row wrap>
           <p class="discoverText">
             Discover more about complementary and alternative medicine
