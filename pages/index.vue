@@ -20,7 +20,9 @@
               <v-flex xs12 md4 class="infocontainer">
                 <EventLogo class="customicon"></EventLogo>
                 <p class="infotext">Book directly online.</p>
-                <v-btn round>book</v-btn>
+                <nuxt-link class="links" :to="{name: 'results', query: { search:'*' } }">
+                  <v-btn round>book</v-btn>
+                </nuxt-link>
               </v-flex>
               <v-flex xs12 md4 class="infocontainer">
                 <AgendaLogo class="customicon"></AgendaLogo>
@@ -75,7 +77,9 @@
       <v-layout  align-center justify-center row wrap>
         <v-layout align-center column>
           <v-flex xs12 md4>
-            <v-img class="discoverAvatar" :src="require('../assets/back.jpg')"></v-img>
+            <nuxt-link to="/therapies">
+              <v-img class="discoverAvatar" :src="require('../assets/back.jpg')"></v-img>
+            </nuxt-link>
           </v-flex>
           <v-flex xs12 md4>
             <span>Therapies</span>
@@ -83,7 +87,9 @@
         </v-layout>
         <v-layout align-center column>
           <v-flex xs12 md4>
-            <v-img class="discoverAvatar" :src="require('../assets/belly.jpg')"></v-img>
+            <nuxt-link to="/symptoms">
+              <v-img class="discoverAvatar" :src="require('../assets/belly.jpg')"></v-img>
+            </nuxt-link>
           </v-flex>
           <v-flex xs12 md4>
             <span>Symptoms</span>
@@ -91,7 +97,9 @@
         </v-layout>
         <v-layout align-center column>
           <v-flex xs12 md4>
-            <v-img class="discoverAvatar" :src="require('../assets/berries.jpg')"></v-img>
+            <nuxt-link to="/topics">
+              <v-img class="discoverAvatar" :src="require('../assets/berries.jpg')"></v-img>
+            </nuxt-link>
           </v-flex>
           <v-flex xs12 md4>
             <span>Topics</span>
