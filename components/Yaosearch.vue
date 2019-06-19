@@ -13,12 +13,12 @@
               hide-selected
               deletable-chips
               :search-input.sync="search"
-              @change="search = ''"
+              @change="preventSearchAction"
               @input="checkType"
               return-object
+              @keyup.enter="doSearch"
       >
-        <template v-slot:item="data">
-          <template>
+        <template v-slot:item="data" @change="foo">
             <v-list-tile-avatar v-if="data.item.group === 'Therapy'">
               <v-icon>local_hospital</v-icon>
             </v-list-tile-avatar>
@@ -28,11 +28,10 @@
             <v-list-tile-content>
               <v-list-tile-title v-html="data.item.name"></v-list-tile-title>
             </v-list-tile-content>
-          </template>
         </template>
         <!--TODO disable allow mouseover with tip to add items-->
         <template v-slot:append>
-          <nuxt-link :to="{name: `results`, query: {search: choice}}" :class="!disabled ? 'disabled' : ''">
+          <nuxt-link :to="{name: 'results', query: {search: choice}}" :class="!hasInput ? 'disabled' : ''">
             <v-icon @click.stop >search</v-icon>
           </nuxt-link>
         </template>
@@ -48,15 +47,28 @@ export default {
       items: [],
       choice: [],
       therapies: [],
-      symptoms: []
+      symptoms: [],
+      go: false
     }
   },
   computed: {
-    disabled() {
+    hasInput() {
       return this.choice.length > 0
     }
   },
   methods: {
+    preventSearchAction: function() {
+      // search is set to empty string so that the user input is reset and just the option is displayed
+      this.search = ''
+      // when we select an item in the dropdown we dont want that the keyup.enter fires and starts the search
+      this.go = false
+    },
+    doSearch: function() {
+      if (this.hasInput && this.go) {
+        this.$router.push({name: 'results', query: {search: this.choice}})
+      }
+      this.go = true
+    },
     // not really performant needs rewrite
     checkType: function(payload) {
       const newestItem = payload[payload.length -1]
@@ -127,6 +139,10 @@ export default {
 
   $input-height: 40px;
   $input-border-radius: 15px;
+
+  a {
+    text-decoration: none;
+  }
 
   /deep/ .v-text-field {
     font-family: Roboto;
