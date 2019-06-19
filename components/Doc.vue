@@ -70,7 +70,7 @@
         const x = new Buffer.from(`${process.env.YAOUSER}:${process.env.YAOPW}`)
         this.$http.setToken(x.toString('base64'), 'Basic')
 
-        appointmentTypes = await this.$http.$get(`${process.env.ACUITYPROXY}/appointment-types`)
+        appointmentTypes = await this.$http.$get(`acuity/appointment-types`)
         for (const type of appointmentTypes) {
           if (type.calendarIDs[0]) {
             if (Number(this.calendarId) === type.calendarIDs[0]) {
@@ -84,11 +84,11 @@
           const date = this.$dayjs()
           const x = new Buffer.from(`${process.env.YAOUSER}:${process.env.YAOPW}`)
           this.$http.setToken(x.toString('base64'), 'Basic')
-          let dates = await this.$http.$get(`${process.env.ACUITYPROXY}/availability/dates?appointmentTypeID=${type.id}&month=${date.year()}-${date.month() + 1}&calendarID=${this.calendarId}`)
+          let dates = await this.$http.$get(`acuity/availability/dates?appointmentTypeID=${type.id}&month=${date.year()}-${date.month() + 1}&calendarID=${this.calendarId}`)
           // TODO if a doctor is booked out we maybe need to next month until we have 3 dates at least
           if (this.$dayjs().endOf('month').diff(date, 'days') < 10) {
             // TODO doesnt work on the end of the year
-            const nextMonth = await this.$http.$get(`${process.env.ACUITYPROXY}/api/availability/dates?appointmentTypeID=${type.id}&month=${date.year()}-${date.month() + 2}&calendarID=${this.calendarId}`)
+            const nextMonth = await this.$http.$get(`acuity/api/availability/dates?appointmentTypeID=${type.id}&month=${date.year()}-${date.month() + 2}&calendarID=${this.calendarId}`)
 
             if (dates.length > 0 && nextMonth.length > 0) {
               dates = [...dates, ...nextMonth]

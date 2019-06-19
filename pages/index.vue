@@ -187,7 +187,7 @@ export default {
         try {
           console.log('send')
 
-          this.$http.$post(`${process.env.YAOAPI}/subscription/${this.email}`).then(res => {
+          this.$http.$post(`subscription/${this.email}`).then(res => {
             this.snackbar = false
             if (res.name === 'error') {
               this.errorsnackbar = true
@@ -213,8 +213,8 @@ export default {
     $http.setToken(x.toString('base64'), 'Basic')
     try {
       const [allDocs, specialities] = await Promise.all([
-        $http.$get(`${process.env.YAOAPI}/doctors/`),
-        $http.$get(`${process.env.YAOAPI}/specialities`)
+        $http.$get(`doctors`),
+        $http.$get(`specialities`)
       ]).catch(e => console.error('Error with YAO API:', e)) // show error page
 
       let allDocsCopy = allDocs.slice()

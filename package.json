@@ -5,8 +5,10 @@
   "author": "Patrick Weingärtner",
   "private": true,
   "scripts": {
-    "dev": "nuxt --port 3001",
-    "dev:debug": "nodemon --inspect node_modules/.bin/nuxt --port 3001",
+    "dev": "NODE_ENV=development nuxt --port 3001",
+    "prod": "NODE_ENV=production nuxt --port 3001",
+    "dev:debug": "NODE_ENV=development nodemon --inspect node_modules/.bin/nuxt --port 3001",
+    "prod:debug": "NODE_ENV=production nodemon --inspect node_modules/.bin/nuxt --port 3001",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate"

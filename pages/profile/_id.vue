@@ -139,7 +139,7 @@
       const x = new Buffer.from(`${process.env.YAOUSER}:${process.env.YAOPW}`)
       $http.setToken(x.toString('base64'), 'Basic')
       try {
-        descriptions = await $http.$get(`${process.env.YAOAPI}/doctors/description/${route.params.id}`)
+        descriptions = await $http.$get(`doctors/description/${route.params.id}`)
       } catch (e) {
         console.error('Error with YAO API:', e)
         // show error page

@@ -1,5 +1,6 @@
 import pkg from './package'
 import qs from 'qs'
+require('dotenv').config()
 
 export default {
   mode: 'universal',
@@ -75,6 +76,9 @@ export default {
       var r = require('qs').stringify(query, { encode: false })
       return r ? '?' + r : ''
     }
+  },
+  http: {
+    baseURL: process.env.NODE_ENV === "production" ? process.env.YAOAPIPROD : process.env.YAOAPILOCAL
   },
   webfontloader: {
     google: {

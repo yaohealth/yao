@@ -103,15 +103,15 @@
       try {
         if (query.search.length > 0) {
           if (query.search === '*') {
-            result.doctors = await $http.$get(`${process.env.YAOAPI}/doctors`)
+            result.doctors = await $http.$get(`doctors`)
           } else {
             const search = {[query.search[0].group]: query.search.map(elem => elem.name)}
             const searchquery = qs.stringify(search)
             const type = query.search[0].group
             if (type === 'Therapy') {
-              result.doctors = await $http.$get(`${process.env.YAOAPI}/doctors/specialities?${searchquery}`)
+              result.doctors = await $http.$get(`doctors/specialities?${searchquery}`)
             } else if (type === 'Symptom') {
-              result.treatment = await $http.$get(`${process.env.YAOAPI}/therapies/symptoms?${searchquery}`)
+              result.treatment = await $http.$get(`therapies/symptoms?${searchquery}`)
 
               result.treatment = result.treatment.map(elem => {
                 return {
@@ -136,7 +136,7 @@
               }
 
               result.specialities = lodash.orderBy(lodash.uniqBy(result.specialities, 'name'), ['weight'], ['desc'])
-              result.doctors = await $http.$get(`${process.env.YAOAPI}/doctors/specialities?${qs.stringify({Therapy: result.specialities.map(spec => spec.name)})}`)
+              result.doctors = await $http.$get(`doctors/specialities?${qs.stringify({Therapy: result.specialities.map(spec => spec.name)})}`)
               result.specNameList = result.specialities.map(elem => elem.name)
             }
           }
