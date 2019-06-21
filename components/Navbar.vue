@@ -28,13 +28,11 @@
   export default {
     computed: {
       loggedIn(){
-        console.log(!!this.$store.state.auth.user)
         return !!this.$store.state.auth.user
       }
     },
     methods: {
       logout() {
-        console.log('logout')
         this.$store.dispatch('auth/reset')
       }
     }
