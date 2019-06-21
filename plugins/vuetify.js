@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuetify, {
   VApp, // required
+  VAlert,
   VContainer,
   VLayout,
   VFlex,
@@ -12,6 +13,7 @@ import Vuetify, {
   VListTileTitle,
   VImg,
   VSnackbar,
+  VForm,
   VTextField,
   VCard,
   VCardMedia,
@@ -33,6 +35,7 @@ import Vuetify, {
 Vue.use(Vuetify, {
   components: {
     VApp,
+    VAlert,
     VContainer,
     VLayout,
     VFlex,
@@ -48,6 +51,7 @@ Vue.use(Vuetify, {
     VCard,
     VCardMedia,
     VCardTitle,
+    VForm,
     VCardActions,
     VDivider,
     VIcon,

@@ -181,9 +181,6 @@ export default {
     subscribe() {
       console.log('sub')
       if (this.email) {
-        // set auth for yao api
-        const x = new Buffer.from(`${process.env.YAOUSER}:${process.env.YAOPW}`)
-        this.$http.setToken(x.toString('base64'), 'Basic')
         try {
           console.log('send')
 
@@ -208,9 +205,6 @@ export default {
   async asyncData({ $http }) {
     let doctors = []
     let therapies = []
-    // set auth for yao api
-    const x = new Buffer.from(`${process.env.YAOUSER}:${process.env.YAOPW}`)
-    $http.setToken(x.toString('base64'), 'Basic')
     try {
       const [allDocs, specialities] = await Promise.all([
         $http.$get(`doctors`),

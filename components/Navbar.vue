@@ -8,13 +8,16 @@
         </label>
       </div>
 <!--      <div class="left-menu">-->
-<!--        <a class="links" href="https://blog.yao.health">Blog</a>-->
+<!--        <a href="https://blog.yao.health">Blog</a>-->
 <!--      </div>-->
+      <div class="left-menu">
+        <nuxt-link to="/login">Login</nuxt-link>
+      </div>
       <nuxt-link to="/" class="logo">
         <img class="icon" src="~assets/logo1.png" alt="">
       </nuxt-link>
       <div class="right-menu">
-        <nuxt-link class="links" :to="{name: 'results', query: { search:'*' } }">Booking</nuxt-link>
+        <nuxt-link :to="{name: 'results', query: { search:'*' } }">Booking</nuxt-link>
       </div>
     </nav>
   </div>

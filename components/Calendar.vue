@@ -113,10 +113,6 @@
         }
 
         nextDates = nextDates.splice(0,10)
-        // set auth for yao api
-        const x = new Buffer.from(`${process.env.YAOUSER}:${process.env.YAOPW}`)
-        this.$http.setToken(x.toString('base64'), 'Basic')
-
         for(const date of nextDates) {
           dateRequests.push(this.$http.$get(`acuity/availability/times?appointmentTypeID=${type.id}&calendarID=${this.doctor.calendarid}&date=${date.date}`))
         }

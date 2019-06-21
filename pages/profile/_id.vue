@@ -136,8 +136,6 @@
     async asyncData({$http, route}) {
       // set auth for yao api
       let descriptions
-      const x = new Buffer.from(`${process.env.YAOUSER}:${process.env.YAOPW}`)
-      $http.setToken(x.toString('base64'), 'Basic')
       try {
         descriptions = await $http.$get(`doctors/description/${route.params.id}`)
       } catch (e) {

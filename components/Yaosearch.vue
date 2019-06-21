@@ -99,14 +99,8 @@ export default {
   },
   async created() {
     let therapies = []
-    // set auth for yao api
-    const x = new Buffer.from(`${process.env.YAOUSER}:${process.env.YAOPW}`)
-    this.$http.setToken(x.toString('base64'), 'Basic')
     try {
       const specialities = await this.$http.$get(`specialities`).catch(e => console.error('Error with YAO API:', e)) // show error page
-
-      const x = new Buffer.from(`${process.env.YAOUSER}:${process.env.YAOPW}`)
-      this.$http.setToken(x.toString('base64'), 'Basic')
       const symptoms = await this.$http.$get(`symptoms`).catch(e => console.error('Error with YAO API:', e)) // show error page
       therapies = specialities.map( speciality => speciality.speciality)
       this.therapies = therapies

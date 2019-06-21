@@ -95,10 +95,6 @@
       this.search = this.$route.query.search
     },
     async asyncData({$http, query}) {
-      // set auth for yao api
-      const x = new Buffer.from(`${process.env.YAOUSER}:${process.env.YAOPW}`)
-      $http.setToken(x.toString('base64'), 'Basic')
-
       let result = {}
       try {
         if (query.search.length > 0) {
