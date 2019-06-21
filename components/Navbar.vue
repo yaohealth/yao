@@ -11,7 +11,8 @@
 <!--        <a href="https://blog.yao.health">Blog</a>-->
 <!--      </div>-->
       <div class="left-menu">
-        <nuxt-link to="/login">Login</nuxt-link>
+        <nuxt-link v-if="loggedIn" @click.native="logout" to="/">Logout</nuxt-link>
+        <nuxt-link v-if="!loggedIn" to="/login">Login</nuxt-link>
       </div>
       <nuxt-link to="/" class="logo">
         <img class="icon" src="~assets/logo1.png" alt="">
@@ -22,6 +23,23 @@
     </nav>
   </div>
 </template>
+
+<script>
+  export default {
+    computed: {
+      loggedIn(){
+        console.log(!!this.$store.state.auth.user)
+        return !!this.$store.state.auth.user
+      }
+    },
+    methods: {
+      logout() {
+        console.log('logout')
+        this.$store.dispatch('auth/reset')
+      }
+    }
+  }
+</script>
 
 <style lang="scss" scoped>
   .nav-container {
