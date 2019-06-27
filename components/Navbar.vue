@@ -11,8 +11,28 @@
 <!--        <a href="https://blog.yao.health">Blog</a>-->
 <!--      </div>-->
       <div class="left-menu">
-        <nuxt-link v-if="loggedIn" @click.native="logout" to="/">Logout</nuxt-link>
         <nuxt-link v-if="!loggedIn" to="/login">Login</nuxt-link>
+        <div v-if="loggedIn" class="text-xs-center">
+          <v-menu offset-y>
+            <template v-slot:activator="{ on }">
+              <v-btn icon flat v-on="on">
+                <v-icon color="#00afa4" class="settingsIcon">settings</v-icon>
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-tile>
+                <v-list-tile-title>
+                  <nuxt-link class="menu-item" :to="{name: `admin-id`, params: {id}}">Profile Settings</nuxt-link>
+                </v-list-tile-title>
+              </v-list-tile>
+              <v-list-tile>
+                <v-list-tile-title>
+                  <nuxt-link class="menu-item" @click.native="logout" to="/">Logout</nuxt-link>
+                </v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
+        </div>
       </div>
       <nuxt-link to="/" class="logo">
         <img class="icon" src="~assets/logo1.png" alt="">
@@ -29,6 +49,9 @@
     computed: {
       loggedIn(){
         return !!this.$store.state.auth.user
+      },
+      id() {
+        return this.$store.state.auth.user.id || this.$store.state.auth.user.user.id
       }
     },
     methods: {
@@ -111,13 +134,23 @@
     }
   }
 
+  .menu-item {
+    color: #00afa4 !important;
+    text-decoration: none !important;
+    text-transform: uppercase;
+    transition: .3s all ease-in-out !important;
+  }
+
+  .menu-item:hover {
+    opacity: .7 !important;
+  }
+
   .left-menu {
     grid-column: 1;
     align-self: center;
 
     a {
       padding: 10px 0;
-      margin-left: 15px;
       font-size: 20px;
       font-weight: bold;
       letter-spacing: 0.5px;
@@ -139,7 +172,6 @@
 
     a {
       padding: 10px 0;
-      margin-left: 15px;
       font-size: 20px;
       font-weight: bold;
       letter-spacing: 0.5px;

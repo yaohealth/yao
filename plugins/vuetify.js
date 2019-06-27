@@ -28,7 +28,14 @@ import Vuetify, {
   VFooter,
   VChip,
   VCardText,
-  VCheckbox
+  VCheckbox,
+  VTab,
+  VTabs,
+  VTabItem,
+  VTabsSlider,
+  VTextarea,
+  VSpacer,
+  VMenu
 } from 'vuetify/lib'
 
 
@@ -62,6 +69,13 @@ Vue.use(Vuetify, {
     VFooter,
     VChip,
     VCardText,
-    VCheckbox
+    VCheckbox,
+    VTab,
+    VTabs,
+    VTabItem,
+    VTabsSlider,
+    VTextarea,
+    VSpacer,
+    VMenu
   }
 })

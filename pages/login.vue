@@ -35,14 +35,16 @@
           username: this.username,
           password: this.password
         }).then(result => {
+          if (result.message === 'Forbidden'){
+            throw new Error('Login failed')
+          }
           this.alert = {type: 'success', message: result.message}
           this.loading = false
-          this.$router.push({name: 'admin'})
+          this.$router.push({name: `admin-id`, params:{id: result.user.id}})
         }).catch(error => {
           this.loading = false
-          if (error.response && error.response.data) {
-            this.alert = {type: 'error', message: error.response.data.message || error.reponse.status}
-          }
+          console.log('err', error)
+          this.alert = {type: 'error', message: error.message}
         })
 
       }

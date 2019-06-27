@@ -11,11 +11,10 @@
         <v-flex xs12 class="subtitle" v-if="specialities.length > 0">
           Considering the symptoms or conditions you are looking for, these therapies should be the most appropriate for
           you
-          <!--{{ specialities }}-->
         </v-flex>
         <v-flex xs4 v-for="treat in treatmentIcons.filter(icon => specNameList.includes(icon.name))" :key="treat.id">
           <component :is="treat.icon"></component>
-          <p>{{ treat.name}}</p>
+          <p>{{ treat.name }}</p>
         </v-flex>
       </v-layout>
 

@@ -32,7 +32,7 @@ export const actions = {
         this.$http.setToken(response.token, 'Bearer')
         cookies.set('authorization', response.token, {expires: 7})
         return response
-      })
+      }).catch(e => e)
   },
   reset ({commit}) {
     commit('reset_user')
