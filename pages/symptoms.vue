@@ -1,6 +1,5 @@
 <template>
-  <v-app>
-    <section class="mycontainer">
+  <v-app class="mycontainer">
       <Navbar/>
       <section class="article">
         <h1>CHRONIC DISEASE AND ALTERNATIVE MEDICINE </h1>
@@ -56,9 +55,8 @@
         <p>
            Naturopathy: certain dietary recommendations and a change in lifestyle can improve the quality of life of the individual fibromyalgia.
         </p>
-      </section>
-      <Yaofooter/>
     </section>
+    <Yaofooter/>
   </v-app>
 </template>
 
@@ -79,6 +77,9 @@
   .article {
     text-align: left;
     padding: 0 20vw;
+    font-family: Roboto;
+    font-weight: 400;
+    padding-bottom: 2.5rem;
   }
 
   h1 {

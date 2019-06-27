@@ -1,5 +1,5 @@
 <template>
-  <v-footer>
+  <v-footer class="footer">
     <v-container pa-0>
       <v-layout justify-center column>
         <v-flex class="links">
@@ -34,6 +34,13 @@
 
 <style lang="scss" scoped>
   $yaoGradient: radial-gradient(circle at center, #074f65 0, #00afa4 100%);
+
+  footer {
+    height: 0px !important;
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+  }
 
   * {
     font-family: Roboto;

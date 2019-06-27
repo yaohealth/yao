@@ -1,6 +1,5 @@
 <template>
-  <v-app>
-    <section class="mycontainer">
+  <v-app class="mycontainer">
       <Navbar/>
       <section class="article">
         <h1>IMPROVING YOUR GENERAL HEALTH</h1>
@@ -57,7 +56,6 @@
         </p>
       </section>
       <Yaofooter/>
-    </section>
   </v-app>
 </template>
 
@@ -78,6 +76,9 @@
   .article {
     text-align: left;
     padding: 0 20vw;
+    font-family: Roboto;
+    font-weight: 400;
+    padding-bottom: 2.5rem;
   }
 
   h1 {
