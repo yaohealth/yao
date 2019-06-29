@@ -1,6 +1,6 @@
 <template>
-  <v-app>
-  <section class="mycontainer">
+  <v-app class="mycontainer">
+  <section>
     <section class="searchInfoContainer">
       <div class="bg">
         <Navbar id="navbar"/>
@@ -125,8 +125,8 @@
         </v-layout>
       </v-container>
     </section>
-    <Yaofooter></Yaofooter>
   </section>
+    <Yaofooter></Yaofooter>
     <v-snackbar auto-height color="white" class="black--text" v-model="snackbar" bottom :timeout="0">
       Subscribe to our Newsletter:
       <v-text-field class="emailinput" v-model="email" :rules="emailRules" label="E-mail"></v-text-field>

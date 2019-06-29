@@ -45,13 +45,23 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
+
   export default {
     computed: {
+      ...mapGetters({
+        getUser: 'auth/getUser'
+      }),
       loggedIn(){
-        return !!this.$store.state.auth.user
+        try {
+          return !!this.getUser
+        } catch (e) {
+          return false
+        }
+
       },
       id() {
-        return this.$store.state.auth.user.id || this.$store.state.auth.user.user.id
+        return (this.getUser || {}).id
       }
     },
     methods: {

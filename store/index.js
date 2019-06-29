@@ -1,24 +1,17 @@
 import cookie from 'cookie'
 
 export const actions = {
-  nuxtServerInit ({dispatch}, context) {
-    return new Promise((resolve, reject) => {
+  async nuxtServerInit ({dispatch}, context) {
       const cookies = cookie.parse(context.req.headers.cookie || '')
       if (cookies.hasOwnProperty('authorization')) {
-        this.$http.setToken(cookies['authorization'], 'Bearer')
-        dispatch('auth/fetch')
-          .then(result => {
-            resolve(true)
-          })
-          .catch(error => {
-            console.log('Provided token is invalid:', error)
+        try {
+          this.$http.setToken(cookies['authorization'], 'Bearer')
+          await dispatch('auth/fetch')
+        } catch (e) {
             this.$http.setToken(false)
-            resolve(false)
-          })
+        }
       } else {
         this.$http.setToken(false)
-        resolve(false)
       }
-    })
   }
 }

@@ -28,7 +28,6 @@ html {
 }
 
 .mycontainer {
-  min-height: 100vh;
   text-align: center;
   padding: 0;
   margin: 0;

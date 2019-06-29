@@ -252,14 +252,17 @@
         <v-spacer></v-spacer>
       </div>
       <Yaofooter></Yaofooter>
-
     </section>
+    <v-snackbar auto-height :color="color" v-model="snackbar" bottom :timeout="4000">
+      {{snacktext}}
+    </v-snackbar>
   </v-app>
 </template>
 
 <script>
   import Navbar from '@/components/Navbar'
   import Yaofooter from '@/components/Yaofooter'
+  import { mapGetters } from 'vuex'
 
   export default {
     components: {
@@ -274,26 +277,46 @@
         },
         descriptions: [],
         specialities: [],
-        valid: false
+        valid: false,
+        snackbar: false,
+        snacktext: '',
+        color: ''
       }
     },
     computed: {
-      user () { return (this.$store.state.auth || {}).user || null }
+      ...mapGetters({
+        getUser: 'auth/getUser'
+      }),
+      user () { return this.getUser }
     },
     methods: {
       async updateProfile() {
-        await this.$http.post(`doctor/${this.user.user.id}`, { doctor: this.doctorData })
-        await this.$http.post(`description/${this.user.user.id}`, { descriptions: this.descriptions })
-        await this.$http.post(`specialities/${this.user.user.id}/${this.doctorData[0].iddoctorprofile}`, { specialities: this.doctorData[0].speciality })
-        // snackbar succsess or failour
+        try {
+          await this.$http.post(`doctor/${this.user.id}`, { doctor: this.doctorData })
+          await this.$http.post(`description/${this.user.id}`, { descriptions: this.descriptions })
+          await this.$http.post(`specialities/${this.user.id}/${this.doctorData[0].iddoctorprofile}`, { specialities: this.doctorData[0].speciality })
+          this.showSuccessSnack()
+        } catch (e) {
+          this.showFailedSnack()
+        }
       },
       addNewDescription() {
         this.descriptions.push({iddescription: null, iddoctorprofile: this.doctorData[0].iddoctorprofile, header: '', body: ''})
       },
       async deleteDescription(description) {
         const descriptionIndex = this.descriptions.findIndex(elem => elem.header === description.header && elem.body === description.body)
-        await this.$http.post(`description/delete/${this.user.user.id}`, { description: this.descriptions[descriptionIndex]})
+        await this.$http.post(`description/delete/${this.user.id}`, { description: this.descriptions[descriptionIndex]})
         this.descriptions.splice(descriptionIndex, 1)
+      },
+      showSuccessSnack() {
+        this.color = 'success'
+        this.snacktext = 'Update successful'
+        this.snackbar = true
+      },
+      showFailedSnack() {
+        this.color = 'error'
+        this.snacktext = 'Update failed'
+        this.snackbar = true
       }
     },
     async asyncData({$http, store}){
@@ -305,7 +328,7 @@
        * add an photo (need actual S3 for that)
        */
       const user = (store.state.auth || {}).user
-      const id = user.id || user.user.id
+      const id = user? user.id : ''
       const doctorData = await $http.$get(`doctor/${id}`)
       const descriptions = await $http.$get(`doctors/description/${doctorData[0].iddoctorprofile}`)
       const specialities = await $http.$get(`specialities`)

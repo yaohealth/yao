@@ -14,16 +14,15 @@ export const mutations = {
 }
 
 export const actions = {
-  fetch ({commit}) {
-    return this.$http.$get('me')
-      .then(response => {
-        commit('set_user', response.result)
-        return response
-      })
-      .catch(error => {
-        commit('reset_user')
-        return error
-      })
+  async fetch ({commit, dispatch}) {
+    try {
+      const response = await this.$http.$get('me')
+      commit('set_user', response.user)
+      return response
+    } catch (e) {
+      dispatch('reset')
+      throw new Error(e)
+    }
   },
   login ({commit}, data) {
     return this.$http.$post('auth/login', data)
@@ -32,7 +31,9 @@ export const actions = {
         this.$http.setToken(response.token, 'Bearer')
         cookies.set('authorization', response.token, {expires: 7})
         return response
-      }).catch(e => e)
+      }).catch(e => {
+        return e
+      })
   },
   reset ({commit}) {
     commit('reset_user')
@@ -40,4 +41,8 @@ export const actions = {
     cookies.remove('authorization')
     return Promise.resolve()
   }
+}
+
+export const getters = {
+  getUser: state => state.user
 }
