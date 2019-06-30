@@ -1,6 +1,6 @@
 <template>
   <v-container>
-      <v-dialog width="60vw" v-model="show">
+      <v-dialog width="80vw" v-model="show">
         <v-card>
           <v-layout  column justify-center fluid>
             <v-flex>
@@ -113,12 +113,6 @@
 
 
 <style lang="scss" scoped>
-  .bookingDialog {
-    width: 50vw;
-    min-width: 300px;
-    height: 90vh;
-  }
-
   .buttons {
     display: flex;
     justify-content: space-between;

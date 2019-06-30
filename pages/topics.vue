@@ -1,6 +1,7 @@
 <template>
   <v-app class="mycontainer">
       <Navbar/>
+    <div class="articleContainer">
       <section class="article">
         <h1>IMPROVING YOUR GENERAL HEALTH</h1>
         <h2>DISCOVER TAI CHI</h2>
@@ -55,6 +56,7 @@
           can offer, you may need something more aerobic as well.
         </p>
       </section>
+    </div>
       <Yaofooter/>
   </v-app>
 </template>
@@ -73,9 +75,14 @@
 </script>
 
 <style lang="scss">
+  .articleContainer {
+    text-align: center;
+  }
+
   .article {
     text-align: left;
-    padding: 0 20vw;
+    display: inline-block;
+    width: 80%;
     font-family: Roboto;
     font-weight: 400;
     padding-bottom: 2.5rem;

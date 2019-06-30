@@ -2,52 +2,49 @@
   <v-app class="mycontainer">
     <v-container pa-0>
       <Navbar></Navbar>
-      <v-layout row wrap>
-        <v-flex xs12>
-          <v-container class="profileContainer">
-            <v-layout row wrap>
-              <v-flex xs12 md4>
-                <v-img class="docAvatar" v-if="doctor && doctor.pictureurl" :src="doctor.pictureurl" aspect-ratio="1"/>
-                <v-img class="docAvatar" v-else src="https://via.placeholder.com/150" aspect-ratio="1"/>
-              </v-flex>
-              <v-flex xs12 md3 class="docdetails">
-                <p class="gradientText" v-if="doctor">{{doctor.title}} {{doctor.firstname}} {{doctor.lastname}}</p>
-                <p v-if="doctor && Array.isArray(doctor.speciality)">{{doctor.speciality.slice(0,3).join(', ')}}</p>
-                <p v-if="doctor && !Array.isArray(doctor.speciality)">{{doctor.speciality}}</p>
-                <p v-if="doctor">{{doctor.street}} {{ doctor.housenumber}}</p>
-                <p v-if="doctor">{{doctor.zipcode}} {{ doctor.city}}</p>
-                <section>
-                  <a v-if="doctor && doctor.contactemail" :href="'mailto:'+doctor.contactemail">
-                    <fa class="socialicon" :icon="['far', 'envelope-open']"/>
-                  </a>
-                  <a v-if="doctor && doctor.facebook" :href="doctor.facebook">
-                    <fa class="socialicon" :icon="['fab', 'facebook']"/>
-                  </a>
-                  <a v-if="doctor && doctor.twitter" :href="doctor.twitter">
-                    <fa class="socialicon" :icon="['fab', 'twitter']"/>
-                  </a>
-                  <a v-if="doctor && doctor.instagram" :href="doctor.instagram">
-                    <fa class="socialicon" :icon="['fab', 'instagram']"/>
-                  </a>
-                  <a v-if="doctor && doctor.youtube" :href="doctor.youtube">
-                    <fa class="socialicon" :icon="['fab', 'youtube']"/>
-                  </a>
-                </section>
-              </v-flex>
-              <v-flex xs12 md5 class="mapContainer">
-                <no-ssr v-if="doctor && doctor.latlong">
-                  <l-map class="map" :zoom=15 :center="[doctor.latlong.x, doctor.latlong.y]">
-                    <l-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></l-tile-layer>
-                    <l-marker :lat-lng="[doctor.latlong.x, doctor.latlong.y]"></l-marker>
-                  </l-map>
-                </no-ssr>
-                <strong v-else>Sorry can't load map</strong>
-              </v-flex>
-            </v-layout>
-          </v-container>
-        </v-flex>
         <v-container grid-list-xl>
           <v-layout row wrap justify-center>
+            <v-container class="profileContainer">
+              <v-layout row wrap>
+                <v-flex xs12 md6 lg4>
+                  <v-img class="docAvatar" v-if="doctor && doctor.pictureurl" :src="doctor.pictureurl" aspect-ratio="1"/>
+                  <v-img class="docAvatar" v-else src="https://via.placeholder.com/150" aspect-ratio="1"/>
+                </v-flex>
+                <v-flex xs12 md6 lg3 class="docdetails">
+                  <p class="gradientText" v-if="doctor">{{doctor.title}} {{doctor.firstname}} {{doctor.lastname}}</p>
+                  <p v-if="doctor && Array.isArray(doctor.speciality)">{{doctor.speciality.slice(0,3).join(', ')}}</p>
+                  <p v-if="doctor && !Array.isArray(doctor.speciality)">{{doctor.speciality}}</p>
+                  <p v-if="doctor">{{doctor.street}} {{ doctor.housenumber}}</p>
+                  <p v-if="doctor">{{doctor.zipcode}} {{ doctor.city}}</p>
+                  <section>
+                    <a v-if="doctor && doctor.contactemail" :href="'mailto:'+doctor.contactemail">
+                      <fa class="socialicon" :icon="['far', 'envelope-open']"/>
+                    </a>
+                    <a v-if="doctor && doctor.facebook" :href="doctor.facebook">
+                      <fa class="socialicon" :icon="['fab', 'facebook']"/>
+                    </a>
+                    <a v-if="doctor && doctor.twitter" :href="doctor.twitter">
+                      <fa class="socialicon" :icon="['fab', 'twitter']"/>
+                    </a>
+                    <a v-if="doctor && doctor.instagram" :href="doctor.instagram">
+                      <fa class="socialicon" :icon="['fab', 'instagram']"/>
+                    </a>
+                    <a v-if="doctor && doctor.youtube" :href="doctor.youtube">
+                      <fa class="socialicon" :icon="['fab', 'youtube']"/>
+                    </a>
+                  </section>
+                </v-flex>
+                <v-flex xs12 lg5 class="mapContainer">
+                  <no-ssr v-if="doctor && doctor.latlong">
+                    <l-map class="map" :zoom=15 :center="[doctor.latlong.x, doctor.latlong.y]">
+                      <l-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></l-tile-layer>
+                      <l-marker :lat-lng="[doctor.latlong.x, doctor.latlong.y]"></l-marker>
+                    </l-map>
+                  </no-ssr>
+                  <strong v-else>Sorry can't load map</strong>
+                </v-flex>
+              </v-layout>
+            </v-container>
             <v-flex xs12 md8 class="calenderContainer">
               <v-card>
                 <Calendar :doctor="doctor" @successfulBooking="showSuccessSnack"
@@ -84,7 +81,6 @@
             </v-flex>
           </v-layout>
         </v-container>
-      </v-layout>
       <Yaofooter></Yaofooter>
     </v-container>
     <v-snackbar auto-height :color="color" v-model="snackbar" bottom :timeout="4000">
@@ -157,7 +153,7 @@
     padding: 0;
     //background-image: $yaoLowGradient;
     background: $yaoLowGradient;
-    height: 300px;
+    height: fit-content;
 
     p {
       font-size: 18px;
@@ -173,7 +169,6 @@
   .docAvatar {
     /*TODO margin is just a hack. fix this!*/
     margin-left: 50px;
-    /*height: 300px;*/
     width: 300px;
     border: double 7px transparent;
     border-radius: 150px;
@@ -183,9 +178,35 @@
     transform: scale(1.1); /*need to do a media query for this to remove it on break*/
   }
 
+  @media only screen and (max-width:  960px) {
+    .docAvatar {
+      margin-left: 0;
+      width: 150px;
+      border: double 7px transparent;
+      border-radius: 75px;
+      background-image: linear-gradient(white, white), radial-gradient(circle at top left, #00afa4, #074f65);
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+
+      position: relative;
+      top: 40%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .docdetails {
+      align-items: center;
+    }
+
+    .mapContainer {
+      height: 300px;
+      width: 100%;
+    }
+  }
+
   .mapContainer {
-    height: 300px;
-    width: 500px;
+    height: 324px;
+    align-self: center;
   }
 
   .map {

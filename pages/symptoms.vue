@@ -1,6 +1,7 @@
 <template>
   <v-app class="mycontainer">
       <Navbar/>
+    <div class="articleContainer">
       <section class="article">
         <h1>CHRONIC DISEASE AND ALTERNATIVE MEDICINE </h1>
         <p>
@@ -53,9 +54,10 @@
           Acupuncture: Thanks to its modulating effect on pain, acupuncture could be an effective aid for people with fibromyalgia.
         </p>
         <p>
-           Naturopathy: certain dietary recommendations and a change in lifestyle can improve the quality of life of the individual fibromyalgia.
+          Naturopathy: certain dietary recommendations and a change in lifestyle can improve the quality of life of the individual fibromyalgia.
         </p>
-    </section>
+      </section>
+    </div>
     <Yaofooter/>
   </v-app>
 </template>
@@ -74,9 +76,14 @@
 </script>
 
 <style lang="scss">
+  .articleContainer {
+    text-align: center;
+  }
+
   .article {
     text-align: left;
-    padding: 0 20vw;
+    display: inline-block;
+    width: 80%;
     font-family: Roboto;
     font-weight: 400;
     padding-bottom: 2.5rem;

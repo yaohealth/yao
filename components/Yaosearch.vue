@@ -122,7 +122,7 @@ export default {
 
   .searchbar {
     width: 70vw;
-    min-width: 400px;
+    min-width: 350px;
   }
 
   .disabled {

@@ -39,7 +39,7 @@
     height: 0px !important;
     position: absolute;
     bottom: 0;
-    width: 100vw;
+    width: 100%;
   }
 
   * {

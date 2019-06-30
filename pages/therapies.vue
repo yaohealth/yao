@@ -1,6 +1,7 @@
 <template>
   <v-app class="mycontainer">
       <Navbar/>
+    <div class="articleContainer">
       <section class="article">
         <h1>COMPLEMENTARY AND ALTERNATIVE MEDICINE</h1>
         <p>
@@ -206,6 +207,7 @@
           more active.
         </p>
       </section>
+    </div>
       <Yaofooter/>
   </v-app>
 </template>
@@ -224,9 +226,14 @@
 </script>
 
 <style lang="scss">
+  .articleContainer {
+    text-align: center;
+  }
+
   .article {
     text-align: left;
-    padding: 0 20vw;
+    display: inline-block;
+    width: 80%;
     font-family: Roboto;
     font-weight: 400;
     padding-bottom: 2.5rem;
