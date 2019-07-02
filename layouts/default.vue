@@ -33,4 +33,24 @@ html {
   margin: 0;
 }
 
+.articleContainer {
+  text-align: center;
+}
+
+.article {
+  text-align: left;
+  display: inline-block;
+  width: 80%;
+  font-weight: 400;
+  padding-bottom: 2.5rem;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
 </style>

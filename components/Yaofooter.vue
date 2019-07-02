@@ -8,16 +8,16 @@
               <strong>Follow us</strong>
             </v-flex>
             <v-flex pb-5>
-              <a href="https://www.twitter.com/yaohealth"><fa class="socialicon" :icon="['fab', 'twitter']"/></a>
-              <a href="https://www.instagram.com/yaohealth"><fa class="socialicon" :icon="['fab', 'instagram']"/></a>
-              <a href="https://www.facebook.com/yaohealth"><fa class="socialicon" :icon="['fab', 'facebook-f']"/></a>
+              <a><fa class="socialicon" :icon="['fab', 'twitter']"/></a>
+              <a><fa class="socialicon" :icon="['fab', 'instagram']"/></a>
+              <a><fa class="socialicon" :icon="['fab', 'facebook-f']"/></a>
             </v-flex>
             <v-flex>
               <nuxt-link class="footerlink" to="/impressum">Impressum</nuxt-link>
             </v-flex>
-            <v-flex>
-              <nuxt-link class="footerlink" to="/kontakt">Kontakt</nuxt-link>
-            </v-flex>
+<!--            <v-flex>-->
+<!--              <nuxt-link class="footerlink" to="/kontakt">Kontakt</nuxt-link>-->
+<!--            </v-flex>-->
             <v-flex pb-5>
               <nuxt-link class="footerlink" to="/datenschutz">Datenschutz</nuxt-link>
             </v-flex>

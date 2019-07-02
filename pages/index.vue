@@ -34,7 +34,9 @@
               </v-flex>
               <v-flex xs12 md4 infocontainer>
                 <p class="joinText">Are you a doctor or practitioner?</p>
-                <v-btn round>JOIN YAO</v-btn>
+                <nuxt-link class="links" to="/impressum">
+                  <v-btn round>JOIN YAO</v-btn>
+                </nuxt-link>
               </v-flex>
               <v-flex xs12 md8>
                 <v-list>
@@ -238,6 +240,9 @@ $yaobg: #effafc;
 $yaoGradient: radial-gradient(circle at center, #074f65 0, #00afa4 100%);
 $yaoGreyFont: #393f4d;
 
+a {
+  text-decoration: none;
+}
 
 .customicon {
   height: 70px;
@@ -292,7 +297,6 @@ $yaoGreyFont: #393f4d;
       }
 
       .infocontainer {
-        font-family: Roboto;
         font-weight: 400;
       }
 
@@ -366,7 +370,6 @@ $yaoGreyFont: #393f4d;
     text-transform: uppercase;
     font-size: 24px;
     color: $yaoGreyFont;
-    font-family: Roboto;
     font-weight: 400;
   }
 }
