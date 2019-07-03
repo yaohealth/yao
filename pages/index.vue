@@ -44,25 +44,19 @@
                     <v-list-tile-avatar>
                       <Arrow class="customicon"></Arrow>
                     </v-list-tile-avatar>
-                    <v-list-tile-content>
-                      <v-list-tile-title class="infotext">Yao is a network regulated by doctors and practitioners, to improve trust and the link with patients</v-list-tile-title>
-                    </v-list-tile-content>
+                      <p class="bulletpoints">Yao is a network regulated by doctors and practitioners, to improve trust and the link with patients</p>
                   </v-list-tile>
                   <v-list-tile>
                     <v-list-tile-avatar>
                       <Arrow class="customicon"></Arrow>
                     </v-list-tile-avatar>
-                    <v-list-tile-content>
-                      <v-list-tile-title class="infotext">Reduce rate of absenteeism</v-list-tile-title>
-                    </v-list-tile-content>
+                      <p class="bulletpoints">Reduce rate of absenteeism</p>
                   </v-list-tile>
                   <v-list-tile>
                     <v-list-tile-avatar>
                       <Arrow class="customicon" />
                     </v-list-tile-avatar>
-                    <v-list-tile-content>
-                      <v-list-tile-title class="infotext">Improve your visivility online</v-list-tile-title>
-                    </v-list-tile-content>
+                      <p class="bulletpoints">Improve your visivility online</p>
                   </v-list-tile>
                 </v-list>
               </v-flex>
@@ -286,10 +280,6 @@ a {
           height: 50px;
         }
 
-        .infotext {
-          height: fit-content;
-        }
-
         .infocontainer {
           padding-bottom: 20px;
         }
@@ -297,6 +287,7 @@ a {
       }
 
       .infocontainer {
+        font-family: Roboto;
         font-weight: 400;
       }
 
@@ -308,7 +299,19 @@ a {
 
       .infotext {
         height: fit-content;
+        margin: 0;
         color: $yaoGreyFont;
+        font-family: Roboto;
+        font-weight: 400;
+      }
+
+      .bulletpoints {
+        text-align: left;
+        height: fit-content;
+        margin: 0;
+        color: $yaoGreyFont;
+        font-family: Roboto;
+        font-weight: 400;
       }
 
       .joinText {
@@ -370,6 +373,7 @@ a {
     text-transform: uppercase;
     font-size: 24px;
     color: $yaoGreyFont;
+    font-family: Roboto;
     font-weight: 400;
   }
 }

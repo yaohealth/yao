@@ -85,7 +85,7 @@ export default {
   },
   webfontloader: {
     google: {
-      families: ['Fjalla One:400']
+      families: ['Fjalla One:400', 'Roboto:300']
     }
   },
   /*
