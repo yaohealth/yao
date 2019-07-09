@@ -48,6 +48,7 @@
   import Osteopathy from '@/assets/customIcons/osteopathy.svg'
   import Reflexology from '@/assets/customIcons/reflexology.svg'
   import TCM from '@/assets/customIcons/TCM.svg'
+  import Tuina from '@/assets/customIcons/tuina-massage.svg'
   import qs from 'qs'
   import lodash from 'lodash'
 
@@ -86,7 +87,8 @@
           {name: 'Yoga', icon: Meditation},
           {name: 'Osteopathy', icon: Osteopathy},
           {name: 'Reflexology', icon: Reflexology},
-          {name: 'TCM', icon: TCM}
+          {name: 'TCM', icon: TCM},
+          {name: 'Tuina-Massage', icon: Tuina}
         ]
       }
     },
