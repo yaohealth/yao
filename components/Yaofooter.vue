@@ -13,13 +13,13 @@
               <a><fa class="socialicon" :icon="['fab', 'facebook-f']"/></a>
             </v-flex>
             <v-flex>
-              <nuxt-link class="footerlink" to="/impressum">Impressum</nuxt-link>
+              <nuxt-link class="footerlink" :to="localePath({name: 'impressum'})">Impressum</nuxt-link>
             </v-flex>
 <!--            <v-flex>-->
 <!--              <nuxt-link class="footerlink" to="/kontakt">Kontakt</nuxt-link>-->
 <!--            </v-flex>-->
             <v-flex pb-5>
-              <nuxt-link class="footerlink" to="/datenschutz">Datenschutz</nuxt-link>
+              <nuxt-link class="footerlink" :to="localePath({name: 'datenschutz'})">Datenschutz</nuxt-link>
             </v-flex>
           </v-layout>
         </v-flex>

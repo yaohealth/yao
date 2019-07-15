@@ -68,7 +68,30 @@ export default {
     '@nuxtjs/dotenv',
     'nuxt-leaflet',
     '@nuxt/http',
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
+    [
+      'nuxt-i18n',
+      {
+        locales: [
+          {
+            name: 'English',
+            code: 'en',
+            file: 'en-US.js',
+            iso: 'en-US'
+          },
+          {
+            name: 'Deutsch',
+            code: 'de',
+            file: 'de-DE.js',
+            iso: 'de-DE'
+          }
+        ],
+        defaultLocale :'en',
+        lazy: true,
+        langDir: 'lang/',
+        seo: false
+      }
+    ]
   ],
   router: {
     middleware: ['auth'],

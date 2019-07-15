@@ -7,7 +7,7 @@
               item-text="name"
               item-value="name"
               :multiple="true"
-              placeholder="SEARCH FOR SYMPTOMS, CONDITIONS, DOCTORS, PRACTITIONERS"
+              :placeholder="$t('searchbar.placeholder')"
               dense
               hide-no-data
               hide-selected
@@ -31,7 +31,7 @@
         </template>
         <!--TODO disable allow mouseover with tip to add items-->
         <template v-slot:append>
-          <nuxt-link :to="{name: 'results', query: {search: choice}}" :class="!hasInput ? 'disabled' : ''">
+          <nuxt-link :to="localePath({name: 'results', query: {search: choice}})" :class="!hasInput ? 'disabled' : ''">
             <v-icon @click.stop >search</v-icon>
           </nuxt-link>
         </template>

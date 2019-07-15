@@ -6,7 +6,7 @@
         <Navbar id="navbar"/>
         <section class="searchContainer">
           <p class="discoverText">
-            your preventive medicine platform
+            {{ $t('landing.welcome')}}
           </p>
             <Yaosearch></Yaosearch>
         </section>
@@ -20,7 +20,7 @@
               <v-flex xs12 md4 class="infocontainer">
                 <EventLogo class="customicon"></EventLogo>
                 <p class="infotext">Book directly online.</p>
-                <nuxt-link class="links" :to="{name: 'results', query: { search:'*' } }">
+                <nuxt-link class="links" :to="localePath({name: 'results', query: { search:'*' }})">
                   <v-btn round>book</v-btn>
                 </nuxt-link>
               </v-flex>
@@ -34,7 +34,7 @@
               </v-flex>
               <v-flex xs12 md4 infocontainer>
                 <p class="joinText">Are you a doctor or practitioner?</p>
-                <nuxt-link class="links" to="/impressum">
+                <nuxt-link class="links" :to="localePath({name: 'impressum'})">
                   <v-btn round>JOIN YAO</v-btn>
                 </nuxt-link>
               </v-flex>
@@ -73,7 +73,7 @@
       <v-layout  align-center justify-center row wrap>
         <v-layout align-center column>
           <v-flex xs12 md4>
-            <nuxt-link to="/therapies">
+            <nuxt-link :to="localePath({name: 'therapies'})">
               <v-img class="discoverAvatar" :src="require('../assets/back.jpg')"></v-img>
             </nuxt-link>
           </v-flex>
@@ -83,7 +83,7 @@
         </v-layout>
         <v-layout align-center column>
           <v-flex xs12 md4>
-            <nuxt-link to="/symptoms">
+            <nuxt-link :to="localePath({name: 'symptoms'})">
               <v-img class="discoverAvatar" :src="require('../assets/belly.jpg')"></v-img>
             </nuxt-link>
           </v-flex>
@@ -93,7 +93,7 @@
         </v-layout>
         <v-layout align-center column>
           <v-flex xs12 md4>
-            <nuxt-link to="/topics">
+            <nuxt-link :to="localePath({name: 'topics'})">
               <v-img class="discoverAvatar" :src="require('../assets/berries.jpg')"></v-img>
             </nuxt-link>
           </v-flex>
@@ -124,10 +124,10 @@
   </section>
     <Yaofooter></Yaofooter>
     <v-snackbar auto-height color="white" class="black--text" v-model="snackbar" bottom :timeout="0">
-      Subscribe to our Newsletter:
+      {{ $t('landing.snacktext') }}:
       <v-text-field class="emailinput" v-model="email" :rules="emailRules" label="E-mail"></v-text-field>
-      <v-btn color="rgba(51, 169, 181, 255)" flat @click="subscribe">Subscribe</v-btn>
-      <v-btn color="rgba(51, 169, 181, 255)" flat @click="snackbar = false">Close</v-btn>
+      <v-btn color="rgba(51, 169, 181, 255)" flat @click="subscribe">{{ $t('landing.subscribe') }}</v-btn>
+      <v-btn color="rgba(51, 169, 181, 255)" flat @click="snackbar = false">{{ $t('landing.close') }}</v-btn>
     </v-snackbar>
     <v-snackbar v-model="errorsnackbar" :timeout="4000" color="error">Ups something went wrong</v-snackbar>
     <v-snackbar v-model="sucessnackbar" :timeout="4000" color="success">You successful subscribed to our newsletter</v-snackbar>

@@ -32,6 +32,7 @@
     "node-sass": "^4.11.0",
     "nuxt": "^2.8.1",
     "nuxt-fontawesome": "^0.4.0",
+    "nuxt-i18n": "^5.12.7",
     "nuxt-leaflet": "^0.0.18",
     "nuxt-material-design-icons": "^1.0.4",
     "nuxt-svg-loader": "^1.0.1",

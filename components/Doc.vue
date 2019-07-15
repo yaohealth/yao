@@ -1,7 +1,7 @@
 <template>
   <v-flex xs12 md4 align-self-start class="doc">
     <v-card>
-      <nuxt-link :class="!clickable ? 'disabled avatarLink' : 'avatarLink'" :to="{name: `profile-id`, params: {id}}">
+      <nuxt-link :class="!clickable ? 'disabled avatarLink' : 'avatarLink'" :to="localePath({name: `profile-id`, params: {id}})">
         <v-img v-if="pictureurl.length > 0" class="docAvatar" :src="pictureurl"></v-img>
         <v-img v-else class="docAvatar" src="https://via.placeholder.com/150"
                aspect-ratio="1"></v-img>
@@ -16,14 +16,14 @@
       <v-divider light></v-divider>
       <v-card-text v-if="displaypeviewdates.length">
         <v-icon>access_time</v-icon>
-        <nuxt-link :class="!clickable ? 'disabled' : ''" :to="{name: `profile-id`, params: {id}}">
+        <nuxt-link :class="!clickable ? 'disabled' : ''" :to="localePath({name: `profile-id`, params: {id}})">
           <v-btn v-for="nextdate in displaypeviewdates" :key="nextdate" class="somebtn" flat>{{ nextdate }}</v-btn>
         </nuxt-link>
       </v-card-text>
       <v-card-actions>
         <v-layout justify-center>
-          <nuxt-link :class="!clickable ? 'disabled' : ''" :to="{name: `profile-id`, params: {id}}">
-            <v-btn round class="bookingButton">Booking</v-btn>
+          <nuxt-link :class="!clickable ? 'disabled' : ''" :to="localePath({name: `profile-id`, params: {id}})">
+            <v-btn round class="bookingButton">{{ $t('doctor.component.button') }}</v-btn>
           </nuxt-link>
         </v-layout>
       </v-card-actions>

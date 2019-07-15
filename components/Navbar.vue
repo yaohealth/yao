@@ -11,7 +11,7 @@
 <!--        <a href="https://blog.yao.health">Blog</a>-->
 <!--      </div>-->
       <div class="left-menu">
-        <nuxt-link v-if="!loggedIn" to="/login">Login</nuxt-link>
+        <nuxt-link v-if="!loggedIn" :to="localePath({name: 'login'})">Login</nuxt-link>
         <div v-if="loggedIn" class="text-xs-center">
           <v-menu offset-y>
             <template v-slot:activator="{ on }">
@@ -22,12 +22,12 @@
             <v-list>
               <v-list-tile>
                 <v-list-tile-title>
-                  <nuxt-link class="menu-item" :to="{name: `admin-id`, params: {id}}">Profile Settings</nuxt-link>
+                  <nuxt-link class="menu-item" :to="localePath({name: `admin-id`, params: {id}})">{{ $t('navbar.profile_settings')}}</nuxt-link>
                 </v-list-tile-title>
               </v-list-tile>
               <v-list-tile>
                 <v-list-tile-title>
-                  <nuxt-link class="menu-item" @click.native="logout" to="/">Logout</nuxt-link>
+                  <nuxt-link class="menu-item" @click.native="logout" :to="localePath({name: 'index'})">Logout</nuxt-link>
                 </v-list-tile-title>
               </v-list-tile>
             </v-list>
@@ -38,7 +38,25 @@
         <img class="icon" src="~assets/logo1.png" alt="">
       </nuxt-link>
       <div class="right-menu">
-        <nuxt-link :to="{name: 'results', query: { search:'*' } }">Booking</nuxt-link>
+        <nuxt-link :to="localePath({name: 'results', query: { search:'*' }})">{{ $t('navbar.booking')}}</nuxt-link>
+      </div>
+      <div class=" far-right-menu">
+        <v-menu offset-y>
+          <template v-slot:activator="{ on }">
+            <v-btn icon flat v-on="on" class="menu-item">
+              {{ $i18n.locale }}
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-tile
+                    v-for="locale in availableLocales"
+                    :key="locale.code">
+              <v-list-tile-title>
+                <nuxt-link :to="switchLocalePath(locale.code)">{{ locale.name }}</nuxt-link>
+              </v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
       </div>
     </nav>
   </div>
@@ -62,6 +80,9 @@
       },
       id() {
         return (this.getUser || {}).id
+      },
+      availableLocales () {
+        return this.$i18n.locales.filter(i => i.code !== this.$i18n.locale)
       }
     },
     methods: {
@@ -130,7 +151,7 @@
     max-width: 1720px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    grid-template-columns: 1fr 1fr 0.5fr 0.5fr;
 
     a {
       color: #00afa4 !important;
@@ -182,6 +203,17 @@
 
     a {
       padding: 10px 0;
+      font-size: 20px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  .far-right-menu {
+    grid-column: 4;
+    align-self: center;
+
+    button {
       font-size: 20px;
       font-weight: bold;
       letter-spacing: 0.5px;
