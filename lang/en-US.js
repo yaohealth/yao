@@ -23,6 +23,10 @@ export default (context) => {
         subscribe: 'subscribe',
         close: 'close'
       },
+      resultpage: {
+        therapytext: 'Considering the symptoms or conditions you are looking for, these therapies should be the most appropriate for you',
+        doctortext: 'Discover {number} Doctors or Practitioners adapted to your needs'
+      },
       navbar: {
         booking: 'booking',
         profile_settings: 'Profile Settings'

@@ -9,8 +9,7 @@
       </v-layout>
       <v-layout row wrap align-center justify-center v-if="specialities" class="symptomContainer">
         <v-flex xs12 class="subtitle" v-if="specialities.length > 0">
-          Considering the symptoms or conditions you are looking for, these therapies should be the most appropriate for
-          you
+          {{$t('resultpage.therapytext')}}
         </v-flex>
         <v-flex xs4 v-for="treat in treatmentIcons.filter(icon => specNameList.includes(icon.name))" :key="treat.id">
           <component :is="treat.icon"></component>
@@ -22,7 +21,7 @@
       <!--<hr>-->
 
       <v-layout align-baseline justify-space-around row wrap>
-        <v-flex xs12 class="subtitle" v-if="doctors">Discover {{doctors.length}} Doctors or Practitioners adapted to your needs</v-flex>
+        <v-flex xs12 class="subtitle" v-if="doctors">{{$t('resultpage.doctortext', {number: doctors.length})}}</v-flex>
         <Doc v-for="doctor in doctors" :id="doctor.iddoctorprofile" :title="doctor.title" :firstname="doctor.firstname"
              :lastname="doctor.lastname" :specialities="doctor.speciality" :key="doctor.id"
              :calendar-id="doctor.calendarid" :dates="doctor.dates" :pictureurl="doctor.pictureurl"

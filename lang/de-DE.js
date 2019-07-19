@@ -23,6 +23,10 @@ export default (context) => {
         subscribe: 'Abonieren',
         close: 'Schließen'
       },
+      resultpage: {
+        therapytext: 'Folgende Therapien sind für die von Ihnen angegebenen Beschwerden und Symptome geeignet',
+        doctortext: 'Entdecken Sie {number} Ärzte oder Praktiker, die Ihnen helfen können'
+      },
       navbar: {
         booking: 'Terminbuchung',
         profile_settings: 'Profile Einstellungen'
