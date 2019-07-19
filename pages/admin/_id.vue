@@ -11,22 +11,22 @@
                 v-if="doctorData.length > 0"
         >
           <v-tab href="#tab-1">
-            Personal Details
+            {{$t('admin.tab1.header')}}
             <v-icon>account_box</v-icon>
           </v-tab>
 
           <v-tab href="#tab-2">
-            Media
+            {{$t('admin.tab2.header')}}
             <v-icon>public</v-icon>
           </v-tab>
 
           <v-tab href="#tab-3">
-            Description
+            {{$t('admin.tab3.header')}}
             <v-icon>description</v-icon>
           </v-tab>
 
           <v-tab href="#tab-4">
-            Specialities
+            {{$t('admin.tab4.header')}}
             <v-icon>local_hospital</v-icon>
           </v-tab>
 
@@ -39,7 +39,7 @@
                       <v-flex xs12 md4>
                         <v-text-field
                                 v-model="doctorData[0].title"
-                                label="Title"
+                                :label=$t('admin.tab1.title')
                                 required
                         ></v-text-field>
                       </v-flex>
@@ -47,7 +47,7 @@
                       <v-flex xs12 md4>
                         <v-text-field
                                 v-model="doctorData[0].firstname"
-                                label="First name"
+                                :label=$t('admin.tab1.firstname')
                                 required
                         ></v-text-field>
                       </v-flex>
@@ -55,7 +55,7 @@
                       <v-flex xs12 md4>
                         <v-text-field
                                 v-model="doctorData[0].lastname"
-                                label="Last name"
+                                :label=$t('admin.tab1.lastname')
                                 required
                         ></v-text-field>
                       </v-flex>
@@ -63,7 +63,7 @@
                       <v-flex xs12 md4>
                         <v-text-field
                                 v-model="doctorData[0].praxisname"
-                                label="Praxisname"
+                                :label=$t('admin.tab1.praxisname')
                                 required
                         ></v-text-field>
                       </v-flex>
@@ -71,7 +71,7 @@
                       <v-flex xs12 md4>
                         <v-text-field
                                 v-model="doctorData[0].street"
-                                label="Street"
+                                :label=$t('admin.tab1.street')
                                 required
                         ></v-text-field>
                       </v-flex>
@@ -79,7 +79,7 @@
                       <v-flex xs12 md4>
                         <v-text-field
                                 v-model="doctorData[0].housenumber"
-                                label="Housenumber"
+                                :label=$t('admin.tab1.housenumber')
                                 required
                         ></v-text-field>
                       </v-flex>
@@ -87,7 +87,7 @@
                       <v-flex xs12 md4>
                         <v-text-field
                                 v-model="doctorData[0].zipcode"
-                                label="Zipcode"
+                                :label=$t('admin.tab1.zipcode')
                                 required
                         ></v-text-field>
                       </v-flex>
@@ -95,7 +95,7 @@
                       <v-flex xs12 md4>
                         <v-text-field
                                 v-model="doctorData[0].city"
-                                label="City"
+                                :label=$t('admin.tab1.city')
                                 required
                         ></v-text-field>
                       </v-flex>
@@ -103,7 +103,7 @@
                       <v-flex xs12 md4>
                         <v-text-field
                                 v-model="doctorData[0].state"
-                                label="State"
+                                :label=$t('admin.tab1.state')
                                 required
                         ></v-text-field>
                       </v-flex>
@@ -111,7 +111,7 @@
                       <v-flex xs12 md4>
                         <v-text-field
                                 v-model="doctorData[0].country"
-                                label="Country"
+                                :label=$t('admin.tab1.country')
                                 required
                         ></v-text-field>
                       </v-flex>
@@ -131,7 +131,7 @@
                       <v-flex xs12 md4>
                         <v-text-field
                                 v-model="doctorData[0].contactmail"
-                                label="Contactmail"
+                                :label=$t('admin.tab2.contactmail')
                                 required
                         ></v-text-field>
                       </v-flex>
@@ -139,7 +139,7 @@
                       <v-flex xs12 md4>
                         <v-text-field
                                 v-model="doctorData[0].phonenumber"
-                                label="Phonenumber"
+                                :label=$t('admin.tab2.phonenumber')
                                 required
                         ></v-text-field>
                       </v-flex>
@@ -151,7 +151,7 @@
                       <v-flex xs12 md4>
                         <v-text-field
                                 v-model="doctorData[0].website"
-                                label="Website"
+                                :label=$t('admin.tab2.website')
                         ></v-text-field>
                       </v-flex>
 
@@ -209,7 +209,7 @@
                         <v-textarea solo v-model="description.body" placeholder="Description"></v-textarea>
                       </v-flex>
                       <v-flex xs4 align-self-center>
-                        <v-btn @click="addNewDescription">Add new description</v-btn>
+                        <v-btn @click="addNewDescription">{{$t('admin.tab3.addBtn')}}</v-btn>
                       </v-flex>
                     </v-layout>
                   </v-container>
@@ -232,9 +232,9 @@
                                 item-text="speciality"
                                 item-value="speciality"
                                 :menu-props="{ maxHeight: '400' }"
-                                label="Specialities"
+                                :label=$t('admin.tab4.label')
                                 multiple
-                                hint="Pick your specialties"
+                                :hint=$t('admin.tab4.hint')
                                 persistent-hint
                                 dense
                         ></v-select>
@@ -248,7 +248,7 @@
           </v-tab-item>
         </v-tabs>
         <v-spacer></v-spacer>
-        <v-btn @click="updateProfile">Save</v-btn>
+        <v-btn @click="updateProfile">{{$t('admin.saveBtn')}}</v-btn>
         <v-spacer></v-spacer>
       </div>
       <Yaofooter></Yaofooter>

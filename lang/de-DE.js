@@ -27,6 +27,37 @@ export default (context) => {
         therapytext: 'Folgende Therapien sind für die von Ihnen angegebenen Beschwerden und Symptome geeignet',
         doctortext: 'Entdecken Sie {number} Ärzte oder Praktiker, die Ihnen helfen können'
       },
+      admin: {
+        tab1: {
+          header: 'Persönliche Informationen',
+          title: 'Title',
+          firstname: 'Vorname',
+          lastname: 'Nachname',
+          praxisname: 'Name der Praxis',
+          street: 'Straße',
+          housenumber: 'Hausnummer',
+          zipcode: 'Postleitzahl',
+          city: 'Stadt',
+          state: 'Bundesland',
+          country: 'Land'
+        },
+        tab2: {
+          header: 'Media',
+          contactmail: 'Email',
+          phonenumber: 'Telefonnummer',
+          website: 'Webseite'
+        },
+        tab3: {
+          header: 'Darstellung',
+          addBtn: 'Neuen Beitrag hinzufügen'
+        },
+        tab4: {
+          header:'Behandlungsmethoden',
+          label: 'Behandlungsmethoden',
+          hint: 'Wählen Sie Ihre Behandlungsmethoden'
+        },
+        saveBtn: 'Speichern'
+      },
       navbar: {
         booking: 'Terminbuchung',
         profile_settings: 'Profile Einstellungen'
@@ -40,12 +71,6 @@ export default (context) => {
       doctor: {
         component: {
           button: 'BUCHEN'
-        },
-        profile: {
-
-        },
-        settings: {
-
         }
       }
     })

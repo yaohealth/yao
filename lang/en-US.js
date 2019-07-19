@@ -27,6 +27,37 @@ export default (context) => {
         therapytext: 'Considering the symptoms or conditions you are looking for, these therapies should be the most appropriate for you',
         doctortext: 'Discover {number} Doctors or Practitioners adapted to your needs'
       },
+      admin: {
+        tab1: {
+          header: 'Personal Details',
+          title: 'Title',
+          firstname: 'Firstname',
+          lastname: 'Lastname',
+          praxisname: 'Praxisname',
+          street: 'Street',
+          housenumber: 'Housenumber',
+          zipcode: 'Zipcode',
+          city: 'City',
+          state: 'State',
+          country: 'Country'
+        },
+        tab2: {
+          header: 'Media',
+          contactmail: 'Contactmail',
+          phonenumber: 'Phonenumber',
+          website: 'Website'
+        },
+        tab3: {
+          header: 'Description',
+          addBtn: 'Add new description'
+        },
+        tab4: {
+          header: 'Specialities',
+          label: 'Specialities',
+          hint: 'Pick your specialties'
+        },
+        saveBtn: 'Save'
+      },
       navbar: {
         booking: 'booking',
         profile_settings: 'Profile Settings'
@@ -40,12 +71,6 @@ export default (context) => {
       doctor: {
         component: {
           button: 'BOOKING'
-        },
-        profile: {
-
-        },
-        settings: {
-
         }
       }
     })
