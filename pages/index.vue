@@ -14,28 +14,28 @@
             <v-layout row wrap fill-height align-center>
               <v-flex xs12 md4 class="infocontainer">
                 <SearchLogo class="customicon"></SearchLogo>
-                <p class="infotext">Find the therapy adapted to you, identify the right doctor or practitioner.</p>
-                <v-btn round @click="$vuetify.goTo('#navbar', {duration: 300, easing: 'easeInOutCubic'})">find</v-btn>
+                <p class="infotext">{{ $t('landing.infotext1')}}</p>
+                <v-btn round @click="$vuetify.goTo('#navbar', {duration: 300, easing: 'easeInOutCubic'})">{{ $t('landing.findBtn')}}</v-btn>
               </v-flex>
               <v-flex xs12 md4 class="infocontainer">
                 <EventLogo class="customicon"></EventLogo>
-                <p class="infotext">Book directly online.</p>
+                <p class="infotext">{{ $t('landing.infotext2')}}</p>
                 <nuxt-link class="links" :to="localePath({name: 'results', query: { search:'*' }})">
-                  <v-btn round>book</v-btn>
+                  <v-btn round>{{ $t('landing.bookBtn')}}</v-btn>
                 </nuxt-link>
               </v-flex>
               <v-flex xs12 md4 class="infocontainer">
                 <AgendaLogo class="customicon"></AgendaLogo>
-                <p class="infotext">Learn about the different therapies and symptoms complementary and alternative medicine can help out.</p>
-                <v-btn round @click="$vuetify.goTo('#content', {duration: 300, easing: 'easeInOutCubic'})">discover</v-btn>
+                <p class="infotext">{{ $t('landing.infotext3')}}</p>
+                <v-btn round @click="$vuetify.goTo('#content', {duration: 300, easing: 'easeInOutCubic'})">{{ $t('landing.discoverBtn')}}</v-btn>
               </v-flex>
               <v-flex xs12>
                 <hr>
               </v-flex>
               <v-flex xs12 md4 infocontainer>
-                <p class="joinText">Are you a doctor or practitioner?</p>
+                <p class="joinText">{{ $t('landing.jointext')}}</p>
                 <nuxt-link class="links" :to="localePath({name: 'impressum'})">
-                  <v-btn round>JOIN YAO</v-btn>
+                  <v-btn round>{{$t('landing.registerBtn')}}JOIN YAO</v-btn>
                 </nuxt-link>
               </v-flex>
               <v-flex xs12 md8>
@@ -44,19 +44,19 @@
                     <v-list-tile-avatar>
                       <Arrow class="customicon"></Arrow>
                     </v-list-tile-avatar>
-                      <p class="bulletpoints">Yao is a network regulated by doctors and practitioners, to improve trust and the link with patients</p>
+                      <p class="bulletpoints">{{$t('landing.bulletpoint1')}}</p>
                   </v-list-tile>
                   <v-list-tile>
                     <v-list-tile-avatar>
                       <Arrow class="customicon"></Arrow>
                     </v-list-tile-avatar>
-                      <p class="bulletpoints">Reduce rate of absenteeism</p>
+                      <p class="bulletpoints">{{$t('landing.bulletpoint2')}}</p>
                   </v-list-tile>
                   <v-list-tile>
                     <v-list-tile-avatar>
                       <Arrow class="customicon" />
                     </v-list-tile-avatar>
-                      <p class="bulletpoints">Improve your visivility online</p>
+                      <p class="bulletpoints">{{$t('landing.bulletpoint3')}}</p>
                   </v-list-tile>
                 </v-list>
               </v-flex>
@@ -67,7 +67,7 @@
     <v-container class="discoverContainer" id="content">
       <v-layout  align-center justify-center row wrap>
           <p class="discoverText">
-            Discover more about complementary and alternative medicine
+            {{$t('landing.discovertext')}}
           </p>
       </v-layout>
       <v-layout  align-center justify-center row wrap>
@@ -78,7 +78,7 @@
             </nuxt-link>
           </v-flex>
           <v-flex xs12 md4>
-            <span>Therapies</span>
+            <span>{{$t('landing.content1')}}</span>
           </v-flex>
         </v-layout>
         <v-layout align-center column>
@@ -88,7 +88,7 @@
             </nuxt-link>
           </v-flex>
           <v-flex xs12 md4>
-            <span>Symptoms</span>
+            <span>{{$t('landing.content2')}}</span>
           </v-flex>
         </v-layout>
         <v-layout align-center column>
@@ -98,13 +98,13 @@
             </nuxt-link>
           </v-flex>
           <v-flex xs12 md4>
-            <span>Topics</span>
+            <span>{{$t('landing.content3')}}Topics</span>
           </v-flex>
         </v-layout>
       </v-layout>
     </v-container>
     <section class="docPreview">
-      <p class="discoverText">Meet our doctors and practitioners</p>
+      <p class="discoverText">{{$t('landing.doctorhighlights')}}</p>
       <v-container>
         <v-layout row wrap justify-space-around fill-height align-center>
           <Doc v-for="doctor in doctors"

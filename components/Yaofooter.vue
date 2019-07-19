@@ -5,7 +5,7 @@
         <v-flex class="links">
           <v-layout justify-center column pt-3>
             <v-flex text--white>
-              <strong>Follow us</strong>
+              <strong>{{$t('footer.text')}}</strong>
             </v-flex>
             <v-flex pb-5>
               <a><fa class="socialicon" :icon="['fab', 'twitter']"/></a>
