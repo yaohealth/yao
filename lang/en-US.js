@@ -71,6 +71,9 @@ export default (context) => {
       doctor: {
         component: {
           button: 'BOOKING'
+        },
+        profile: {
+          paymentoptions: 'Payment Options'
         }
       }
     })

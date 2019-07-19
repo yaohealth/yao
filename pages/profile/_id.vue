@@ -64,7 +64,7 @@
                   <v-chip label color="#64c9c5" text-color="white">{{doctor.speciality}}</v-chip>
                 </div>
                 <div class="paymentOptions">
-                  <p class="gradientText">Payment Options</p>
+                  <p class="gradientText">{{$t('doctor.profile.paymentoptions')}}</p>
                   <span>Cash, Credit Card</span>
                 </div>
               </v-card>
