@@ -68,6 +68,18 @@ export default (context) => {
       searchbar: {
         placeholder: 'SUCHE NACH SYMPTOMEN, ÄRZTEN UND PRAKTIKERN'
       },
+      therapy: {
+        Osteopathy: 'Osteopathie',
+        TCM: 'TCM',
+        Anthroposophy: 'Antroposophie',
+        Homeopathy: 'Homeopathie',
+        'Tuina-Massage': 'Tuina-Massage',
+        'Herbal Medicine': 'Pflanzenheilkunde',
+        Yoga: 'Yoga',
+        'Massage Therapy': 'Massage Therapie',
+        Chiropractic: 'Chiropraktik',
+        Acupuncture: 'Akupunktur'
+      },
       doctor: {
         component: {
           button: 'BUCHEN'

@@ -66,7 +66,19 @@ export default (context) => {
         text: 'Follow us'
       },
       searchbar: {
-        placeholder: 'SEARCH FOR SYMPTOMS, CONDITIONS, DOCTORS, PRACTITIONERS'
+        placeholder: 'SEARCH FOR SYMPTOMS, CONDITIONS, DOCTORS, PRACTITIONERS',
+        therapy: {
+          Osteopathy: 'Osteopathy',
+          TCM: 'TCM',
+          Anthroposophy: 'Anthroposophy',
+          Homeopathy: 'Homeopathy',
+          'Tuina-Massage': 'Tuina-Massage',
+          'Herbal Medicine': 'Herbal Medicine',
+          Yoga: 'Yoga',
+          'Massage Therapy': 'Massage Therapy',
+          Chiropractic: 'Chiropractic',
+          Acupuncture: 'Acupuncture'
+        }
       },
       doctor: {
         component: {

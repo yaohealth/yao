@@ -9,8 +9,12 @@
       <v-card-title>
         <div>
           <span class="name mb-0">{{ title }} {{ firstname }} {{ lastname }}</span>
-          <div class="specialities" v-if="Array.isArray(specialities)">{{ specialities.slice(0,3).join(', ')}}</div>
-          <div class="specialities" v-else>{{ specialities }}</div>
+          <div class="specialities" v-if="Array.isArray(specialities)">
+            {{ specialities.slice(0,3).map(value => $t(`therapy.${value}`)).join(', ')}}
+          </div>
+          <!-- in case it's just a single specialiy it is passed as a string          -->
+          <!-- TODO should fix that         -->
+          <div class="specialities" v-else>{{ $t(`therapy.${specialities}`)}}</div>
         </div>
       </v-card-title>
       <v-divider light></v-divider>

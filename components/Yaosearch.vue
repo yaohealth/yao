@@ -25,8 +25,11 @@
             <v-list-tile-avatar v-if="data.item.group === 'Symptom'">
               <v-icon>bug_report</v-icon>
             </v-list-tile-avatar>
-            <v-list-tile-content>
-              <v-list-tile-title v-html="data.item.name"></v-list-tile-title>
+            <v-list-tile-content v-if="data.item.group === 'Therapy'">
+              <v-list-tile-title v-html="$t(`therapy.${data.item.name}`)"></v-list-tile-title>
+            </v-list-tile-content>
+            <v-list-tile-content v-if="data.item.group === 'Symptom'">
+              <v-list-tile-title v-html="$t(`symptom.${data.item.name}`)"></v-list-tile-title>
             </v-list-tile-content>
         </template>
         <!--TODO disable allow mouseover with tip to add items-->
