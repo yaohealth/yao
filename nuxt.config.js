@@ -89,7 +89,22 @@ export default {
         defaultLocale :'en',
         lazy: true,
         langDir: 'lang/',
-        seo: false
+        seo: false,
+        parsePages: false,
+        pages: {
+          therapies: {
+            en: '/therapies',
+            de: '/therapien'
+          },
+          symptoms: {
+            en: '/symptoms',
+            de: '/symptome'
+          },
+          topics: {
+            en: '/topics',
+            de: '/themen'
+          }
+        }
       }
     ]
   ],

@@ -9,7 +9,7 @@ export default (context) => {
         findBtn: 'Suchen',
         bookBtn: 'Buchen',
         discoverBtn: 'Entdecken',
-        joinText: 'Sie sind Arzt oder Praktiker?',
+        jointext: 'Sie sind Arzt oder Praktiker?',
         registerBtn: 'Registrieren',
         bulletpoint1: 'Yao ist ein Netzwerk, das von Ärzten und Praktikern reguliert wird, um das Vertrauen und die Beziehung zu Patienten zu verbessern',
         bulletpoint2: 'Reduzieren Sie Abwesenheitsraten',

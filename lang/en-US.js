@@ -9,7 +9,7 @@ export default (context) => {
         findBtn: 'find',
         bookBtn: 'book',
         discoverBtn: 'discover',
-        joinText: 'Are you a doctor or practitioner?',
+        jointext: 'Are you a doctor or practitioner?',
         registerBtn: 'JOIN YAO',
         bulletpoint1: 'Yao is a network regulated by doctors and practitioners, to improve trust and the link with patients',
         bulletpoint2: 'Reduce rate of absenteeism',

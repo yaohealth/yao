@@ -34,7 +34,7 @@
           </v-menu>
         </div>
       </div>
-      <nuxt-link to="/" class="logo">
+      <nuxt-link :to="localePath({name: 'index'})" class="logo">
         <img class="icon" src="~assets/logo1.png" alt="">
       </nuxt-link>
       <div class="right-menu">

@@ -35,7 +35,7 @@
               <v-flex xs12 md4 infocontainer>
                 <p class="joinText">{{ $t('landing.jointext')}}</p>
                 <nuxt-link class="links" :to="localePath({name: 'impressum'})">
-                  <v-btn round>{{$t('landing.registerBtn')}}JOIN YAO</v-btn>
+                  <v-btn round>{{$t('landing.registerBtn')}}</v-btn>
                 </nuxt-link>
               </v-flex>
               <v-flex xs12 md8>
