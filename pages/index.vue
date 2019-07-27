@@ -98,7 +98,7 @@
             </nuxt-link>
           </v-flex>
           <v-flex xs12 md4>
-            <span>{{$t('landing.content3')}}Topics</span>
+            <span>{{$t('landing.content3')}}</span>
           </v-flex>
         </v-layout>
       </v-layout>
