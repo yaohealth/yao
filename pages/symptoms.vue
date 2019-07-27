@@ -7,7 +7,7 @@
         <p>
           Complementary and Alternative Medicine is now accepted for being adequate in treating chronic diseases.
         </p>
-        <p>As EUROCAM reports stipulated the benefits of CAM : </p>
+        <p>As EUROCAM reports stipulated the benefits of CAM: </p>
         <ul>
           <li>Supporting and inducing the self-regenerating process for the person ; if recovery can occur from this,
             the need for later high-impact, high-cost interventions is reduced</li>
@@ -45,7 +45,7 @@
           Due to the multiplicity of symptoms, the impact of fibromyalgia on the family, emotional and professional sphere is considerable.
         </p>
         <p>
-          CAM has given good results in treating Fibromyalgia, such as :
+          CAM has given good results in treating Fibromyalgia, such as:
         </p>
         <p>
           Hypnosis: Hypnosis can improve the condition of fibromyalgia individuals through its beneficial effect on the perception of pain and anxiety.
