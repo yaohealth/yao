@@ -29,7 +29,7 @@
               <v-list-tile-title v-html="$t(`therapy.${data.item.name}`)"></v-list-tile-title>
             </v-list-tile-content>
             <v-list-tile-content v-if="data.item.group === 'Symptom'">
-              <v-list-tile-title v-html="$t(`symptom.${data.item.name}`)"></v-list-tile-title>
+              <v-list-tile-title v-html="$t(`searchbar.symptoms.${data.item.name}`)"></v-list-tile-title>
             </v-list-tile-content>
         </template>
         <!--TODO disable allow mouseover with tip to add items-->
