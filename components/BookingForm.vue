@@ -63,7 +63,7 @@
           try {
             const foo = await this.$http.$post(`acuity/appointments`, {
               appointmentTypeID: treatmentID.id,
-              datetime: this.$dayjs(this.selectedDate, {locale: 'de'}).toISOString(),
+              datetime: this.$dayjs(this.selectedDate, {locale: this.$i18n.locale}).toISOString(),
               firstName: this.firstname,
               lastName: this.lastname,
               email: this.email,

@@ -118,7 +118,7 @@
         return await Promise.all(dateRequests).catch(e => console.error("error in getTimes", e))
       },
       formatTimes (times, type) {
-        this.ADD_FORMATED_DATES({id: this.doctor.iddoctorprofile, times, type})
+        this.ADD_FORMATED_DATES({id: this.doctor.iddoctorprofile, times, type, locale: this.$i18n.locale})
       },
       isPageOne() {
         return this.pagination.page < 2
@@ -147,7 +147,7 @@
       },
       successfulBooking(date) {
         // find the booked time and remove it from the calendar
-        const fullDate = this.$dayjs(date, {locale: 'de'})
+        const fullDate = this.$dayjs(date, {locale: this.$i18n.locale})
         const dateDetails = {
           date: fullDate.format('DD'),
           month: fullDate.format('MMMM'),

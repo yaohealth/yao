@@ -37,18 +37,18 @@ export const mutations = {
             if(payload.times){
               const matchedDate = payload.times.find(dayArray => {
                 if (dayArray.length > 0){
-                  return this.$dayjs(dayArray[0].time, {locale: 'de'}).format('YYYY-MM-DD') === date.date
+                  return this.$dayjs(dayArray[0].time, {locale: payload.locale}).format('YYYY-MM-DD') === date.date
                 }
               })
               if(matchedDate){
-                const fullDate = this.$dayjs(matchedDate[0].time, {locale: 'de'})
+                const fullDate = this.$dayjs(matchedDate[0].time, {locale: payload.locale})
                 Vue.set(date, 'formatedDates', {
                   date: fullDate.format('DD'),
                   weekday: fullDate.format('dd'),
                   month: fullDate.format('MMMM'),
                   year: fullDate.year(),
                   times: matchedDate.map(time => {
-                    return this.$dayjs(time.time, {locale: 'de'}).format('HH:mm')
+                    return this.$dayjs(time.time, {locale: payload.locale}).format('HH:mm')
                   })
                 })
               }
