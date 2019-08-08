@@ -40,7 +40,7 @@
           }
           this.alert = {type: 'success', message: result.message}
           this.loading = false
-          this.$router.push({name: `admin-id`, params:{id: result.user.id}})
+          this.$router.push(this.localePath({name: `admin-id`, params:{id: result.user.id}}))
         }).catch(error => {
           this.loading = false
           console.log('err', error)
