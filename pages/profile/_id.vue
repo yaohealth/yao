@@ -37,7 +37,7 @@
                 <v-flex xs12 lg5 class="mapContainer">
                   <no-ssr v-if="doctor && doctor.latlong">
                     <l-map class="map" :zoom=15 :center="[doctor.latlong.x, doctor.latlong.y]">
-                      <l-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></l-tile-layer>
+                      <l-tile-layer url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"></l-tile-layer>
                       <l-marker :lat-lng="[doctor.latlong.x, doctor.latlong.y]"></l-marker>
                     </l-map>
                   </no-ssr>
