@@ -39,7 +39,7 @@
                       <v-flex xs12 md4>
                         <v-text-field
                                 v-model="doctorData[0].title"
-                                :label=$t('admin.tab1.title')
+                                :label="$t('admin.tab1.title')"
                                 required
                         ></v-text-field>
                       </v-flex>
@@ -47,7 +47,7 @@
                       <v-flex xs12 md4>
                         <v-text-field
                                 v-model="doctorData[0].firstname"
-                                :label=$t('admin.tab1.firstname')
+                                :label="$t('admin.tab1.firstname')"
                                 required
                         ></v-text-field>
                       </v-flex>
@@ -55,7 +55,7 @@
                       <v-flex xs12 md4>
                         <v-text-field
                                 v-model="doctorData[0].lastname"
-                                :label=$t('admin.tab1.lastname')
+                                :label="$t('admin.tab1.lastname')"
                                 required
                         ></v-text-field>
                       </v-flex>
@@ -63,7 +63,7 @@
                       <v-flex xs12 md4>
                         <v-text-field
                                 v-model="doctorData[0].praxisname"
-                                :label=$t('admin.tab1.praxisname')
+                                :label="$t('admin.tab1.praxisname')"
                                 required
                         ></v-text-field>
                       </v-flex>
@@ -71,7 +71,7 @@
                       <v-flex xs12 md4>
                         <v-text-field
                                 v-model="doctorData[0].street"
-                                :label=$t('admin.tab1.street')
+                                :label="$t('admin.tab1.street')"
                                 required
                         ></v-text-field>
                       </v-flex>
@@ -79,7 +79,7 @@
                       <v-flex xs12 md4>
                         <v-text-field
                                 v-model="doctorData[0].housenumber"
-                                :label=$t('admin.tab1.housenumber')
+                                :label="$t('admin.tab1.housenumber')"
                                 required
                         ></v-text-field>
                       </v-flex>
@@ -87,7 +87,7 @@
                       <v-flex xs12 md4>
                         <v-text-field
                                 v-model="doctorData[0].zipcode"
-                                :label=$t('admin.tab1.zipcode')
+                                :label="$t('admin.tab1.zipcode')"
                                 required
                         ></v-text-field>
                       </v-flex>
@@ -95,7 +95,7 @@
                       <v-flex xs12 md4>
                         <v-text-field
                                 v-model="doctorData[0].city"
-                                :label=$t('admin.tab1.city')
+                                :label="$t('admin.tab1.city')"
                                 required
                         ></v-text-field>
                       </v-flex>
@@ -103,7 +103,7 @@
                       <v-flex xs12 md4>
                         <v-text-field
                                 v-model="doctorData[0].state"
-                                :label=$t('admin.tab1.state')
+                                :label="$t('admin.tab1.state')"
                                 required
                         ></v-text-field>
                       </v-flex>
@@ -111,7 +111,7 @@
                       <v-flex xs12 md4>
                         <v-text-field
                                 v-model="doctorData[0].country"
-                                :label=$t('admin.tab1.country')
+                                :label="$t('admin.tab1.country')"
                                 required
                         ></v-text-field>
                       </v-flex>
@@ -131,7 +131,7 @@
                       <v-flex xs12 md4>
                         <v-text-field
                                 v-model="doctorData[0].contactmail"
-                                :label=$t('admin.tab2.contactmail')
+                                :label="$t('admin.tab2.contactmail')"
                                 required
                         ></v-text-field>
                       </v-flex>
@@ -139,7 +139,7 @@
                       <v-flex xs12 md4>
                         <v-text-field
                                 v-model="doctorData[0].phonenumber"
-                                :label=$t('admin.tab2.phonenumber')
+                                :label="$t('admin.tab2.phonenumber')"
                                 required
                         ></v-text-field>
                       </v-flex>
@@ -151,7 +151,7 @@
                       <v-flex xs12 md4>
                         <v-text-field
                                 v-model="doctorData[0].website"
-                                :label=$t('admin.tab2.website')
+                                :label="$t('admin.tab2.website')"
                         ></v-text-field>
                       </v-flex>
 
@@ -232,9 +232,9 @@
                                 item-text="speciality"
                                 item-value="speciality"
                                 :menu-props="{ maxHeight: '400' }"
-                                :label=$t('admin.tab4.label')
+                                :label="$t('admin.tab4.label')"
                                 multiple
-                                :hint=$t('admin.tab4.hint')
+                                :hint="$t('admin.tab4.hint')"
                                 persistent-hint
                                 dense
                         ></v-select>
