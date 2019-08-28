@@ -12,8 +12,10 @@
                 </v-flex>
                 <v-flex xs12 md6 lg3 class="docdetails">
                   <p class="gradientText" v-if="doctor">{{doctor.title}} {{doctor.firstname}} {{doctor.lastname}}</p>
-                  <p v-if="doctor && Array.isArray(doctor.speciality)">{{doctor.speciality.slice(0,3).join(', ')}}</p>
-                  <p v-if="doctor && !Array.isArray(doctor.speciality)">{{doctor.speciality}}</p>
+                  <p v-if="doctor && Array.isArray(doctor.speciality)">
+                    {{doctor.speciality.slice(0,3).map(thrpy => $t(`therapy.${thrpy}`)).join(', ')}}
+                  </p>
+                  <p v-if="doctor && !Array.isArray(doctor.speciality)">{{$t(`therapy.${doctor.speciality}`)}}</p>
                   <p v-if="doctor">{{doctor.street}} {{ doctor.housenumber}}</p>
                   <p v-if="doctor">{{doctor.zipcode}} {{ doctor.city}}</p>
                   <section>
@@ -57,11 +59,11 @@
                 <p class="gradientText">Expertise</p>
                 <template v-if="doctor && Array.isArray(doctor.speciality)">
                   <div v-for="speciality in doctor.speciality">
-                    <v-chip label text-color="white">{{speciality}}</v-chip>
+                    <v-chip label text-color="white">{{$t(`therapy.${speciality}`)}}</v-chip>
                   </div>
                 </template>
                 <div v-if="doctor && !Array.isArray(doctor.speciality)">
-                  <v-chip label color="#64c9c5" text-color="white">{{doctor.speciality}}</v-chip>
+                  <v-chip label color="#64c9c5" text-color="white">{{$t(`therapy.${doctor.speciality}`)}}</v-chip>
                 </div>
                 <div class="paymentOptions">
                   <p class="gradientText">{{$t('doctor.profile.paymentoptions')}}</p>
