@@ -443,7 +443,9 @@ export default (context) => {
         Yoga: 'Yoga',
         'Massage Therapy': 'Massage Therapy',
         Chiropractic: 'Chiropractic',
-        Acupuncture: 'Acupuncture'
+        Acupuncture: 'Acupuncture',
+        'Somantic Bodywork': 'Somantic Bodywork',
+        Naturopathy: 'Naturopathy'
       },
       doctor: {
         component: {
