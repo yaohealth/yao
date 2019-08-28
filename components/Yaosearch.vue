@@ -68,7 +68,7 @@ export default {
     },
     doSearch: function() {
       if (this.hasInput && this.go) {
-        this.$router.push({name: 'results', query: {search: this.choice}})
+        this.$router.push(this.localePath({name: `results`, query: {search: this.choice}}))
       }
       this.go = true
     },
