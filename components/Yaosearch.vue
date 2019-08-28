@@ -4,7 +4,13 @@
               v-model="choice"
               :items="items"
               color="blue-grey lighten-2"
-              item-text="name"
+              :item-text="item => {
+                if(item.group === 'Symptom') {
+                  return $t(`searchbar.symptoms.${item.name}`)
+                } else if(item.group === 'Therapy') {
+                  return $t(`therapy.${item.name}`)
+                }
+              }"
               item-value="name"
               :multiple="true"
               :placeholder="$t('searchbar.placeholder')"
