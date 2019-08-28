@@ -13,7 +13,7 @@
         </v-flex>
         <v-flex xs4 v-for="treat in treatmentIcons.filter(icon => specNameList.includes(icon.name))" :key="treat.id">
           <component :is="treat.icon"></component>
-          <p>{{ treat.name }}</p>
+          <p>{{ $t(`therapy.${treat.name}`) }}</p>
         </v-flex>
       </v-layout>
 
