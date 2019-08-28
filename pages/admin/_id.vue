@@ -229,7 +229,11 @@
                         <v-select
                                 v-model="doctorData[0].speciality"
                                 :items="specialities"
-                                item-text="speciality"
+                                :item-text="item => {
+                                  if(item.speciality) {
+                                    return $t(`therapy.${item.speciality}`)
+                                  }
+                                }"
                                 item-value="speciality"
                                 :menu-props="{ maxHeight: '400' }"
                                 :label="$t('admin.tab4.label')"
