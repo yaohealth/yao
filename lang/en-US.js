@@ -454,6 +454,17 @@ export default (context) => {
         profile: {
           paymentoptions: 'Payment Options'
         }
+      },
+      booking: {
+        title: 'Book appointment',
+        treatment: 'Treatment*',
+        firstname: 'Firstname*',
+        lastname: 'Lastname*',
+        phone: 'Phone*',
+        hint: '* indicates the required fields',
+        agb: 'accept AGB',
+        cancel: 'Cancel',
+        book: 'Book'
       }
     })
   })

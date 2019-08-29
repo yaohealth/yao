@@ -454,6 +454,17 @@ export default (context) => {
         profile: {
           paymentoptions: 'Zahlungsmethoden'
         }
+      },
+      booking: {
+        title: 'Termin buchen',
+        treatment: 'Behandlung*',
+        firstname: 'Vorname*',
+        lastname: 'Nachname*',
+        phone: 'Telefonnummer*',
+        hint: '* makiert die Pflichtfelder',
+        agb: 'AGB akzeptieren',
+        cancel: 'Abbrechen',
+        book: 'Buchen'
       }
     })
   })
