@@ -345,4 +345,8 @@
   .v-tabs__bar {
     background: radial-gradient(circle at center, #074f65 0, #00afa4 100%);
   }
+
+  .v-btn {
+    margin: 50px;
+  }
 </style>

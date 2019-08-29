@@ -7,7 +7,7 @@
             <v-flex text--white>
               <strong>{{$t('footer.text')}}</strong>
             </v-flex>
-            <v-flex pb-5>
+            <v-flex pb-2>
               <a><fa class="socialicon" :icon="['fab', 'twitter']"/></a>
               <a><fa class="socialicon" :icon="['fab', 'instagram']"/></a>
               <a><fa class="socialicon" :icon="['fab', 'facebook-f']"/></a>
@@ -18,7 +18,7 @@
 <!--            <v-flex>-->
 <!--              <nuxt-link class="footerlink" to="/kontakt">Kontakt</nuxt-link>-->
 <!--            </v-flex>-->
-            <v-flex pb-5>
+            <v-flex pb-2>
               <nuxt-link class="footerlink" :to="localePath({name: 'datenschutz'})">Datenschutz</nuxt-link>
             </v-flex>
           </v-layout>
