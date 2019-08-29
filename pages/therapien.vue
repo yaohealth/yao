@@ -39,7 +39,7 @@
           Kräutermedizin ist Fischöl zur Behandlung von kardiovaskulären Zuständen.
         </p>
         <p>
-          Die </b>vierte Kategorie</b> sind manuelle und körperbasierte Behandlungen und beinhalten Therapien mit Körperbewegung und -einwirkung.
+          Die <b>vierte Kategorie</b> sind manuelle und körperbasierte Behandlungen und beinhalten Therapien mit Körperbewegung und -einwirkung.
           Am bekanntesten ist die Chiropraktik. Eine Technik der chiropraktischen Behandlung ist die Spinalmanipulation oder auch
           spinale Adjustierung, zur Korrektur von Anomalitäten der
           Wirbelsäulengelenke <a href="https://www.ncbi.nlm.nih.gov/books/NBK83804/">(Meeker and Haldeman, 2002)</a>. Massagetherapien sind ein weiteres
