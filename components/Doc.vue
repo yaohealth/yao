@@ -1,7 +1,7 @@
 <template>
   <v-flex xs12 md4 align-self-start class="doc">
     <v-card>
-      <nuxt-link :class="!clickable ? 'disabled avatarLink' : 'avatarLink'" :to="localePath({name: `profile-id`, params: {id}})">
+      <nuxt-link class="avatarLink" :to="localePath({name: `profile-id`, params: {id}})">
         <v-img v-if="pictureurl.length > 0" class="docAvatar" :src="pictureurl"></v-img>
         <v-img v-else class="docAvatar" src="https://via.placeholder.com/150"
                aspect-ratio="1"></v-img>
@@ -20,13 +20,13 @@
       <v-divider light></v-divider>
       <v-card-text v-if="displaypeviewdates.length">
         <v-icon>access_time</v-icon>
-        <nuxt-link :class="!clickable ? 'disabled' : ''" :to="localePath({name: `profile-id`, params: {id}})">
+        <nuxt-link :to="localePath({name: `profile-id`, params: {id}})">
           <v-btn v-for="nextdate in displaypeviewdates" :key="nextdate" class="somebtn" flat>{{ nextdate }}</v-btn>
         </nuxt-link>
       </v-card-text>
       <v-card-actions>
         <v-layout justify-center>
-          <nuxt-link :class="!clickable ? 'disabled' : ''" :to="localePath({name: `profile-id`, params: {id}})">
+          <nuxt-link :to="localePath({name: `profile-id`, params: {id}})">
             <v-btn round class="bookingButton">{{ $t('doctor.component.button') }}</v-btn>
           </nuxt-link>
         </v-layout>
@@ -36,10 +36,7 @@
 </template>
 
 <script>
-  import {mapMutations} from 'vuex'
-
   export default {
-
     props: {
       'id': String,
       'title': String,
@@ -64,12 +61,10 @@
     data() {
       return {
         nextDates: [],
-        displaypeviewdates: [],
-        clickable: false
+        displaypeviewdates: []
       }
     },
     async created() {
-      this.clickable = false
       let appointmentTypes
       try {
         appointmentTypes = await this.$http.$get(`acuity/appointment-types`)
@@ -80,7 +75,6 @@
             }
           }
         }
-        this.ADD_APPOINTMENTTYPES({appointmentTypes: this.appointmentTypes, id: this.id})
 
         for (const type of this.appointmentTypes) {
           const date = this.$dayjs()
@@ -97,20 +91,14 @@
             }
           }
           this.nextDates = dates.slice(0, 3)
-          this.ADD_INITIAL_DATES({dates, id: this.id, appointmentType: type})
         }
         this.displaydates()
-        this.clickable = true
       } catch (e) {
         console.error('Error with Acuity API:', e)
         //show Error Page
       }
     },
     methods: {
-      ...mapMutations({
-        ADD_INITIAL_DATES: 'localStorage/ADD_INITIAL_DATES',
-        ADD_APPOINTMENTTYPES: 'localStorage/ADD_APPOINTMENTTYPES'
-      }),
       displaydates() {
         for (const dateString of this.nextDates) {
           const date = new Date(dateString.date)
@@ -125,10 +113,6 @@
 <style lang="scss" scoped>
   $yaoGradient: radial-gradient(circle at center, #074f65 0, #00afa4 100%);
   $yaoGreyFont: #393f4d;
-
-  .disabled {
-    pointer-events: none
-  }
 
   .doc {
     display: flex;

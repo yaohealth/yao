@@ -35,8 +35,8 @@
 </template>
 
 <script>
-  import { mapGetters, mapMutations } from 'vuex'
   import BookingForm from '@/components/BookingForm'
+  import Vue from 'vue'
 
   export default {
     watch: {
@@ -68,14 +68,6 @@
       }
     },
     methods: {
-      ...mapGetters({
-        getSpecificDoctor: 'localStorage/getSpecificDoctor'
-      }),
-      ...mapMutations({
-        ADD_DATES: 'localStorage/ADD_DATES',
-        ADD_FORMATED_DATES: 'localStorage/ADD_FORMATED_DATES',
-        REMOVE_APPOINTMENT: 'localStorage/REMOVE_APPOINTMENT'
-      }),
       openBookingDialog(date) {
         this.selectedDate = date
         this.showBooking = true
@@ -118,7 +110,32 @@
         return await Promise.all(dateRequests).catch(e => console.error("error in getTimes", e))
       },
       formatTimes (times, type) {
-        this.ADD_FORMATED_DATES({id: this.doctor.iddoctorprofile, times, type, locale: this.$i18n.locale})
+          this.doctor.appointmentTypes.forEach( appointmentType => {
+              appointmentType.availableDates.forEach(date => {
+                if(times){
+                  const matchedDate = times.find(dayArray => {
+                    if (dayArray.length > 0){
+                      // use proper locale
+                      return this.$dayjs(dayArray[0].time, {locale: 'en'}).format('YYYY-MM-DD') === date.date
+                    }
+                  })
+                  if(matchedDate){
+                    const fullDate = this.$dayjs(matchedDate[0].time, {locale: 'en'})
+                    Vue.set(date, 'formatedDates', {
+                      date: fullDate.format('DD'),
+                      weekday: fullDate.format('dd'),
+                      month: fullDate.format('MMMM'),
+                      year: fullDate.year(),
+                      times: matchedDate.map(time => {
+                        return this.$dayjs(time.time, {locale: 'en'}).format('HH:mm')
+                      })
+                    })
+                  }
+                }
+              })
+          })
+
+
       },
       isPageOne() {
         return this.pagination.page < 2
@@ -132,8 +149,12 @@
           const lastDate = this.doctor.appointmentTypes[0].availableDates[this.doctor.appointmentTypes[0].availableDates.length - 1].date
           let newDate = this.$dayjs(lastDate).add(1, 'day')
           for (let i = 0; i < 10; i++) {
-            // adds available dates
-            this.ADD_DATES({date: newDate.format('YYYY-MM-DD'), id: this.doctor.iddoctorprofile})
+            if (this.doctor && this.doctor.appointmentTypes) {
+              for (const type of this.doctor.appointmentTypes) {
+                type.availableDates.push({date: newDate.format('YYYY-MM-DD')})
+              }
+            }
+
             newDate = this.$dayjs(newDate).add(1, 'day')
           }
 
@@ -156,14 +177,14 @@
         const resultDate = this.formatedDates.find(value => {
           return value.date === dateDetails.date && value.month === dateDetails.month
         })
-        this.REMOVE_APPOINTMENT({dateDetails, resultDate})
+        Vue.set(resultDate, 'times', resultDate.times.filter(time => time !== dateDetails.time))
         this.$emit('successfulBooking')
       },
       failedBooking() {
         this.$emit('failedBooking')
       }
     },
-    async created() {
+    async mounted() {
       if (this.doctor && this.doctor.appointmentTypes) {
         await this.setFormatedTimes()
       }

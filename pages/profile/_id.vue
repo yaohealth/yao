@@ -95,7 +95,6 @@
   import Navbar from '@/components/Navbar'
   import Calendar from '@/components/Calendar'
   import Yaofooter from '@/components/Yaofooter'
-  import {mapGetters} from 'vuex'
 
   export default {
     components: {
@@ -108,13 +107,11 @@
         descriptions: [],
         snackbar: false,
         snacktext: '',
-        color: ''
+        color: '',
+        doctor: ''
       }
     },
     methods: {
-      ...mapGetters({
-        getSpecificDoctor: 'localStorage/getSpecificDoctor'
-      }),
       showSuccessSnack() {
         this.color = 'success'
         this.snacktext = 'Booking successful'
@@ -126,21 +123,58 @@
         this.snackbar = true
       }
     },
-    computed: {
-      doctor() {
-        return (this.getSpecificDoctor())(this.$route.params.id)
-      }
-    },
-    async asyncData({$http, route}) {
-      // set auth for yao api
-      let descriptions
+    async asyncData({$http, route, redirect, $dayjs}) {
+
       try {
-        descriptions = await $http.$get(`doctors/description/${route.params.id}`)
+        let [doctor, descriptions, appointmentTypes] = await Promise.all([
+          $http.$get(`doctor/bydocid/${route.params.id}`),
+          $http.$get(`doctors/description/${route.params.id}`),
+          $http.$get(`acuity/appointment-types`)
+        ])
+
+        doctor = doctor[0]
+        if(!doctor) {
+          redirect('/')
+        } else {
+          const types = []
+          for (const type of appointmentTypes) {
+            if (type.calendarIDs[0]) {
+              if (Number(doctor.calendarid) === type.calendarIDs[0]) {
+                types.push(type)
+              }
+            }
+          }
+
+          doctor.appointmentTypes = types
+
+          for (const type of doctor.appointmentTypes) {
+            const date = $dayjs()
+            let dates = await $http.$get(`acuity/availability/dates?appointmentTypeID=${type.id}&month=${date.year()}-${date.month() + 1}&calendarID=${doctor.calendarid}`)
+            // TODO if a doctor is booked out we maybe need to next month until we have 3 dates at least
+            if ($dayjs().endOf('month').diff(date, 'days') < 10) {
+              // TODO doesnt work on the end of the year
+              const nextMonth = await $http.$get(`acuity/availability/dates?appointmentTypeID=${type.id}&month=${date.year()}-${date.month() + 2}&calendarID=${doctor.calendarid}`)
+
+              if (dates.length > 0 && nextMonth.length > 0) {
+                dates = [...dates, ...nextMonth]
+              } else if (dates.length === 0 && nextMonth.length > 0) {
+                dates = nextMonth
+              }
+            }
+
+            if (doctor && doctor.appointmentTypes) {
+              doctor.appointmentTypes.map(type => {
+                type.availableDates = dates
+              })
+            }
+          }
+
+          return {descriptions, doctor}
+        }
       } catch (e) {
         console.error('Error with YAO API:', e)
         // show error page
       }
-      return {descriptions}
     }
   }
 </script>

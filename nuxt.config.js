@@ -38,7 +38,6 @@ export default {
   */
   plugins: [
     { src: '~/plugins/vue-tiny-slider.js', mode: 'client' },
-    { src: '~/plugins/vuex-persist', mode: 'client' },
     { src: '~/plugins/vuetify'},
     { src: "~/plugins/authInit", mode: 'client'}
 

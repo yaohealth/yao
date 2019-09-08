@@ -14,7 +14,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@ax2/dayjs-module": "^0.1.2",
+    "@ax2/dayjs-module": "https://github.com/Lisiadito/nuxt-modules.git",
     "@fortawesome/fontawesome-svg-core": "^1.2.17",
     "@fortawesome/free-brands-svg-icons": "^5.8.1",
     "@fortawesome/free-regular-svg-icons": "^5.8.2",
@@ -44,8 +44,7 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "vue-svg-loader": "^0.12.0",
-    "vue-tiny-slider": "^0.1.35",
-    "vuex-persist": "^2.0.0"
+    "vue-tiny-slider": "^0.1.35"
   },
   "devDependencies": {
     "nodemon": "^1.18.10"

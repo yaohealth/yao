@@ -171,9 +171,6 @@ export default {
     }
   },
   methods: {
-    ...mapMutations({
-      SET_DOCTORS: 'localStorage/SET_DOCTORS'
-    }),
     subscribe() {
       console.log('sub')
       if (this.email) {
@@ -194,28 +191,15 @@ export default {
       }
     }
   },
-  created() {
-    // add expiry of localstorage
-    this.SET_DOCTORS(this.allDocs)
-  },
   async asyncData({ $http }) {
     let doctors = []
     let therapies = []
     try {
       const [allDocs, specialities] = await Promise.all([
-        $http.$get(`doctors`),
+        $http.$get(`doctors?Limit=3`),
         $http.$get(`specialities`)
       ]).catch(e => console.error('Error with YAO API:', e)) // show error page
-
-      let allDocsCopy = allDocs.slice()
-      if(allDocsCopy.length >= 3) {
-        for (let i = 0; i < 3; i++) {
-          // pick and remove three doctors from the array for preview
-          doctors.push(allDocsCopy.splice(Math.ceil(Math.random() * 10) % allDocsCopy.length, 1)[0])
-        }
-      } else if(allDocsCopy.length < 3 && allDocsCopy.length > 0) {
-        doctors = allDocsCopy
-      }
+      doctors = allDocs.slice()
       therapies = specialities.map( speciality => speciality.speciality)
       return {doctors, allDocs, therapies}
     } catch (e) {
