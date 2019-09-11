@@ -296,9 +296,12 @@
     methods: {
       async updateProfile() {
         try {
-          await this.$http.post(`doctor/${this.user.id}`, { doctor: this.doctorData })
-          await this.$http.post(`description/${this.user.id}`, { descriptions: this.descriptions })
-          await this.$http.post(`specialities/${this.user.id}/${this.doctorData[0].iddoctorprofile}`, { specialities: this.doctorData[0].speciality })
+          const updates = [
+            this.$http.post(`doctor/${this.user.id}`, { doctor: this.doctorData }),
+            this.$http.post(`description/${this.user.id}`, { descriptions: this.descriptions }),
+            this.$http.post(`specialities/${this.user.id}/${this.doctorData[0].iddoctorprofile}`, { specialities: this.doctorData[0].speciality })
+          ]
+          const result = await Promise.all(updates)
           this.showSuccessSnack()
         } catch (e) {
           this.showFailedSnack()

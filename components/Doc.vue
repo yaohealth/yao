@@ -78,11 +78,15 @@
 
         for (const type of this.appointmentTypes) {
           const date = this.$dayjs()
-          let dates = await this.$http.$get(`acuity/availability/dates?appointmentTypeID=${type.id}&month=${date.year()}-${date.month() + 1}&calendarID=${this.calendarId}`)
-          // TODO if a doctor is booked out we maybe need to next month until we have 3 dates at least
+          let counter = 1
+          let dates
+          do {
+            dates = await this.$http.$get(`acuity/availability/dates?appointmentTypeID=${type.id}&month=${date.year()}-${date.month() + counter}&calendarID=${this.calendarId}`)
+            counter++
+          } while (dates.length < 1)
           if (this.$dayjs().endOf('month').diff(date, 'days') < 10) {
             // TODO doesnt work on the end of the year
-            const nextMonth = await this.$http.$get(`acuity/availability/dates?appointmentTypeID=${type.id}&month=${date.year()}-${date.month() + 2}&calendarID=${this.calendarId}`)
+            const nextMonth = await this.$http.$get(`acuity/availability/dates?appointmentTypeID=${type.id}&month=${date.year()}-${date.month() + counter}&calendarID=${this.calendarId}`)
 
             if (dates.length > 0 && nextMonth.length > 0) {
               dates = [...dates, ...nextMonth]
