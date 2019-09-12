@@ -68,6 +68,12 @@ export default {
     'nuxt-leaflet',
     '@nuxt/http',
     '@nuxtjs/proxy',
+    ['@nuxtjs/google-analytics',
+      {
+        id: 'UA-131680679-4',
+        dev: false
+      }
+    ],
     [
       'nuxt-i18n',
       {
