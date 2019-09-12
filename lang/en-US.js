@@ -445,7 +445,23 @@ export default (context) => {
         Chiropractic: 'Chiropractic',
         Acupuncture: 'Acupuncture',
         'Somantic Bodywork': 'Somantic Bodywork',
-        Naturopathy: 'Naturopathy'
+        Naturopathy: 'Naturopathy',
+        'Pain Therapy': 'Pain Therapy',
+        Cupping: 'Cupping',
+        'Nutrition Therapy': 'Nutrition Therapy',
+        Heilpraktiker: 'Heilpraktiker',
+        'Podo Orthesiology': 'Podo Orthesiology',
+        'Neural Therapy': 'Neural Therapy',
+        'Infusion Therapy': 'Infusion Therapy',
+        Fasting: 'Fasting',
+        'Bach Flower Therapy': 'Bach Flower Therapy',
+        'Phytotherapy': 'Phytotherapy',
+        'Children Treatment': 'Children Treatment',
+        Psychotherapy: 'Psychotherapy',
+        'Energetic Massage': 'Energetic Massage',
+        'General Medicine': 'General Medicine',
+        'Symptom Communication Intuitive Bodywork': 'Symptom Communication Intuitive Bodywork',
+        'Life Coaching': 'Life Coaching'
       },
       doctor: {
         component: {

@@ -437,7 +437,7 @@ export default (context) => {
         Osteopathy: 'Osteopathie',
         TCM: 'TCM',
         Anthroposophy: 'Antroposophie',
-        Homeopathy: 'Homeopathie',
+        Homeopathy: 'Homöopathie',
         'Tuina-Massage': 'Tuina-Massage',
         'Herbal Medicine': 'Pflanzenheilkunde',
         Yoga: 'Yoga',
@@ -445,7 +445,23 @@ export default (context) => {
         Chiropractic: 'Chiropraktik',
         Acupuncture: 'Akupunktur',
         'Somantic Bodywork': 'Somantic Bodywork',
-        Naturopathy: 'Naturheilkunde'
+        Naturopathy: 'Naturheilkunde',
+        'Pain Therapy': 'Schmerztherapie',
+        Cupping: 'Schröpfen',
+        'Nutrition Therapy': 'Ernährungsberatung',
+        Heilpraktiker: 'Heilpraktiker',
+        'Podo Orthesiology': 'Podo Orthesiologie',
+        'Neural Therapy': 'Neuraltherapie',
+        'Infusion Therapy': 'Infusionstherapie',
+        Fasting: 'Fastenbegleitung',
+        'Bach Flower Therapy': 'Bachblütentherapie',
+        'Phytotherapy': 'Phytotherapie',
+        'Children Treatment': 'Kinderbegandlung',
+        Psychotherapy: 'Psychotherapie',
+        'Energetic Massage': 'Energetische Massage',
+        'General Medicine': 'Allgemein Medizin',
+        'Symptom Communication Intuitive Bodywork': 'Symptomkommunikation Intuitive Körperarbeit',
+        'Life Coaching': 'Lebensberatung'
       },
       doctor: {
         component: {
