@@ -444,7 +444,7 @@ export default (context) => {
         'Massage Therapy': 'Massage Therapy',
         Chiropractic: 'Chiropractic',
         Acupuncture: 'Acupuncture',
-        'Somantic Bodywork': 'Somantic Bodywork',
+        'Somatic Bodywork': 'Somatic Bodywork',
         Naturopathy: 'Naturopathy',
         'Pain Therapy': 'Pain Therapy',
         Cupping: 'Cupping',
