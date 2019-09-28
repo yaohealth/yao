@@ -468,7 +468,10 @@ export default (context) => {
           button: 'BOOKING'
         },
         profile: {
-          paymentoptions: 'Payment Options'
+          paymentoptions: 'Payment Options',
+          Cash: 'Cash',
+          Creditcard: 'Creditcard',
+          Eccard: 'EC Card'
         }
       },
       booking: {

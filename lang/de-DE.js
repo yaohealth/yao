@@ -468,7 +468,10 @@ export default (context) => {
           button: 'BUCHEN'
         },
         profile: {
-          paymentoptions: 'Zahlungsmethoden'
+          paymentoptions: 'Zahlungsmethoden',
+          Cash: 'Bar',
+          Creditcard: 'Kreditkarte',
+          Eccard: 'EC Karte'
         }
       },
       booking: {

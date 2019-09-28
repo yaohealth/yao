@@ -58,16 +58,17 @@
               <v-card>
                 <p class="gradientText">Expertise</p>
                 <template v-if="doctor && Array.isArray(doctor.speciality)">
-                  <div v-for="speciality in doctor.speciality">
-                    <v-chip label text-color="white">{{$t(`therapy.${speciality}`)}}</v-chip>
-                  </div>
+                  <div v-for="speciality in doctor.speciality" class="max-width-chip" text-color="white">{{$t(`therapy.${speciality}`)}}</div>
                 </template>
                 <div v-if="doctor && !Array.isArray(doctor.speciality)">
-                  <v-chip label color="#64c9c5" text-color="white">{{$t(`therapy.${doctor.speciality}`)}}</v-chip>
+                  <div class="max-width-chip" color="#64c9c5" text-color="white">{{$t(`therapy.${doctor.speciality}`)}}</div>
                 </div>
                 <div class="paymentOptions">
                   <p class="gradientText">{{$t('doctor.profile.paymentoptions')}}</p>
-                  <span>Cash, Credit Card</span>
+                  <div v-if="doctor.payment">
+                    <div v-for="payment in doctor.payment.split(',')">{{ $t(`doctor.profile.${payment}`) }}</div>
+                  </div>
+                  <div v-else>{{ $t('doctor.profile.Cash') }}</div>
                 </div>
               </v-card>
             </v-flex>
@@ -284,10 +285,15 @@
   .infobox {
     font-family: Roboto;
     font-weight: 400;
-    .v-chip {
+    .max-width-chip {
       text-transform: uppercase;
       font-size: 16px;
       background-image: $yaoGradient;
+      padding: 5px;
+      margin: 3px auto;
+      color: white;
+      max-width: 300px !important;
+      border-radius: 2px;
     }
 
     .v-card {
