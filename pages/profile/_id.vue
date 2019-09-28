@@ -12,7 +12,7 @@
                 </v-flex>
                 <v-flex xs12 md6 lg3 class="docdetails">
                   <p class="gradientText" v-if="doctor">{{doctor.title}} {{doctor.firstname}} {{doctor.lastname}}</p>
-                  <p v-if="doctor && Array.isArray(doctor.speciality)">
+                  <p class="top_specilities" v-if="doctor && Array.isArray(doctor.speciality)">
                     {{doctor.speciality.slice(0,3).map(thrpy => $t(`therapy.${thrpy}`)).join(', ')}}
                   </p>
                   <p v-if="doctor && !Array.isArray(doctor.speciality)">{{$t(`therapy.${doctor.speciality}`)}}</p>
@@ -77,7 +77,7 @@
                 <div class="descriptioncontainer">
                   <section v-for="(description, index) in descriptions" :key="`T-${index}`">
                     <h1 :key="`H-${description.header}`">{{ description.header }}</h1>
-                    <p :key="`B-${description.header}`">{{ description.body}}</p>
+                    <vue-markdown :key="`B-${description.header}`">{{ description.body}}</vue-markdown>
                   </section>
                 </div>
               </v-card>
@@ -96,12 +96,14 @@
   import Navbar from '@/components/Navbar'
   import Calendar from '@/components/Calendar'
   import Yaofooter from '@/components/Yaofooter'
+  import VueMarkdown from 'vue-markdown'
 
   export default {
     components: {
       Navbar,
       Yaofooter,
-      Calendar
+      Calendar,
+      VueMarkdown
     },
     data() {
       return {
@@ -243,6 +245,14 @@
       height: 300px;
       width: 100%;
     }
+
+    .top_specilities {
+      text-align: center;
+    }
+  }
+
+  .top_specilities {
+    max-width: calc(100vw - 50px) !important;
   }
 
   .mapContainer {

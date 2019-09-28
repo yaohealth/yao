@@ -144,10 +144,6 @@
                         ></v-text-field>
                       </v-flex>
 
-<!--                      <v-flex xs12 md4>-->
-<!--                        <v-btn>picture upload</v-btn>-->
-<!--                      </v-flex>-->
-
                       <v-flex xs12 md4>
                         <v-text-field
                                 v-model="doctorData[0].website"
