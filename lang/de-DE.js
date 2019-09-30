@@ -458,10 +458,9 @@ export default (context) => {
         'Phytotherapy': 'Phytotherapie',
         'Children Treatment': 'Kinderbegandlung',
         Psychotherapy: 'Psychotherapie',
-        'Energetic Massage': 'Energetische Massage',
         'General Medicine': 'Allgemein Medizin',
-        'Symptom Communication Intuitive Bodywork': 'Symptomkommunikation Intuitive Körperarbeit',
-        'Life Coaching': 'Lebensberatung'
+        'Energetic Massage / Intuitive Bodywork': 'Energetische Massage / Intuitive Körperarbeit',
+        'Symptom Communication / Life Coaching': 'Symptomkommunikation / Lebensberatung'
       },
       doctor: {
         component: {

@@ -75,10 +75,7 @@
             <v-flex xs12>
               <v-card color="#effafc">
                 <div class="descriptioncontainer">
-                  <section v-for="(description, index) in descriptions" :key="`T-${index}`">
-                    <h1 :key="`H-${description.header}`">{{ description.header }}</h1>
-                    <vue-markdown :key="`B-${description.header}`">{{ description.body}}</vue-markdown>
-                  </section>
+                  <vue-markdown class="markdown" v-for="(description, index) in descriptions" :key="`B-${index}`">{{ description.body}}</vue-markdown>
                 </div>
               </v-card>
             </v-flex>
@@ -249,6 +246,12 @@
     .top_specilities {
       text-align: center;
     }
+
+    .markdown {
+      margin: auto;
+      max-width: 90vw !important;
+    }
+
   }
 
   .top_specilities {
@@ -342,6 +345,13 @@
   }
 
   .descriptioncontainer {
+    text-align: left;
+
+    .markdown {
+      margin: auto;
+      max-width: 50vw !important;
+    }
+
     font-family: Roboto;
     padding: 20px;
     margin-bottom: 50px;
