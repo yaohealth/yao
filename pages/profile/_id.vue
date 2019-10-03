@@ -61,12 +61,12 @@
                   <div v-for="speciality in doctor.speciality" class="max-width-chip" text-color="white">{{$t(`therapy.${speciality}`)}}</div>
                 </template>
                 <div v-if="doctor && !Array.isArray(doctor.speciality)">
-                  <div class="max-width-chip" color="#64c9c5" text-color="white">{{$t(`therapy.${doctor.speciality}`)}}</div>
+                  <div class="max-width-chip">{{$t(`therapy.${doctor.speciality}`)}}</div>
                 </div>
                 <div class="paymentOptions">
                   <p class="gradientText">{{$t('doctor.profile.paymentoptions')}}</p>
                   <div v-if="doctor.payment">
-                    <div v-for="payment in doctor.payment.split(',')">{{ $t(`doctor.profile.${payment}`) }}</div>
+                    <div v-for="payment in doctor.payment.replace(/ /g,'').split(',')" class="max-width-chip">{{ $t(`doctor.profile.${payment}`) }}</div>
                   </div>
                   <div v-else>{{ $t('doctor.profile.Cash') }}</div>
                 </div>

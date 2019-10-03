@@ -470,7 +470,8 @@ export default (context) => {
           paymentoptions: 'Zahlungsmethoden',
           Cash: 'Bar',
           Creditcard: 'Kreditkarte',
-          Eccard: 'EC Karte'
+          Eccard: 'EC Karte',
+          Invoice: 'Rechnung'
         }
       },
       booking: {
